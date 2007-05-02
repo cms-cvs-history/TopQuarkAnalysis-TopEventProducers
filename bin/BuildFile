@@ -1,0 +1,8 @@
+<environment>
+ <use name=AnalysisDataFormats/TopObjects>
+ <use name=FWCore/FWLite>
+ <use name=FWCore/Framework>
+ <use name=rootcintex>
+ <use name=root> 
+ <bin file="TtEventDummyAnalyser.cpp"> </bin>
+</environment>

@@ -1,0 +1,19 @@
+
+#
+# Filter to select a specific Ttbar decay channel
+#	the "allowDecay" parameter consists of two digis,
+#		 first: #nr of leptons in decay
+#		 second = 0 if you allow all leptons
+#		          1 if you allow only electrons
+# 			  2 if you allow only muons
+#			  3 if you allow only taus
+#			  4 if you allow no electrons
+#		 	  5 if you allow no muons
+#			  6 if you allow no taus
+#		  decay = -1 means no selection at all
+#
+
+# module to filter a specific ttbar decay
+  module genTtDecaySel = TtDecaySelection {
+    int32 allowDecay = 12 #semilep to muon
+  }
