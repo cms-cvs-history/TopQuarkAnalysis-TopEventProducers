@@ -130,7 +130,7 @@ int main() {
       hEtajet_cal -> Fill(sols[bestSol].getCalHadq().eta());
       hEtajet_cal -> Fill(sols[bestSol].getCalHadb().eta());
       hEtajet_cal -> Fill(sols[bestSol].getCalLepb().eta());
-      if(sols[bestSol].getChi2()>0){
+      if(sols[bestSol].getProbChi2()>0){
         hETjet_fit  -> Fill(sols[bestSol].getFitHadp().et());
         hETjet_fit  -> Fill(sols[bestSol].getFitHadq().et());
         hETjet_fit  -> Fill(sols[bestSol].getFitHadb().et());
@@ -152,7 +152,7 @@ int main() {
                          sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadp().et());
         pLJEScal -> Fill(sols[bestSol].getRecHadq().et(),
                          sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadq().et());      
-        if(sols[bestSol].getChi2()>0){
+        if(sols[bestSol].getProbChi2()>0){
           pLJESfit -> Fill(sols[bestSol].getRecHadp().et(),
                            sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadp().et());
           pLJESfit -> Fill(sols[bestSol].getRecHadq().et(),
@@ -168,7 +168,7 @@ int main() {
                          sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadq().et());
         pLJEScal -> Fill(sols[bestSol].getRecHadq().et(),
                          sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadp().et());      
-        if(sols[bestSol].getChi2()>0){
+        if(sols[bestSol].getProbChi2()>0){
           pLJESfit -> Fill(sols[bestSol].getRecHadp().et(),
                            sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadq().et());
           pLJESfit -> Fill(sols[bestSol].getRecHadq().et(),
@@ -179,7 +179,7 @@ int main() {
       
       
       // Fill reconstructed objects masses
-      if(sols[bestSol].getChi2()>0){
+      if(sols[bestSol].getProbChi2()>0){
         hmthrec ->Fill(sols[bestSol].getRecHadt().mass());
         hmtlrec ->Fill(sols[bestSol].getRecLept().mass());
         hmWhrec ->Fill(sols[bestSol].getRecHadW().mass());
@@ -196,7 +196,7 @@ int main() {
       
       // Fill other histo's
       hsumDR -> Fill(sols[bestSol].getSumDeltaRjp());
-      if(sols[bestSol].getChi2()>0) probchi2 -> Fill(sols[bestSol].getChi2());
+      if(sols[bestSol].getProbChi2()>0) probchi2 -> Fill(sols[bestSol].getProbChi2());
     }
   }
   
