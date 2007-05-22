@@ -99,11 +99,7 @@ int main() {
     if(sols.size()>1){
         
       //get bestSol
-      int bestSol = 0;
-      for(size_t s=0; s<sols.size(); s++) {
-         if(sols[s].getBestSol()) bestSol = s;
-      }
-      
+      int bestSol = sols[0].getMCBestSol();
     
       // Fill kinematics plots
       hETjet_gen  -> Fill(sols[bestSol].getGenHadp().et());
