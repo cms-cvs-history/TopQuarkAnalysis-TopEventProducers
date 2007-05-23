@@ -12,6 +12,6 @@
     double maxF            = 1e-4
     int32  parametrisation = 2		//1: EtEtaPhi, 2:EtThetaPhi, 3:EMom
     vint32 constraints     = {1}	//1: Whadr, 2:Wlep, 3:thadr, 4:tlep, 5:nu-mass
-    bool   addJetCombProb  = false
+    bool   addLRJetComb    = false
   } 
 
