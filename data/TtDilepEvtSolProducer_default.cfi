@@ -1,0 +1,13 @@
+
+          module solutions = TtDilepEvtSolutionMaker {
+	    bool calcTopMass   	  = true
+	    bool matchToGenEvt    = true
+	    bool eeChannel        = true
+	    bool emuChannel       = true
+	    bool mumuChannel      = true
+	    string jetInput       = 'TopBJets'
+	    double tmassbegin   = 100.0
+	    double tmassend     = 300.0
+	    double tmassstep    = 1.0
+	  } 
+	  
