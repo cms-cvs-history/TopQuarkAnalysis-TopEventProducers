@@ -3,6 +3,8 @@
 # Gen Event MC reconstruction
 #
 # generated Ttbar-event reconstruction
-  module genEvt = TtGenEventReco{}  
+  module genEvt = TtGenEventReco{
+    InputTag src = genParticleCandidates
+  }  
 
 
