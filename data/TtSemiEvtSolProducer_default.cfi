@@ -2,9 +2,12 @@
 # Module to build the semileptonic Ttbar event solutions (one solution for each possible jet combination)
 #
   module solutions = TtSemiEvtSolutionMaker {
+    InputTag electronSource = selectedTopElectrons
+    InputTag muonSource     = selectedTopMuons
+    InputTag metSource      = selectedTopMETs
     string leptonFlavour   = 'muon' 	//electron or muon
-    string lJetInput	   = 'TopLJets'
-    string bJetInput	   = 'TopBJets'
+    string lJetInput	   = 'topLJets'
+    string bJetInput	   = 'topBJets'
     double jetEtaCut       = 2.4	
     double recJetETCut     = 10.	
     double calJetETCut     = 30.	
@@ -16,7 +19,7 @@
     double electronPtCut   = 20.
     double electronLRCut   = -999.
     double metCut          = 0.	
-    bool   matchToGenEvt   = true
+    bool   matchToGenEvt   = false
     bool   doKinFit   	   = true
     int32  maxNrIter       = 200
     double maxDeltaS       = 5e-5
