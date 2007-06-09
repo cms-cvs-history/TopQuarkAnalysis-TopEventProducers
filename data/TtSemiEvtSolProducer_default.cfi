@@ -12,13 +12,6 @@
     double recJetETCut     = 10.	
     double calJetETCut     = 30.	
     double jetLRCut        = -999
-    double muonEtaCut      = 2.4	
-    double muonPtCut       = 20.	
-    double muonLRCut       = -999.	
-    double electronEtaCut  = 2.4	
-    double electronPtCut   = 20.
-    double electronLRCut   = -999.
-    double metCut          = 0.	
     bool   matchToGenEvt   = false
     bool   doKinFit   	   = true
     int32  maxNrIter       = 200
