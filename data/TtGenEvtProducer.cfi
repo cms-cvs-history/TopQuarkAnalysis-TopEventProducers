@@ -2,9 +2,12 @@
 #
 # Gen Event MC reconstruction
 #
+
+# if running on CMSSW_1_2_* produced sample, build the vector genParticleCandidates  
+  include "SimGeneral/HepPDTESSource/data/pythiapdt.cfi"
+  include "PhysicsTools/HepMCCandAlgos/data/genParticleCandidates.cfi"
+
 # generated Ttbar-event reconstruction
-  module genEvt = TtGenEventReco{
-    InputTag src = genParticleCandidates
-  }  
+  module genEvt = TtGenEventReco{}  
 
 
