@@ -5,13 +5,9 @@
     InputTag electronSource = selectedTopElectrons
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
+    InputTag lJetSource     = selectedTopLJets
+    InputTag bJetSource     = selectedTopBJets
     string leptonFlavour   = 'muon' 	//electron or muon
-    string lJetInput	   = 'topLJets'
-    string bJetInput	   = 'topBJets'
-    double jetEtaCut       = 2.4	
-    double recJetETCut     = 10.	
-    double calJetETCut     = 30.	
-    double jetLRCut        = -999
     bool   matchToGenEvt   = false
     bool   doKinFit   	   = true
     int32  maxNrIter       = 200
