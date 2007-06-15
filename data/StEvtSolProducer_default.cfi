@@ -1,0 +1,20 @@
+#
+# Module to build the single top event solutions (one solution for each possible jet combination)
+#
+  module solutions = StEvtSolutionMaker {
+    InputTag electronSource = selectedTopElectrons
+    InputTag muonSource     = selectedTopMuons
+    InputTag metSource      = selectedTopMETs
+    InputTag lJetSource     = selectedTopLJets
+    InputTag bJetSource     = selectedTopBJets
+    string leptonFlavour   = 'muon' 	//electron or muon
+    bool   matchToGenEvt   = false
+    bool   doKinFit   	   = true
+    int32  maxNrIter       = 200
+    double maxDeltaS       = 5e-5
+    double maxF            = 1e-4
+    int32  parametrisation = 2		//1: EtEtaPhi, 2:EtThetaPhi, 3:EMom
+    vint32 constraints     = {1,2}	//1: Wlep, 2:tlep, 3:nu-mass
+    bool   addLRJetComb    = false
+    string lrJetCombFile   = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/to_be_added.root'
+  } 
