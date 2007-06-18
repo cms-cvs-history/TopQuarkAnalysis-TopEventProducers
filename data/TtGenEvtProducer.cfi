@@ -4,7 +4,7 @@
 #
 # generated Ttbar-event reconstruction
   module genEvt = TtGenEventReco{
-    InputTag src = genParticleCandidates
+#    InputTag src = genParticleCandidates
   }  
 
 
