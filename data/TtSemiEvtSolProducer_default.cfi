@@ -2,20 +2,41 @@
 # Module to build the semileptonic Ttbar event solutions (one solution for each possible jet combination)
 #
   module solutions = TtSemiEvtSolutionMaker {
+    
+    // define input to start from
     InputTag electronSource = selectedTopElectrons
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
     InputTag lJetSource     = selectedTopLJets
     InputTag bJetSource     = selectedTopBJets
-    string leptonFlavour   = 'muon' 	//electron or muon
-    bool   matchToGenEvt   = false
-    bool   doKinFit   	   = true
-    int32  maxNrIter       = 200
-    double maxDeltaS       = 5e-5
-    double maxF            = 1e-4
-    int32  parametrisation = 2		//1: EtEtaPhi, 2:EtThetaPhi, 3:EMom
-    vint32 constraints     = {1}	//1: Whadr, 2:Wlep, 3:thadr, 4:tlep, 5:nu-mass
-    bool   addLRJetComb    = true
-    string lrJetCombFile   = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetComb.root'
+    
+    // select lepton type to build semileptonic solutions with
+    string leptonFlavour    = 'muon' 	//electron or muon
+    
+    // do matching to gen event, and find the "MC true" jet matching
+    bool   matchToGenEvt    = true
+    
+    // kinematic fit setup
+    bool   doKinFit   	    = true
+    int32  maxNrIter        = 200
+    double maxDeltaS        = 5e-5
+    double maxF             = 1e-4
+    int32  parametrisation  = 2		//1: EtEtaPhi, 2:EtThetaPhi, 3:EMom
+    vint32 constraints      = {1}	//1: Whadr, 2:Wlep, 3:thadr, 4:tlep, 5:nu-mass
+    
+    // signal event selection LR setup
+    bool   addLRSignalSel   = true
+    //vint32 lrSignalSelObs   = {1,3,5}
+    vint32 lrSignalSelObs   = {-1}
+    //string lrSignalSelFile  = "$CMSSW_BASE/src/TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelAllObs.root"
+    string lrSignalSelFile  = "$CMSSW_BASE/src/TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelSelObsAndPurity.root"
+    
+    
+    // signal event selection LR setup
+    bool   addLRJetComb     = true
+    //vint32 lrJetCombObs     = {1,3,5}
+    vint32 lrJetCombObs     = {-1}
+    //string lrJetCombFile    = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombAllObs.root'
+    string lrJetCombFile    = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombSelObsAndPurity.root'
+    
   } 
-
