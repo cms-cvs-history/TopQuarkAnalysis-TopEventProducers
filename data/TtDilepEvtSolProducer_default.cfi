@@ -1,13 +1,22 @@
+#
+# Module to build the dilepton Ttbar event final states
+#
 
-          module solutions = TtDilepEvtSolutionMaker {
-	    bool calcTopMass   	  = true
-	    bool matchToGenEvt    = true
-	    bool eeChannel        = true
-	    bool emuChannel       = true
-	    bool mumuChannel      = true
-	    string jetInput       = 'TopBJets'
-	    double tmassbegin   = 100.0
-	    double tmassend     = 300.0
-	    double tmassstep    = 1.0
-	  } 
+  module solutions = TtDilepEvtSolutionMaker {
+
+    InputTag electronSource = selectedTopElectrons
+    InputTag muonSource     = selectedTopMuons
+    InputTag metSource      = selectedTopMETs
+    InputTag jetSource      = selectedTopBJets
+
+    bool calcTopMass   	  = true
+    bool matchToGenEvt    = true
+    bool eeChannel        = true
+    bool emuChannel       = true
+    bool mumuChannel      = true
+    double tmassbegin   = 100.0
+    double tmassend     = 300.0
+    double tmassstep    = 1.0
+
+  } 
 	  
