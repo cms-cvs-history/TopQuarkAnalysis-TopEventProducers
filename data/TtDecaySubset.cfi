@@ -1,0 +1,4 @@
+module decaySubset = TtDecaySubset{
+  InputTag src = genParticleCandidates
+}  
+
