@@ -1,0 +1,14 @@
+module ttFullyLeptonicFilter = TtDecaySelection
+{
+  InputTag src = genEvt
+
+  #---------------------------------------
+  # select channels of consideration in
+  # order: (elec,muon,tau)
+  #---------------------------------------
+  vint32 channel_1 = {1,1,0}
+  vint32 channel_2 = {1,1,0}
+
+ #invert selection?
+  bool   invert = false
+}

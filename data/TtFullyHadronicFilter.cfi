@@ -1,0 +1,14 @@
+module ttFullyHadronicFilter = TtDecaySelection
+{
+  InputTag src = genEvt
+
+  #---------------------------------------
+  # select channels of consideration in
+  # order: (elec,muon,tau)
+  #---------------------------------------
+  vint32 channel_1 = {0,0,0}
+  vint32 channel_2 = {0,0,0}
+
+ #invert selection?
+  bool   invert = false
+}
