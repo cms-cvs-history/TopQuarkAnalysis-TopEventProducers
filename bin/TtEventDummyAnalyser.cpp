@@ -42,14 +42,14 @@ int main() {
   //
   // Read event solutions from events
   //
-  TFile fIn("../data/TtSemiMuEvents.root");
-  TTree * events = dynamic_cast<TTree*>( fIn.Get( "Events" ) );
+  TFile fIn("../test/TtSemiMuEvents.root");
+  TTree * events = (TTree *) fIn.Get( "Events" );
   assert( events != 0 );
-  TBranch * solsBranch;
-  solsBranch = events->GetBranch( "TtSemiEvtSolutions_solutions__TtEventReco.obj" );
+  TBranch * decayB = events->GetBranch( "recoCandidatesOwned_decaySubset__TtEventReco.obj" );
+  TBranch * genEvtB = events->GetBranch( "TtGenEvent_genEvt__TtEventReco.obj" );
+  TBranch * solsBranch = events->GetBranch( "TtSemiEvtSolutions_solutions__TtEventReco.obj" );
   assert( solsBranch != 0 );
   vector<TtSemiEvtSolution> sols;
-  solsBranch -> SetAddress( & sols );
   
   
   
@@ -93,23 +93,18 @@ int main() {
   
   // Loop over events and fill histograms
   int nev = events->GetEntries();
-  for( int ev = 0; ev < nev; ++ ev ) { 
-    solsBranch    -> GetEntry( ev );
-            
-    if(sols.size()>1){
-        
+  for( int ev = 0; ev < nev; ++ev ) { 
+
+    solsBranch -> SetAddress( & sols );
+    solsBranch->GetEntry( ev );
+    decayB->GetEntry( ev );
+    genEvtB->GetEntry( ev );
+    events->GetEntry( ev, 0 );
+    if (sols.size()>0) {
+
       //get bestSol
       int bestSol = sols[0].getMCCorrJetComb();
-    
       // Fill kinematics plots
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadp().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadq().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadb().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenLepb().et());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadp().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadq().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadb().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenLepb().eta());
       hETjet_rec  -> Fill(sols[bestSol].getRecHadp().et());
       hETjet_rec  -> Fill(sols[bestSol].getRecHadq().et());
       hETjet_rec  -> Fill(sols[bestSol].getRecHadb().et());
@@ -136,6 +131,14 @@ int main() {
         hEtajet_fit -> Fill(sols[bestSol].getFitHadb().eta());
         hEtajet_fit -> Fill(sols[bestSol].getFitLepb().eta());
       }
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadp().et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadq().et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadb().et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenLepb().et());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadp().eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadq().eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadb().eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenLepb().eta());
            
       
       // Fill jet calibration check plots
