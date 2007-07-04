@@ -142,7 +142,7 @@ int main() {
            
       
       // Fill jet calibration check plots
-      if(sols[bestSol].getChangeWQ() == 0){
+      if(sols[bestSol].getMCChangeWQ() == 0){
         pLJESrec -> Fill(sols[bestSol].getRecHadp().et(),
                          sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadp().et());
         pLJESrec -> Fill(sols[bestSol].getRecHadq().et(),
@@ -158,7 +158,7 @@ int main() {
                            sols[bestSol].getFitHadq().et()/sols[bestSol].getGenHadq().et());
         }
       }
-      else if(sols[bestSol].getChangeWQ() == 1){
+      else if(sols[bestSol].getMCChangeWQ() == 1){
         pLJESrec -> Fill(sols[bestSol].getRecHadp().et(),
                          sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadq().et());
         pLJESrec -> Fill(sols[bestSol].getRecHadq().et(),
@@ -194,7 +194,7 @@ int main() {
       
       
       // Fill other histo's
-      hsumDR -> Fill(sols[bestSol].getSumDeltaRjp());
+      hsumDR -> Fill(sols[bestSol].getMCBestSumAngles());
       if(sols[bestSol].getProbChi2()>0) probchi2 -> Fill(sols[bestSol].getProbChi2());
     }
   }
