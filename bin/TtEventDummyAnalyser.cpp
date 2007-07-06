@@ -94,16 +94,20 @@ int main() {
   // Loop over events and fill histograms
   int nev = events->GetEntries();
   for( int ev = 0; ev < nev; ++ev ) { 
-
     solsBranch -> SetAddress( & sols );
     solsBranch->GetEntry( ev );
     decayB->GetEntry( ev );
     genEvtB->GetEntry( ev );
     events->GetEntry( ev, 0 );
     if (sols.size()>0) {
+     if (sols[0].getGenEvent().isSemiLeptonic() &&
+         sols[0].getGenEvent().numberOfBQuarks() == 2) {
 
       //get bestSol
       int bestSol = sols[0].getMCCorrJetComb();
+
+      if (bestSol >= 0 && bestSol < sols.size()) continue;
+
       // Fill kinematics plots
       hETjet_rec  -> Fill(sols[bestSol].getRecHadp().et());
       hETjet_rec  -> Fill(sols[bestSol].getRecHadq().et());
@@ -131,47 +135,47 @@ int main() {
         hEtajet_fit -> Fill(sols[bestSol].getFitHadb().eta());
         hEtajet_fit -> Fill(sols[bestSol].getFitLepb().eta());
       }
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadp().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadq().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenHadb().et());
-      hETjet_gen  -> Fill(sols[bestSol].getGenLepb().et());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadp().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadq().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenHadb().eta());
-      hEtajet_gen -> Fill(sols[bestSol].getGenLepb().eta());
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadp()->et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadq()->et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenHadb()->et());
+      hETjet_gen  -> Fill(sols[bestSol].getGenLepb()->et());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadp()->eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadq()->eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenHadb()->eta());
+      hEtajet_gen -> Fill(sols[bestSol].getGenLepb()->eta());
            
       
       // Fill jet calibration check plots
       if(sols[bestSol].getMCChangeWQ() == 0){
         pLJESrec -> Fill(sols[bestSol].getRecHadp().et(),
-                         sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadp().et());
+                         sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadp()->et());
         pLJESrec -> Fill(sols[bestSol].getRecHadq().et(),
-                         sols[bestSol].getRecHadq().et()/sols[bestSol].getGenHadq().et());
+                         sols[bestSol].getRecHadq().et()/sols[bestSol].getGenHadq()->et());
         pLJEScal -> Fill(sols[bestSol].getRecHadp().et(),
-                         sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadp().et());
+                         sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadp()->et());
         pLJEScal -> Fill(sols[bestSol].getRecHadq().et(),
-                         sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadq().et());      
+                         sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadq()->et());      
         if(sols[bestSol].getProbChi2()>0){
           pLJESfit -> Fill(sols[bestSol].getRecHadp().et(),
-                           sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadp().et());
+                           sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadp()->et());
           pLJESfit -> Fill(sols[bestSol].getRecHadq().et(),
-                           sols[bestSol].getFitHadq().et()/sols[bestSol].getGenHadq().et());
+                           sols[bestSol].getFitHadq().et()/sols[bestSol].getGenHadq()->et());
         }
       }
       else if(sols[bestSol].getMCChangeWQ() == 1){
         pLJESrec -> Fill(sols[bestSol].getRecHadp().et(),
-                         sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadq().et());
+                         sols[bestSol].getRecHadp().et()/sols[bestSol].getGenHadq()->et());
         pLJESrec -> Fill(sols[bestSol].getRecHadq().et(),
-                         sols[bestSol].getRecHadq().et()/sols[bestSol].getGenHadp().et());
+                         sols[bestSol].getRecHadq().et()/sols[bestSol].getGenHadp()->et());
         pLJEScal -> Fill(sols[bestSol].getRecHadp().et(),
-                         sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadq().et());
+                         sols[bestSol].getCalHadp().et()/sols[bestSol].getGenHadq()->et());
         pLJEScal -> Fill(sols[bestSol].getRecHadq().et(),
-                         sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadp().et());      
+                         sols[bestSol].getCalHadq().et()/sols[bestSol].getGenHadp()->et());      
         if(sols[bestSol].getProbChi2()>0){
           pLJESfit -> Fill(sols[bestSol].getRecHadp().et(),
-                           sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadq().et());
+                           sols[bestSol].getFitHadp().et()/sols[bestSol].getGenHadq()->et());
           pLJESfit -> Fill(sols[bestSol].getRecHadq().et(),
-                           sols[bestSol].getFitHadq().et()/sols[bestSol].getGenHadp().et());
+                           sols[bestSol].getFitHadq().et()/sols[bestSol].getGenHadp()->et());
         }
       }
       
@@ -196,6 +200,7 @@ int main() {
       // Fill other histo's
       hsumDR -> Fill(sols[bestSol].getMCBestSumAngles());
       if(sols[bestSol].getProbChi2()>0) probchi2 -> Fill(sols[bestSol].getProbChi2());
+     }
     }
   }
   
