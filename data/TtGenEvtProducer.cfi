@@ -1,4 +1,5 @@
 module genEvt = TtGenEventReco{
-  InputTag src = decaySubset
+  InputTag src  = decaySubset
+  InputTag init = genParticleCandidates
 }  
 
