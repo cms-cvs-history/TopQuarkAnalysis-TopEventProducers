@@ -1,5 +1,5 @@
  #produce decaySubset of top decay
-  include "TopQuarkAnalysis/TopEventProducers/data/TtDecaySubset.cfi"
+  include "TopQuarkAnalysis/TopEventProducers/data/TopDecaySubset.cfi"
 
  #produce genEvt
   include "TopQuarkAnalysis/TopEventProducers/data/TtGenEvtProducer.cfi"

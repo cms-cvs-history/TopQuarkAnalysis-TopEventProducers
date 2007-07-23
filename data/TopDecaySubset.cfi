@@ -1,4 +1,4 @@
-module decaySubset = TtDecaySubset{
+module decaySubset = TopDecaySubset{
   InputTag src = genParticleCandidates
 }  
 
