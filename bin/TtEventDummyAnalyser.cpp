@@ -106,7 +106,7 @@ int main() {
       //get bestSol
       int bestSol = sols[0].getMCCorrJetComb();
 
-      if (bestSol >= 0 && bestSol < sols.size()) continue;
+      if (bestSol < 0 || bestSol >= sols.size()) continue;
 
       // Fill kinematics plots
       hETjet_rec  -> Fill(sols[bestSol].getRecHadp().et());
