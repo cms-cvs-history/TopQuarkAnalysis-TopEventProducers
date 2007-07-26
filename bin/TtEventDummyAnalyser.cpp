@@ -19,7 +19,7 @@
 #include "FWCore/FWLite/src/AutoLibraryLoader.h"
 #include "AnalysisDataFormats/TopObjects/interface/TtGenEvent.h"
 #include "AnalysisDataFormats/TopObjects/interface/TtSemiEvtSolution.h"
-#include "tdrstyle.C"
+#include "TopQuarkAnalysis/TopTools/test/tdrstyle.C"
 
 using namespace std;
 
