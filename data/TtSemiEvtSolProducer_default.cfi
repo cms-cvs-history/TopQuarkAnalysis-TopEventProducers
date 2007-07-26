@@ -17,12 +17,14 @@
     bool   matchToGenEvt    = true
     
     // kinematic fit setup
-    bool   doKinFit   	    = true
-    int32  maxNrIter        = 200
-    double maxDeltaS        = 5e-5
-    double maxF             = 1e-4
-    int32  parametrisation  = 2		//1: EtEtaPhi, 2:EtThetaPhi, 3:EMom
-    vint32 constraints      = {1}	//1: Whadr, 2:Wlep, 3:thadr, 4:tlep, 5:nu-mass
+    bool   doKinFit   	      = true
+    int32  maxNrIter          = 200
+    double maxDeltaS          = 5e-5
+    double maxF               = 1e-4
+    int32  jetParametrisation = 1		// 1: EMom, 2: EtEtaPhi, 3: EtThetaPhi
+    int32  lepParametrisation = 1		// 1: EMom, 2: EtEtaPhi, 3: EtThetaPhi
+    int32  metParametrisation = 1		// 1: EMom, 2: EtEtaPhi, 3: EtThetaPhi
+    vint32 constraints        = {1}		// 1: Whadr, 2: Wlep, 3: thadr, 4: tlep, 5: nu-mass
     
     // signal event selection LR setup
     bool   addLRSignalSel   = true
