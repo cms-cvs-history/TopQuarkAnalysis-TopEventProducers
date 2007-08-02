@@ -1,0 +1,6 @@
+module decaySubsetSingletop = StDecaySubset{
+  InputTag src = genParticleCandidates
+# use daughter-mother-grandmother relationship (SwitchChainType=1) or directly look at initial state (SwitchChainType=2, useful for SingleTop generator)
+  int32 SwitchChainType = 1
+}  
+

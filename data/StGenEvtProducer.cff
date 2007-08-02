@@ -1,0 +1,7 @@
+ #produce decaySubset of top decay
+  include "TopQuarkAnalysis/TopEventProducers/data/TopDecaySubset.cfi"
+
+ #produce genEvt
+  include "TopQuarkAnalysis/TopEventProducers/data/StGenEvtProducer.cfi"
+
+  sequence makeGenEvt = {decaySubset, genEvtSingletop}
