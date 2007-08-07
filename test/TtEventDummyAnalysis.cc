@@ -13,7 +13,7 @@
 //
 // Original Author:  Shih-Chuan Kao
 //         Created:  Thu Jul 26 13:59:47 CEST 2007
-// $Id$
+// $Id: TtEventDummyAnalysis.cc,v 1.1 2007/07/31 20:52:16 lowette Exp $
 //
 //
 
@@ -249,5 +249,4 @@ TtEventDummyAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
 
 
 //define this as a plug-in
-DEFINE_SEAL_MODULE();
-DEFINE_ANOTHER_FWK_MODULE(TtEventDummyAnalysis);
+DEFINE_FWK_MODULE(TtEventDummyAnalysis);

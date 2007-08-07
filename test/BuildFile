@@ -5,5 +5,5 @@
 <use name=root>
 
 <library file=TtEventDummyAnalysis.cc name=TtEventDummyAnalysis>
-  <flags SEAL_PLUGIN_NAME="TtEventDummyAnalysis">
+  <flags EDM_PLUGIN=1>
 </library>
