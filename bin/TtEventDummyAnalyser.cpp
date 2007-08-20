@@ -104,7 +104,7 @@ int main() {
          sols[0].getGenEvent().numberOfBQuarks() == 2) {
 
       //get bestSol
-      int bestSol = sols[0].getMCCorrJetComb();
+      int bestSol = sols[0].getMCBestJetComb();
 
       if (bestSol < 0 || bestSol >= sols.size()) continue;
 
