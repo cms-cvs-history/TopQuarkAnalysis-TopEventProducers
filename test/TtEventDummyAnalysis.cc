@@ -13,7 +13,7 @@
 //
 // Original Author:  Shih-Chuan Kao
 //         Created:  Thu Jul 26 13:59:47 CEST 2007
-// $Id: TtEventDummyAnalysis.cc,v 1.1 2007/07/31 20:52:16 lowette Exp $
+// $Id: TtEventDummyAnalysis.cc,v 1.2 2007/08/07 10:14:37 tsirig Exp $
 //
 //
 
@@ -139,7 +139,7 @@ TtEventDummyAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& i
    if ( ((sols[0].getGenEvent()).isSemiLeptonic()     ) && 
         ((sols[0].getGenEvent()).numberOfBQuarks()==2 ) ){ 
 
-      int bestSol = sols[0].getMCCorrJetComb();
+      int bestSol = sols[0].getMCBestJetComb();
       histo1 = h_Jet;
       histo3 = h_Other;
 
