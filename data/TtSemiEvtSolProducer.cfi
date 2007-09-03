@@ -4,11 +4,11 @@
   module solutions = TtSemiEvtSolutionMaker {
     
     // define input to start from
-    InputTag electronSource = selectedTopElectrons
-    InputTag muonSource     = selectedTopMuons
-    InputTag metSource      = selectedTopMETs
-    InputTag lJetSource     = selectedTopLJets
-    InputTag bJetSource     = selectedTopBJets
+    InputTag electronSource = selectedLayer1TopElectrons
+    InputTag muonSource     = selectedLayer1TopMuons
+    InputTag metSource      = selectedLayer1TopMETs
+    InputTag lJetSource     = selectedLayer1TopLJets
+    InputTag bJetSource     = selectedLayer1TopBJets
     
     // select lepton type to build semileptonic solutions with
     string leptonFlavour    = 'muon' 	//electron or muon
