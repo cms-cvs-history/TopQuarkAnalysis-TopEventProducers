@@ -18,5 +18,5 @@
     int32  metParametrisation = 0		// 0: EMom, 1: EtEtaPhi, 2: EtThetaPhi
     vint32 constraints     = {1,2}	//1: Wlep, 2:tlep, 3:nu-mass
     bool   addLRJetComb    = false
-    string lrJetCombFile   = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/to_be_added.root'
+    string lrJetCombFile   = 'TopQuarkAnalysis/TopJetCombination/data/to_be_added.root'
   } 
