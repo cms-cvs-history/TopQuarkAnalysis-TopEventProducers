@@ -1,9 +1,0 @@
-<use name=FWCore/Framework>
-<use name=Foundation/PluginManager>
-<use name=FWCore/ParameterSet>
-<use name=AnalysisDataFormats/TopObjects>
-<use name=root>
-
-<library file=TtEventDummyAnalysis.cc name=TtEventDummyAnalysis>
-  <flags EDM_PLUGIN=1>
-</library>
