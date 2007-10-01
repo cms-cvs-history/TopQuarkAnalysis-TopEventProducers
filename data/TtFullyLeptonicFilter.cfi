@@ -9,6 +9,12 @@ module ttFullyLeptonicFilter = TtDecaySelection
   vint32 channel_1 = {1,1,0}
   vint32 channel_2 = {1,1,0}
 
- #invert selection?
+ #---------------------------------------
+ # allowed decay channels for taus.
+ # In order: (leptonic, one prong, three prong)
+ #---------------------------------------
+  vint32 tauDecays = {0,0,0}
+
+#invert selection?
   bool   invert = false
 }

@@ -30,14 +30,15 @@
     bool   addLRSignalSel   = true
     //vint32 lrSignalSelObs   = {1,3,5}
     vint32 lrSignalSelObs   = {-1}
-    //string lrSignalSelFile  = "$CMSSW_BASE/src/TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelAllObs.root"
-    string lrSignalSelFile  = "$CMSSW_BASE/src/TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelSelObsAndPurity.root"
+    //string lrSignalSelFile  = "TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelAllObs.root"
+    string lrSignalSelFile  = "TopQuarkAnalysis/TopEventSelection/data/TtSemiLRSignalSelSelObsAndPurity.root"
+
 
     // jet combination LR setup
     bool   addLRJetComb     = true
     //vint32 lrJetCombObs     = {1,3,5}
     vint32 lrJetCombObs     = {-1}
-    //string lrJetCombFile    = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombAllObs.root'
-    string lrJetCombFile    = '$CMSSW_BASE/src/TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombSelObsAndPurity.root'
+    //string lrJetCombFile    = 'TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombAllObs.root'
+    string lrJetCombFile    = 'TopQuarkAnalysis/TopJetCombination/data/TtSemiLRJetCombSelObsAndPurity.root'
 
   }
