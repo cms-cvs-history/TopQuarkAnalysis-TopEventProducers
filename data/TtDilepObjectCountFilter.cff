@@ -1,0 +1,36 @@
+
+#
+#  Default selection cuts on TopObjects as an input to TtSemiEvtSolutions
+#
+
+// TopElectron
+module countTopElectrons = TopElectronCountFilter {
+  InputTag src       = selectedTopElectrons
+  uint32   minNumber = 0
+}
+
+// TopMuon
+module countTopMuons = TopMuonCountFilter {
+  InputTag src       = selectedTopMuons
+  uint32   minNumber = 0
+}
+
+// TopTaus
+module countTopTaus = TopTauCountFilter {
+  InputTag src       = selectedTopTaus
+  uint32   minNumber = 0
+}
+
+// TopBjets
+module countTopBJets = TopJetCountFilter {
+  InputTag src       = selectedTopBJets
+  uint32   minNumber = 0
+}
+
+
+sequence objectCountFiltering = {
+  countTopElectrons &
+  countTopMuons &
+  countTopTaus &
+  countTopBJets
+}
