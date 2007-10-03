@@ -1,5 +1,5 @@
 //
-// $Id: TtDilepEvtSolutionMaker.cc,v 1.5 2007/07/20 06:52:09 lowette Exp $
+// $Id$
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtDilepEvtSolutionMaker.h"
@@ -21,6 +21,7 @@ TtDilepEvtSolutionMaker::TtDilepEvtSolutionMaker(const edm::ParameterSet & iConf
   muonSource_     = iConfig.getParameter<edm::InputTag>("muonSource");
   metSource_      = iConfig.getParameter<edm::InputTag>("metSource");
   jetSource_      = iConfig.getParameter<edm::InputTag>("jetSource");
+  nrCombJets_     = iConfig.getParameter<unsigned int> ("nrCombJets");
   matchToGenEvt_  = iConfig.getParameter<bool>         ("matchToGenEvt");
   calcTopMass_    = iConfig.getParameter<bool>         ("calcTopMass"); 
   eeChannel_      = iConfig.getParameter<bool>         ("eeChannel"); 
@@ -149,10 +150,13 @@ void TtDilepEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup
                        
   std::vector<TtDilepEvtSolution> * evtsols = new std::vector<TtDilepEvtSolution>();
   if(correctLepton && METFound && jetsFound){
-    //cout<<"constructing solutions"<<endl;
-    
+
+    // protect against reading beyond array boundaries
+    unsigned int nrCombJets = nrCombJets_; // do not overwrite nrCombJets_
+    if (jets->size() < nrCombJets) nrCombJets = jets->size();
+
     //SaveSolution for both jet-lep pairings
-    for (unsigned int ib = 0; ib < 2; ib++) {
+    for (unsigned int ib = 0; ib < nrCombJets; ib++) {
       TtDilepEvtSolution asol;
       
       double xconstraint = 0, yconstraint = 0;
@@ -188,9 +192,11 @@ void TtDilepEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup
       if (calcTopMass_) {
         Handle<TtGenEvent> genEvent;
         iEvent.getByLabel ("genEvt",genEvent);
+  if (genEvent->isFullLeptonic()) {   // FIXME: temporary solution to avoid crash in JetPartonMatching for non semi-leptonic events
         asol.setGenEvt(genEvent);
         TtDilepKinSolver solver(tmassbegin_, tmassend_, tmassstep_, xconstraint, yconstraint);
         asol = solver.addKinSolInfo(&asol);
+  }
       }
       
       evtsols->push_back(asol);
@@ -200,6 +206,7 @@ void TtDilepEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup
     if(matchToGenEvt_){
       Handle<TtGenEvent> genEvt;
       iEvent.getByLabel ("genEvt",genEvt);
+  if (genEvt->isFullLeptonic()) {   // FIXME: temporary solution to avoid crash in JetPartonMatching for non semi-leptonic events
       double bestSolDR = 9999.;
       int bestSol = 0;
       for(size_t s=0; s<evtsols->size(); s++) {
@@ -210,6 +217,7 @@ void TtDilepEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup
         if (dRBB + dRBbarBbar < bestSolDR) { bestSolDR = dRBB + dRBbarBbar; bestSol = s; }
       }
       (*evtsols)[bestSol].setBestSol(true);
+  }
     }
     
     std::auto_ptr<std::vector<TtDilepEvtSolution> > pOut(evtsols);

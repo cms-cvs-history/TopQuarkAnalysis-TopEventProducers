@@ -4,10 +4,15 @@
 
   module solutions = TtDilepEvtSolutionMaker {
 
+    // define input to start from
     InputTag electronSource = selectedTopElectrons
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
     InputTag jetSource      = selectedTopBJets
+
+    // set the maximum number of jets to use in the combinatorics (watch out for exploding combinatorics!)
+    // these jets are taken as the first ones from the ET ordered collection
+    uint32 nrCombJets       = 2
 
     bool calcTopMass   	  = true
     bool matchToGenEvt    = true

@@ -13,6 +13,10 @@
     // select lepton type to build semileptonic solutions with
     string leptonFlavour    = 'muon' 	//electron or muon
 
+    // set the maximum number of jets to use in the combinatorics (watch out for exploding combinatorics!)
+    // these jets are taken as the first ones from the ET ordered collection
+    uint32 nrCombJets       = 4
+
     // do matching to gen event, and find the "MC true" jet matching
     bool   matchToGenEvt    = true
 
