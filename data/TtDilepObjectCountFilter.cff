@@ -1,21 +1,32 @@
 
 #
-#  Default selection cuts on TopObjects as an input to TtSemiEvtSolutions
+#  TopObject count filter requirements for TtDilepEvtSolutions
 #
 
-// TopElectron
+// TopLeptons
+module countTopLeptons = TopLeptonCountFilter {
+  InputTag electronSource = selectedTopElectrons
+  InputTag muonSource     = selectedTopMuons
+  InputTag tauSource      = selectedTopTaus
+  bool     countElectrons = true
+  bool     countMuons     = true
+  bool     countTaus      = false
+  uint32   minNumber      = 2
+}
+
+// TopElectrons separately
 module countTopElectrons = TopElectronCountFilter {
   InputTag src       = selectedTopElectrons
   uint32   minNumber = 0
 }
 
-// TopMuon
+// TopMuons separately
 module countTopMuons = TopMuonCountFilter {
   InputTag src       = selectedTopMuons
   uint32   minNumber = 0
 }
 
-// TopTaus
+// TopTaus separately
 module countTopTaus = TopTauCountFilter {
   InputTag src       = selectedTopTaus
   uint32   minNumber = 0
@@ -24,11 +35,12 @@ module countTopTaus = TopTauCountFilter {
 // TopBjets
 module countTopBJets = TopJetCountFilter {
   InputTag src       = selectedTopBJets
-  uint32   minNumber = 0
+  uint32   minNumber = 2
 }
 
 
 sequence objectCountFiltering = {
+  countTopLeptons &
   countTopElectrons &
   countTopMuons &
   countTopTaus &
