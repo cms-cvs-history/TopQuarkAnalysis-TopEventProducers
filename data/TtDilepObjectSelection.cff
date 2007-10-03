@@ -18,7 +18,7 @@ module selectedTopMuons = TopMuonSelector {
 // TopTaus
 module selectedTopTaus = TopTauSelector {
   InputTag src = selectedLayer1TopTaus
-  string cut = "pt > 0. & abs(eta) < 5."
+  string cut = "discriminator > -10000"
 }
 
 // TopBjets
