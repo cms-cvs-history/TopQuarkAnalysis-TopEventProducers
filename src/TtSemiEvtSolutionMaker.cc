@@ -1,5 +1,5 @@
 //
-// $Id$
+// $Id: TtSemiEvtSolutionMaker.cc,v 1.19.2.5 2007/10/03 22:21:51 lowette Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -126,7 +126,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
                 TtSemiEvtSolution asol;
                 if(leptonFlavour_ == "muon")     asol.setMuon(muons, 0);
                 if(leptonFlavour_ == "electron") asol.setElectron(electrons, 0);
-                asol.setMET(mets, 0);
+                asol.setNeutrino(mets, 0);
                 asol.setHadp(lJets, p);
                 asol.setHadq(lJets, q);
                 asol.setHadb(bJets, bh);
@@ -136,7 +136,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
                   // just to keep a record in the event (drop? -> present in provenance anyway...)
                   asol.setJetParametrisation(jetParam_);
                   asol.setLeptonParametrisation(lepParam_);
-                  asol.setMETParametrisation(metParam_);
+                  asol.setNeutrinoParametrisation(metParam_);
                 }
                 // these lines calculate the observables to be used in the TtSemiSignalSelection LR
                 (*myLRSignalSelObservables)(asol);
