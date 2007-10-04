@@ -12,8 +12,11 @@ module ttFullyLeptonicFilter = TtDecaySelection
  #---------------------------------------
  # allowed decay channels for taus.
  # In order: (leptonic, one prong, three prong)
+ # Important note: When running from genEvt, 
+ # tau daughters are not known. 
+ # All taus are therefore kept, whatever the decay.
  #---------------------------------------
-  vint32 tauDecays = {0,0,0}
+  vint32 tauDecays = {0,1,1}
 
 #invert selection?
   bool   invert = false
