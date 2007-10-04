@@ -1,5 +1,5 @@
-module ttSemiLeptonicFilter = TtDecaySelection
-{
+
+module ttSemiLeptonicFilter = TtDecaySelection {
   InputTag src = genEvt
 
  #---------------------------------------
@@ -18,7 +18,5 @@ module ttSemiLeptonicFilter = TtDecaySelection
 
  #invert selection?
   bool   invert = false
-
-  
 
 }
