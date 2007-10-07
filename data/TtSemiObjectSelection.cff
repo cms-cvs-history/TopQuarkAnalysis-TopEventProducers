@@ -43,7 +43,7 @@ module selectedTopMETs = TopMETSelector {
 sequence objectSelection = {
   selectedTopElectrons &
   selectedTopMuons &
-  selectedTopTaus &
+//  selectedTopTaus &
   selectedTopLJets &
   selectedTopBJets &
   selectedTopMETs
