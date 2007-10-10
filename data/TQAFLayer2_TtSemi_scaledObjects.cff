@@ -1,0 +1,64 @@
+
+### TQAF Layer 2 TtSemi default sequence
+
+# Construct the MC Generated Ttbar Event
+include "TopQuarkAnalysis/TopEventProducers/data/TtGenEvtProducer.cff"
+
+# apply systematics energy shift&smearing
+include "TopQuarkAnalysis/TopObjectProducers/data/TopObjectEnergyScale.cfi"
+
+# apply a kinematic selection on the TopObjects
+include "TopQuarkAnalysis/TopEventProducers/data/TtSemiObjectSelection.cff"
+replace selectedTopElectrons.src = scaledTopElectrons
+replace selectedTopMuons.src     = scaledTopMuons
+replace selectedTopLJets.src     = scaledTopLJets
+replace selectedTopBJets.src     = scaledTopBJets
+replace selectedTopMETs.src      = scaledTopMETs
+
+# filter events requiring a minimal number of final state TopObjects
+include "TopQuarkAnalysis/TopEventProducers/data/TtSemiObjectCountFilter.cff"
+
+# TtSemiEvt solutions
+include "TopQuarkAnalysis/TopEventProducers/data/TtSemiEvtSolProducer.cfi"
+
+sequence tqafLayer2_TtSemi = {
+  makeGenEvt,
+  scaledTopObjects,
+  objectSelection,
+  objectCountFiltering,
+  solutions
+}
+
+
+### TQAF Layer 2 TtSemi sequences filtering a specific decay chain
+
+include "TopQuarkAnalysis/TopEventProducers/data/TtSemiLeptonicFilter.cfi"
+include "TopQuarkAnalysis/TopEventProducers/data/TtFullyLeptonicFilter.cfi"
+include "TopQuarkAnalysis/TopEventProducers/data/TtFullyHadronicFilter.cfi"
+
+sequence tqafLayer2_TtSemi_SemiLepFilter = {
+  makeGenEvt,
+  ttSemiLeptonicFilter,
+  scaledTopObjects,
+  objectSelection,
+  objectCountFiltering,
+  solutions
+}
+
+sequence tqafLayer2_TtSemi_FullLepFilter = {
+  makeGenEvt,
+  ttFullyLeptonicFilter,
+  scaledTopObjects,
+  objectSelection,
+  objectCountFiltering,
+  solutions
+}
+
+sequence tqafLayer2_TtSemi_FullHadFilter = {
+  makeGenEvt,
+  ttFullyHadronicFilter,
+  scaledTopObjects,
+  objectSelection,
+  objectCountFiltering,
+  solutions
+}
