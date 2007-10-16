@@ -223,7 +223,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
 
     // choose the best jet combination according to LR value
     if (addLRJetComb_ && evtsols->size()>0) {
-      float bestLRVal = 1000000;
+      float bestLRVal = -1000000;
       int bestSol = (*evtsols)[0].getLRBestJetComb(); // duplicate the default
       for(size_t s=0; s<evtsols->size(); s++) {
         if ((*evtsols)[s].getLRJetCombLRval() > bestLRVal) {
