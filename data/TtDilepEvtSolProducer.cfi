@@ -6,6 +6,7 @@
 
     // define input to start from
     InputTag electronSource = selectedTopElectrons
+    InputTag tauSource      = selectedTopTaus
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
     InputTag jetSource      = selectedTopBJets
@@ -19,9 +20,10 @@
     bool eeChannel        = true
     bool emuChannel       = true
     bool mumuChannel      = true
+    bool mutauChannel     = true
+    bool etauChannel      = true
     double tmassbegin   = 100.0
     double tmassend     = 300.0
     double tmassstep    = 1.0
-
   } 
-	  
+  
