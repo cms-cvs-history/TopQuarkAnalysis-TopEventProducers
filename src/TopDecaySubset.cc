@@ -26,6 +26,8 @@ TopDecaySubset::produce(edm::Event& evt, const edm::EventSetup& setup)
   const reco::CandidateRefProd ref = evt.getRefBeforePut<reco::CandidateCollection>(); 
   std::auto_ptr<reco::CandidateCollection> sel( new reco::CandidateCollection );
 
+  //clear existing refs
+  refs_.clear();
   //fill output collection
   fillOutput( *src, *sel );
   //fill references
