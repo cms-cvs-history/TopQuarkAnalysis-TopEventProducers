@@ -12,31 +12,60 @@ module countTopLeptons = TopLeptonCountFilter {
   bool     countMuons     = true
   bool     countTaus      = false
   uint32   minNumber      = 2
+  uint32   maxNumber      = 2
 }
 
 // TopElectrons separately
-module countTopElectrons = TopElectronCountFilter {
+module minTopElectrons = TopElectronCountFilter {
   InputTag src       = selectedTopElectrons
   uint32   minNumber = 0
 }
+module maxTopElectrons = TopElectronCountFilter {
+  InputTag src       = selectedTopElectrons
+  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
+  # the filter in the sequence below, it actually serves as a maximum!
+  uint32   minNumber = 999999
+}
+sequence countTopElectrons = { minTopElectrons & !maxTopElectrons }
 
 // TopMuons separately
-module countTopMuons = TopMuonCountFilter {
+module minTopMuons = TopMuonCountFilter {
   InputTag src       = selectedTopMuons
   uint32   minNumber = 0
 }
+module maxTopMuons = TopMuonCountFilter {
+  InputTag src       = selectedTopMuons
+  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
+  # the filter in the sequence below, it actually serves as a maximum!
+  uint32   minNumber = 999999
+}
+sequence countTopMuons = { minTopMuons & !maxTopMuons }
 
 // TopTaus separately
-module countTopTaus = TopTauCountFilter {
+module minTopTaus = TopTauCountFilter {
   InputTag src       = selectedTopTaus
   uint32   minNumber = 0
 }
+module maxTopTaus = TopTauCountFilter {
+  InputTag src       = selectedTopTaus
+  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
+  # the filter in the sequence below, it actually serves as a maximum!
+  uint32   minNumber = 999999
+}
+sequence countTopTaus = { minTopTaus & !maxTopTaus }
 
 // TopBjets
-module countTopBJets = TopJetCountFilter {
+module minTopBJets = TopJetCountFilter {
   InputTag src       = selectedTopBJets
   uint32   minNumber = 2
 }
+module maxTopBJets = TopJetCountFilter {
+  InputTag src       = selectedTopBJets
+  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
+  # the filter in the sequence below, it actually serves as a maximum!
+  uint32   minNumber = 999999
+}
+sequence countTopBJets = { minTopBJets & !maxTopBJets }
 
 
 sequence objectCountFiltering = {
