@@ -24,6 +24,7 @@ module maxTopElectrons = TopElectronCountFilter {
   InputTag src       = selectedTopElectrons
   # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
   # the filter in the sequence below, it actually serves as a maximum!
+  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
   uint32   minNumber = 999999
 }
 sequence countTopElectrons = { minTopElectrons & !maxTopElectrons }
@@ -37,6 +38,7 @@ module maxTopMuons = TopMuonCountFilter {
   InputTag src       = selectedTopMuons
   # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
   # the filter in the sequence below, it actually serves as a maximum!
+  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
   uint32   minNumber = 999999
 }
 sequence countTopMuons = { minTopMuons & !maxTopMuons }
@@ -50,6 +52,7 @@ module maxTopTaus = TopTauCountFilter {
   InputTag src       = selectedTopTaus
   # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
   # the filter in the sequence below, it actually serves as a maximum!
+  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
   uint32   minNumber = 999999
 }
 sequence countTopTaus = { minTopTaus & !maxTopTaus }
@@ -63,6 +66,7 @@ module maxTopLJets = TopJetCountFilter {
   InputTag src       = selectedTopLJets
   # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
   # the filter in the sequence below, it actually serves as a maximum!
+  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
   uint32   minNumber = 999999
 }
 sequence countTopLJets = { minTopLJets & !maxTopLJets }
@@ -76,6 +80,7 @@ module maxTopBJets = TopJetCountFilter {
   InputTag src       = selectedTopBJets
   # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
   # the filter in the sequence below, it actually serves as a maximum!
+  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
   uint32   minNumber = 999999
 }
 sequence countTopBJets = { minTopBJets & !maxTopBJets }
