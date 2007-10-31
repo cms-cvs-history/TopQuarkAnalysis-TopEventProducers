@@ -16,74 +16,59 @@ module countTopLeptons = TopLeptonCountFilter {
 }
 
 // TopElectrons separately
-module minTopElectrons = TopElectronCountFilter {
+module minTopElectrons = TopElectronMinFilter {
   InputTag src       = selectedTopElectrons
   uint32   minNumber = 0
 }
-module maxTopElectrons = TopElectronCountFilter {
+module maxTopElectrons = TopElectronMaxFilter {
   InputTag src       = selectedTopElectrons
-  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
-  # the filter in the sequence below, it actually serves as a maximum!
-  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
-  uint32   minNumber = 999999
+  uint32   maxNumber = 999999
 }
-sequence countTopElectrons = { minTopElectrons & !maxTopElectrons }
+sequence countTopElectrons = { minTopElectrons & maxTopElectrons }
 
 // TopMuons separately
-module minTopMuons = TopMuonCountFilter {
+module minTopMuons = TopMuonMinFilter {
   InputTag src       = selectedTopMuons
   uint32   minNumber = 0
 }
-module maxTopMuons = TopMuonCountFilter {
+module maxTopMuons = TopMuonMaxFilter {
   InputTag src       = selectedTopMuons
-  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
-  # the filter in the sequence below, it actually serves as a maximum!
-  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
-  uint32   minNumber = 999999
+  uint32   maxNumber = 999999
 }
-sequence countTopMuons = { minTopMuons & !maxTopMuons }
+sequence countTopMuons = { minTopMuons & maxTopMuons }
 
 // TopTaus separately
-module minTopTaus = TopTauCountFilter {
+module minTopTaus = TopTauMinFilter {
   InputTag src       = selectedTopTaus
   uint32   minNumber = 0
 }
-module maxTopTaus = TopTauCountFilter {
+module maxTopTaus = TopTauMaxFilter {
   InputTag src       = selectedTopTaus
-  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
-  # the filter in the sequence below, it actually serves as a maximum!
-  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
-  uint32   minNumber = 999999
+  uint32   maxNumber = 999999
 }
-sequence countTopTaus = { minTopTaus & !maxTopTaus }
+sequence countTopTaus = { minTopTaus & maxTopTaus }
 
 // TopLJets
-module minTopLJets = TopJetCountFilter {
+module minTopLJets = TopJetMinFilter {
   InputTag src       = selectedTopLJets
   uint32   minNumber = 4
 }
-module maxTopLJets = TopJetCountFilter {
+module maxTopLJets = TopJetMaxFilter {
   InputTag src       = selectedTopLJets
-  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
-  # the filter in the sequence below, it actually serves as a maximum!
-  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
-  uint32   minNumber = 999999
+  uint32   maxNumber = 999999
 }
-sequence countTopLJets = { minTopLJets & !maxTopLJets }
+sequence countTopLJets = { minTopLJets & maxTopLJets }
 
 // TopBjets
-module minTopBJets = TopJetCountFilter {
+module minTopBJets = TopJetMinFilter {
   InputTag src       = selectedTopBJets
   uint32   minNumber = 4
 }
-module maxTopBJets = TopJetCountFilter {
+module maxTopBJets = TopJetMaxFilter {
   InputTag src       = selectedTopBJets
-  # !!!WATCH OUT!!! this parameter is called minNumber, but since we invert
-  # the filter in the sequence below, it actually serves as a maximum!
-  # !!!WATCH OUT!!! inverse(minNumber >= N) => minNumber < N
-  uint32   minNumber = 999999
+  uint32   maxNumber = 999999
 }
-sequence countTopBJets = { minTopBJets & !maxTopBJets }
+sequence countTopBJets = { minTopBJets & maxTopBJets }
 
 
 sequence objectCountFiltering = {
