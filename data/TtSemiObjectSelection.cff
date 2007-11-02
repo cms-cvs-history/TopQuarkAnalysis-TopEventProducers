@@ -6,13 +6,13 @@
 // TopElectrons
 module selectedTopElectrons = TopElectronSelector {
   InputTag src = selectedLayer1TopElectrons
-  string cut = "pt > 10. & abs(eta) < 2.5"
+  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 6 & getLeptonID > 0.99"
 }
 
 // TopMuons
 module selectedTopMuons = TopMuonSelector {
   InputTag src = selectedLayer1TopMuons
-  string cut = "pt > 10. & abs(eta) < 2.5"
+  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 1"
 }
 
 // TopTaus
@@ -24,13 +24,13 @@ module selectedTopTaus = TopTauSelector {
 // TopLJets
 module selectedTopLJets = TopJetSelector {
   InputTag src = selectedLayer1TopLJets
-  string cut = "et > 20. & abs(eta) < 2.5"
+  string cut = "et > 30. & abs(eta) < 2.4"
 }
 
 // TopBjets
 module selectedTopBJets = TopJetSelector {
   InputTag src = selectedLayer1TopBJets
-  string cut = "et > 20. & abs(eta) < 2.5"
+  string cut = "et > 30. & abs(eta) < 2.4"
 }
 
 // TopMET

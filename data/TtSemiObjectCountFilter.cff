@@ -12,37 +12,63 @@ module countTopLeptons = TopLeptonCountFilter {
   bool     countMuons     = true
   bool     countTaus      = false
   uint32   minNumber      = 1
+  uint32   maxNumber      = 1
 }
 
 // TopElectrons separately
-module countTopElectrons = TopElectronCountFilter {
+module minTopElectrons = TopElectronMinFilter {
   InputTag src       = selectedTopElectrons
   uint32   minNumber = 0
 }
+module maxTopElectrons = TopElectronMaxFilter {
+  InputTag src       = selectedTopElectrons
+  uint32   maxNumber = 999999
+}
+sequence countTopElectrons = { minTopElectrons & maxTopElectrons }
 
 // TopMuons separately
-module countTopMuons = TopMuonCountFilter {
+module minTopMuons = TopMuonMinFilter {
   InputTag src       = selectedTopMuons
   uint32   minNumber = 0
 }
+module maxTopMuons = TopMuonMaxFilter {
+  InputTag src       = selectedTopMuons
+  uint32   maxNumber = 999999
+}
+sequence countTopMuons = { minTopMuons & maxTopMuons }
 
 // TopTaus separately
-module countTopTaus = TopTauCountFilter {
+module minTopTaus = TopTauMinFilter {
   InputTag src       = selectedTopTaus
   uint32   minNumber = 0
 }
+module maxTopTaus = TopTauMaxFilter {
+  InputTag src       = selectedTopTaus
+  uint32   maxNumber = 999999
+}
+sequence countTopTaus = { minTopTaus & maxTopTaus }
 
 // TopLJets
-module countTopLJets = TopJetCountFilter {
+module minTopLJets = TopJetMinFilter {
   InputTag src       = selectedTopLJets
   uint32   minNumber = 4
 }
+module maxTopLJets = TopJetMaxFilter {
+  InputTag src       = selectedTopLJets
+  uint32   maxNumber = 999999
+}
+sequence countTopLJets = { minTopLJets & maxTopLJets }
 
 // TopBjets
-module countTopBJets = TopJetCountFilter {
+module minTopBJets = TopJetMinFilter {
   InputTag src       = selectedTopBJets
   uint32   minNumber = 4
 }
+module maxTopBJets = TopJetMaxFilter {
+  InputTag src       = selectedTopBJets
+  uint32   maxNumber = 999999
+}
+sequence countTopBJets = { minTopBJets & maxTopBJets }
 
 
 sequence objectCountFiltering = {
