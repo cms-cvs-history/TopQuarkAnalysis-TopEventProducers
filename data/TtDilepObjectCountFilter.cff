@@ -64,6 +64,6 @@ sequence objectCountFiltering = {
   countTopLeptons &
   countTopElectrons &
   countTopMuons &
-//  countTopTaus &
+  countTopTaus &
   countTopBJets
 }
