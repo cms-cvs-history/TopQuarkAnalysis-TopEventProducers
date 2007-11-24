@@ -48,16 +48,16 @@ module maxTopTaus = TopTauMaxFilter {
 }
 sequence countTopTaus = { minTopTaus & maxTopTaus }
 
-// TopBjets
-module minTopBJets = TopJetMinFilter {
-  InputTag src       = selectedTopBJets
+// TopJets
+module minTopJets = TopJetMinFilter {
+  InputTag src       = selectedTopJets
   uint32   minNumber = 2
 }
-module maxTopBJets = TopJetMaxFilter {
-  InputTag src       = selectedTopBJets
+module maxTopJets = TopJetMaxFilter {
+  InputTag src       = selectedTopJets
   uint32   maxNumber = 999999
 }
-sequence countTopBJets = { minTopBJets & maxTopBJets }
+sequence countTopJets = { minTopJets & maxTopJets }
 
 
 sequence objectCountFiltering = {
@@ -65,5 +65,5 @@ sequence objectCountFiltering = {
   countTopElectrons &
   countTopMuons &
   countTopTaus &
-  countTopBJets
+  countTopJets
 }
