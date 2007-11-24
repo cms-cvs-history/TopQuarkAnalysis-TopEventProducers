@@ -13,7 +13,7 @@
     InputTag evtSource      = genEvt
 
     // select the jet energy scale correction scheme to be used
-    int32 jetCorrectionScheme = 2   // 1 = use jet flavour from MC
+    int32 jetCorrectionScheme = 0   // 1 = use jet flavour from MC
                                     // 2 = use flavour of role of jet in event
                                     // other = use standard MCJet calibrations (i.e. no flavour distinction)
 
