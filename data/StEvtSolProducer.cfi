@@ -5,9 +5,12 @@
     InputTag electronSource = selectedTopElectrons
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
-    InputTag lJetSource     = selectedTopLJets
-    InputTag bJetSource     = selectedTopBJets
+    InputTag jetSource      = selectedTopJets
     string leptonFlavour   = 'muon' 	//electron or muon
+    // select the jet energy scale correction scheme to be used
+    int32 jetCorrectionScheme = 0   // 1 = use jet flavour from MC
+                                    // 2 = use flavour of role of jet in event
+                                    // other = use standard MCJet calibrations (i.e. no flavour distinction)
     bool   matchToGenEvt   = false
     bool   doKinFit   	   = true
     int32  maxNrIter       = 200

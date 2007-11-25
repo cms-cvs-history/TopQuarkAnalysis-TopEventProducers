@@ -1,4 +1,4 @@
-// $Id: TtHadEvtSolutionMaker.cc,v 1.2 2007/10/06 20:29:34 mfhansen Exp $
+// $Id$
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtHadEvtSolutionMaker.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
@@ -18,8 +18,8 @@
 /// constructor
 TtHadEvtSolutionMaker::TtHadEvtSolutionMaker(const edm::ParameterSet & iConfig) {
   // configurables
-  lJetSrc_         = iConfig.getParameter<edm::InputTag>    ("lJetSource");
-  bJetSrc_         = iConfig.getParameter<edm::InputTag>    ("bJetSource");
+  jetSrc_          = iConfig.getParameter<edm::InputTag>    ("jetSource");
+  jetCorrScheme_   = iConfig.getParameter<int>              ("jetCorrectionScheme");
   doKinFit_        = iConfig.getParameter<bool>             ("doKinFit");
   addLRSignalSel_  = iConfig.getParameter<bool>             ("addLRSignalSel");
   lrSignalSelObs_  = iConfig.getParameter<std::vector<int> >("lrSignalSelObs");
@@ -70,15 +70,12 @@ TtHadEvtSolutionMaker::~TtHadEvtSolutionMaker()
 
 void TtHadEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup & iSetup) {
   // TopObject Selection
-  // Select Jets (TopJet vector is sorted on recET, so four first elements in both the lJets and bJets vector are the same )
+  // Select Jets
 
   bool jetsFound = false;
-  edm::Handle<std::vector<TopJet> > lJets;
-  iEvent.getByLabel(lJetSrc_, lJets);
-  edm::Handle<std::vector<TopJet> > bJets;
-  iEvent.getByLabel(bJetSrc_, bJets);
-  if (lJets->size() >= 6) jetsFound = true;
-
+  edm::Handle<std::vector<TopJet> > jets;
+  iEvent.getByLabel(jetSrc_, jets);
+  if (jets->size() >= 6) jetsFound = true;
 
   // Build Event solutions according to the ambiguity in the jet combination
   // Note, hardcoded to only run through the 6 most energetic jets - could be changed ....
@@ -99,28 +96,31 @@ void TtHadEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup &
 		    vector<TtHadEvtSolution> asol;
 		    asol.resize(6);
 		    //[p][q][b] and [j][k][bbar]
-		    asol[0].setHadp(lJets, p);
-		    asol[0].setHadq(lJets, q);
-		    asol[0].setHadj(lJets, j);
-		    asol[0].setHadk(lJets, k);
-		    asol[0].setHadb(bJets, bh);
-		    asol[0].setHadbbar(bJets, bbarh);
+                    asol[0].setJetCorrectionScheme(jetCorrScheme_);
+		    asol[0].setHadp(jets, p);
+		    asol[0].setHadq(jets, q);
+		    asol[0].setHadj(jets, j);
+		    asol[0].setHadk(jets, k);
+		    asol[0].setHadb(jets, bh);
+		    asol[0].setHadbbar(jets, bbarh);
 
 		    //[p][j][b] and [q][k][bbar]
-		    asol[2].setHadp(lJets, p);
-		    asol[2].setHadq(lJets, j);
-		    asol[2].setHadj(lJets, q);
-		    asol[2].setHadk(lJets, k);
-		    asol[2].setHadb(bJets, bh);
-		    asol[2].setHadbbar(bJets, bbarh);
+                    asol[2].setJetCorrectionScheme(jetCorrScheme_);
+		    asol[2].setHadp(jets, p);
+		    asol[2].setHadq(jets, j);
+		    asol[2].setHadj(jets, q);
+		    asol[2].setHadk(jets, k);
+		    asol[2].setHadb(jets, bh);
+		    asol[2].setHadbbar(jets, bbarh);
 
 		    //[p][k][b] and [j][q][bbar]
-		    asol[4].setHadp(lJets, p);
-		    asol[4].setHadq(lJets, k);
-		    asol[4].setHadj(lJets, j);
-		    asol[4].setHadk(lJets, q);
-		    asol[4].setHadb(bJets, bh);
-		    asol[4].setHadbbar(bJets, bbarh);
+                    asol[4].setJetCorrectionScheme(jetCorrScheme_);
+		    asol[4].setHadp(jets, p);
+		    asol[4].setHadq(jets, k);
+		    asol[4].setHadj(jets, j);
+		    asol[4].setHadk(jets, q);
+		    asol[4].setHadb(jets, bh);
+		    asol[4].setHadbbar(jets, bbarh);
 
 		    if(doKinFit_){
 		      for(unsigned int i=0;i!=asol.size();i++){
