@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.cc,v 1.19.2.8 2007/10/16 20:30:22 lowette Exp $
+// $Id$
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -138,7 +138,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
                   asol.setNeutrinoParametrisation(metParam_);
                 }
                 // these lines calculate the observables to be used in the TtSemiSignalSelection LR
-                (*myLRSignalSelObservables)(asol);
+                (*myLRSignalSelObservables)(asol, *jets);
 
                 // if asked for, calculate with these observable values the LRvalue and 
                 // (depending on the configuration) probability this event is signal
