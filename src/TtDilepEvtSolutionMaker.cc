@@ -1,5 +1,5 @@
 //
-// $Id$
+// $Id: TtDilepEvtSolutionMaker.cc,v 1.6.2.1 2007/10/03 22:21:51 lowette Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtDilepEvtSolutionMaker.h"
@@ -21,6 +21,7 @@ TtDilepEvtSolutionMaker::TtDilepEvtSolutionMaker(const edm::ParameterSet & iConf
   muonSource_     = iConfig.getParameter<edm::InputTag>("muonSource");
   metSource_      = iConfig.getParameter<edm::InputTag>("metSource");
   jetSource_      = iConfig.getParameter<edm::InputTag>("jetSource");
+  jetCorrScheme_  = iConfig.getParameter<int>          ("jetCorrectionScheme");
   nrCombJets_     = iConfig.getParameter<unsigned int> ("nrCombJets");
   matchToGenEvt_  = iConfig.getParameter<bool>         ("matchToGenEvt");
   calcTopMass_    = iConfig.getParameter<bool>         ("calcTopMass"); 
@@ -158,6 +159,7 @@ void TtDilepEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup
     //SaveSolution for both jet-lep pairings
     for (unsigned int ib = 0; ib < nrCombJets; ib++) {
       TtDilepEvtSolution asol;
+      asol.setJetCorrectionScheme(jetCorrScheme_);
       
       double xconstraint = 0, yconstraint = 0;
       if (leptonFoundEE || leptonFoundEpMm) {

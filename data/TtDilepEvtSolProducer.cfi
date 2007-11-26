@@ -8,7 +8,12 @@
     InputTag electronSource = selectedTopElectrons
     InputTag muonSource     = selectedTopMuons
     InputTag metSource      = selectedTopMETs
-    InputTag jetSource      = selectedTopBJets
+    InputTag jetSource      = selectedTopJets
+
+    // select the jet energy scale correction scheme to be used
+    int32 jetCorrectionScheme = 0   // 1 = use jet flavour from MC
+                                    // 2 = use flavour of role of jet in event
+                                    // other = use standard MCJet calibrations (i.e. no flavour distinction)
 
     // set the maximum number of jets to use in the combinatorics (watch out for exploding combinatorics!)
     // these jets are taken as the first ones from the ET ordered collection

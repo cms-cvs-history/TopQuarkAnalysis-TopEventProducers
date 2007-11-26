@@ -6,7 +6,7 @@
 // TopElectron
 module selectedTopElectrons = TopElectronSelector {
   InputTag src = selectedLayer1TopElectrons
-  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 6 & getLeptonID > 0.99"
+  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 6"
 }
 
 // TopMuon
@@ -21,9 +21,9 @@ module selectedTopTaus = TopTauSelector {
   string cut = "discriminator > -10000"
 }
 
-// TopBjets
-module selectedTopBJets = TopJetSelector {
-  InputTag src = selectedLayer1TopBJets
+// TopJets
+module selectedTopJets = TopJetSelector {
+  InputTag src = selectedLayer1TopJets
   string cut = "et > 30. & abs(eta) < 2.4"
 }
 
@@ -37,7 +37,7 @@ module selectedTopMETs = TopMETSelector {
 sequence objectSelection = {
   selectedTopElectrons,
   selectedTopMuons,
-  selectedTopTaus,
-  selectedTopBJets,
+#  selectedTopTaus,
+  selectedTopJets,
   selectedTopMETs
 }
