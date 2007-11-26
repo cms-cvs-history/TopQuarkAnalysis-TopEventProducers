@@ -12,7 +12,7 @@ module selectedTopElectrons = TopElectronSelector {
 // TopMuons
 module selectedTopMuons = TopMuonSelector {
   InputTag src = selectedLayer1TopMuons
-  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 1"
+  string cut = "pt > 10. & abs(eta) < 2.4 & getTrackIso < 3 & getCaloIso < 5"
 }
 
 // TopTaus
