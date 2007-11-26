@@ -11,8 +11,7 @@ include "TopQuarkAnalysis/TopObjectProducers/data/TopObjectEnergyScale.cfi"
 include "TopQuarkAnalysis/TopEventProducers/data/TtSemiObjectSelection.cff"
 replace selectedTopElectrons.src = scaledTopElectrons
 replace selectedTopMuons.src     = scaledTopMuons
-replace selectedTopLJets.src     = scaledTopLJets
-replace selectedTopBJets.src     = scaledTopBJets
+replace selectedTopJets.src     = scaledTopJets
 replace selectedTopMETs.src      = scaledTopMETs
 
 # filter events requiring a minimal number of final state TopObjects

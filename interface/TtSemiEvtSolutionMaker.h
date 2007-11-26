@@ -37,9 +37,9 @@ class TtSemiEvtSolutionMaker : public edm::EDProducer {
     edm::InputTag electronSrc_;
     edm::InputTag muonSrc_;
     edm::InputTag metSrc_;
-    edm::InputTag lJetSrc_;
-    edm::InputTag bJetSrc_;
+    edm::InputTag jetSrc_;
     std::string leptonFlavour_;
+    int jetCorrScheme_;
     unsigned int nrCombJets_;
     std::string lrSignalSelFile_, lrJetCombFile_;
     bool addLRSignalSel_, addLRJetComb_, doKinFit_, matchToGenEvt_;

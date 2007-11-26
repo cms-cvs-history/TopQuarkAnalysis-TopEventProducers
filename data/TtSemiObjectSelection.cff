@@ -21,15 +21,9 @@ module selectedTopTaus = TopTauSelector {
   string cut = "discriminator > -10000"
 }
 
-// TopLJets
-module selectedTopLJets = TopJetSelector {
-  InputTag src = selectedLayer1TopLJets
-  string cut = "et > 30. & abs(eta) < 2.4"
-}
-
-// TopBjets
-module selectedTopBJets = TopJetSelector {
-  InputTag src = selectedLayer1TopBJets
+// TopJets
+module selectedTopJets = TopJetSelector {
+  InputTag src = selectedLayer1TopJets
   string cut = "et > 30. & abs(eta) < 2.4"
 }
 
@@ -44,7 +38,6 @@ sequence objectSelection = {
   selectedTopElectrons &
   selectedTopMuons &
   selectedTopTaus &
-  selectedTopLJets &
-  selectedTopBJets &
+  selectedTopJets &
   selectedTopMETs
 }
