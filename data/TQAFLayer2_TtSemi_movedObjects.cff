@@ -4,7 +4,7 @@
 # Construct the MC Generated Ttbar Event
 include "TopQuarkAnalysis/TopEventProducers/data/TtGenEvtProducer.cff"
 
-# apply systematics energy shift&smearing
+# apply systematics angular smearing
 include "TopQuarkAnalysis/TopObjectProducers/data/TopObjectSpatialResolution.cfi"
 
 # apply a kinematic selection on the TopObjects
