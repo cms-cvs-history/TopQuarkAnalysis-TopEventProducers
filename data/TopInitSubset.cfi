@@ -1,4 +1,4 @@
 module initSubset = TopInitSubset{
-  InputTag src = genParticleCandidates
+  InputTag src = genParticles
 }  
 
