@@ -1,0 +1,27 @@
+# PATLayer1 Lepton count filter
+  replace countLayer1Leptons.electronSource = selectedLayer1Electrons
+  replace countLayer1Leptons.muonSource     = selectedLayer1Muons
+  replace countLayer1Leptons.tauSource      = selectedLayer1Taus
+  replace countLayer1Leptons.countElectrons = true
+  replace countLayer1Leptons.countMuons     = true
+  replace countLayer1Leptons.countTaus      = false
+  replace countLayer1Leptons.minNumber      = 1
+  replace countLayer1Leptons.maxNumber      = 1
+
+# PATLayer1 Electron count filter
+  replace minLayer1Electrons.src            = selectedLayer1Electrons
+  replace minLayer1Electrons.minNumber      = 0
+  replace maxLayer1Electrons.src            = selectedLayer1Electrons
+  replace maxLayer1Electrons.maxNumber      = 999999
+
+# PATLayer1 Muon count filter
+  replace minLayer1Muons.src                = selectedLayer1Muons
+  replace minLayer1Muons.minNumber          = 0
+  replace maxLayer1Muons.src                = selectedLayer1Muons
+  replace maxLayer1Muons.maxNumber          = 999999
+
+# PATLayer1 Tau count filter
+  replace minLayer1Taus.src                 = selectedLayer1Taus
+  replace minLayer1Taus.minNumber           = 0
+  replace maxLayer1Taus.src                 = selectedLayer1Taus
+  replace maxLayer1Taus.maxNumber           = 999999

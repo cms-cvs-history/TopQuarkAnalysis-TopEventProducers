@@ -4,19 +4,15 @@
 # Construct the MC Generated Ttbar Event
 include "TopQuarkAnalysis/TopEventProducers/data/TtGenEvtProducer.cff"
 
-# apply a kinematic selection on the TopObjects
-include "TopQuarkAnalysis/TopEventProducers/data/TtDilepObjectSelection.cff"
-
-# filter events requiring a minimal number of final state TopObjects
-include "TopQuarkAnalysis/TopEventProducers/data/TtDilepObjectCountFilter.cff"
+# Count selection
+include "TopQuarkAnalysis/TopEventProducers/data/TtDilepNumJetFilter.cff"
+include "TopQuarkAnalysis/TopEventProducers/data/TtDilepNumLeptonFilter.cff"
 
 # TtDilepEvt solutions
 include "TopQuarkAnalysis/TopEventProducers/data/TtDilepEvtSolProducer.cfi"
 
 sequence tqafLayer2_TtDilep = {
   makeGenEvt,
-  objectSelection,
-  objectCountFiltering,
   solutions
 }
 
@@ -30,23 +26,17 @@ include "TopQuarkAnalysis/TopEventProducers/data/TtFullyHadronicFilter.cfi"
 sequence tqafLayer2_TtDilep_FullLepFilter = {
   makeGenEvt,
   ttFullyLeptonicFilter,
-  objectSelection,
-  objectCountFiltering,
   solutions
 }
 
 sequence tqafLayer2_TtDilep_SemiLepFilter = {
   makeGenEvt,
   ttSemiLeptonicFilter,
-  objectSelection,
-  objectCountFiltering,
   solutions
 }
 
 sequence tqafLayer2_TtDilep_FullHadFilter = {
   makeGenEvt,
   ttFullyHadronicFilter,
-  objectSelection,
-  objectCountFiltering,
   solutions
 }

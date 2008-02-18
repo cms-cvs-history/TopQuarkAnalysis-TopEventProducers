@@ -2,11 +2,13 @@
 # Module to build the single top event solutions (one solution for each possible jet combination)
 #
   module solutions = StEvtSolutionMaker {
-    InputTag electronSource = selectedTopElectrons
-    InputTag muonSource     = selectedTopMuons
-    InputTag metSource      = selectedTopMETs
-    InputTag jetSource      = selectedTopJets
+    InputTag electronSource = selectedLayer1Electrons
+    InputTag muonSource     = selectedLayer1Muons
+    InputTag metSource      = selectedLayer1METs
+    InputTag jetSource      = selectedLayer1Jets
+
     string leptonFlavour   = 'muon' 	//electron or muon
+
     // select the jet energy scale correction scheme to be used
     int32 jetCorrectionScheme = 0   // 1 = use jet flavour from MC
                                     // 2 = use flavour of role of jet in event
