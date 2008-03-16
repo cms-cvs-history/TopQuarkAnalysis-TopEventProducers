@@ -5,11 +5,11 @@
   module solutions = TtDilepEvtSolutionMaker {
 
     // define input to start from
-    InputTag electronSource = selectedTopElectrons
-    InputTag tauSource      = selectedTopTaus
-    InputTag muonSource     = selectedTopMuons
-    InputTag metSource      = selectedTopMETs
-    InputTag jetSource      = selectedTopJets
+    InputTag electronSource = selectedLayer1Electrons
+    InputTag tauSource      = selectedLayer1Taus
+    InputTag muonSource     = selectedLayer1Muons
+    InputTag metSource      = selectedLayer1METs
+    InputTag jetSource      = selectedLayer1Jets
     InputTag evtSource      = genEvt
 
     // select the jet energy scale correction scheme to be used
