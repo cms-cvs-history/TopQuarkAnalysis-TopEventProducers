@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.cc,v 1.30 2008/01/17 10:30:48 ghammad Exp $
+// $Id: TtSemiEvtSolutionMaker.cc,v 1.29 2007/11/26 18:55:57 lowette Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -53,6 +53,7 @@ TtSemiEvtSolutionMaker::TtSemiEvtSolutionMaker(const edm::ParameterSet & iConfig
   mySimpleBestJetComb                    = new TtSemiSimpleBestJetComb();
   myLRSignalSelObservables               = new TtSemiLRSignalSelObservables();
   myLRJetCombObservables                 = new TtSemiLRJetCombObservables();
+  myLRJetCombObservables -> jetSource(jetSrc_);
   if (addLRJetComb_)   myLRJetCombCalc   = new TtSemiLRJetCombCalc(edm::FileInPath(lrJetCombFile_).fullPath(), lrJetCombObs_);
 
   // instantiate signal selection calculator
@@ -108,7 +109,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
   //
   // Build Event solutions according to the ambiguity in the jet combination
   //
-
+  std::cout << "Build Event solutions according to the ambiguity in the jet combination" << std::endl;
   std::vector<TtSemiEvtSolution> * evtsols = new std::vector<TtSemiEvtSolution>();
   if(leptonFound && metFound && jetsFound){
     // protect against reading beyond array boundaries
@@ -137,8 +138,17 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
                   asol.setLeptonParametrisation(lepParam_);
                   asol.setNeutrinoParametrisation(metParam_);
                 }
-                // if asked for, these lines calculate the observables to be used in the TtSemiSignalSelection LR
-                if(addLRSignalSel_) (*myLRSignalSelObservables)(asol, *jets);
+		if(matchToGenEvt_){
+		  edm::Handle<TtGenEvent> genEvt;
+		  iEvent.getByLabel ("genEvt",genEvt); 
+		  if (genEvt->numberOfBQuarks() == 2 &&  // FIXME: in rare cases W->bc decay, resulting in a wrong filled genEvt leading to a segmentation fault 
+		      genEvt->numberOfLeptons() == 1) {  // FIXME: temporary solution to avoid crash in JetPartonMatching for non semi-leptonic events
+		    asol.setGenEvt(genEvt);   
+		  
+		  }
+		}
+                // these lines calculate the observables to be used in the TtSemiSignalSelection LR
+                (*myLRSignalSelObservables)(asol, *jets);
 
                 // if asked for, calculate with these observable values the LRvalue and 
                 // (depending on the configuration) probability this event is signal
@@ -146,9 +156,11 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
                 if(addLRSignalSel_) (*myLRSignalSelCalc)(asol);
 
                 // these lines calculate the observables to be used in the TtSemiJetCombination LR
-                (*myLRJetCombObservables)(asol);
-
-                // if asked for, calculate with these observable values the LRvalue and 
+                //(*myLRJetCombObservables)(asol);
+		
+		(*myLRJetCombObservables)(asol, iEvent);
+                
+		// if asked for, calculate with these observable values the LRvalue and 
                 // (depending on the configuration) probability a jet combination is correct
                 if(addLRJetComb_) (*myLRJetCombCalc)(asol);
 
