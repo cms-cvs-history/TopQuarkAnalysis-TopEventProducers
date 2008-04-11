@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.cc,v 1.31.2.1 2008/03/26 07:59:26 jmmaes Exp $
+// $Id: TtSemiEvtSolutionMaker.cc,v 1.31.2.2 2008/04/08 10:05:12 rwolf Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -45,6 +45,10 @@ TtSemiEvtSolutionMaker::TtSemiEvtSolutionMaker(const edm::ParameterSet & iConfig
   metParam_        = iConfig.getParameter<int>              ("metParametrisation");
   constraints_     = iConfig.getParameter<std::vector<int> >("constraints");
   matchToGenEvt_   = iConfig.getParameter<bool>             ("matchToGenEvt");
+  matchingAlgo_    = iConfig.getParameter<int>              ("matchingAlgorithm");
+  useMaxDist_      = iConfig.getParameter<bool>             ("useMaximalDistance");
+  useDeltaR_       = iConfig.getParameter<bool>             ("useDeltaR");
+  maxDist_         = iConfig.getParameter<double>           ("maximalDistance");
 
   // define kinfitter
   if(doKinFit_)        myKinFitter       = new TtSemiKinFitter(jetParam_, lepParam_, metParam_, maxNrIter_, maxDeltaS_, maxF_, constraints_);
@@ -204,7 +208,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
           recjets.push_back( &jetq );
           recjets.push_back( &jetbh );
           recjets.push_back( &jetbl );
-          JetPartonMatching aMatch(quarks, recjets, 3, true, true, 0.3);   
+          JetPartonMatching aMatch(quarks, recjets, matchingAlgo_, useMaxDist_, useDeltaR_, maxDist_);   
           (*evtsols)[s].setGenEvt(genEvt);   
           (*evtsols)[s].setMCBestSumAngles(aMatch.getSumAngles());
           (*evtsols)[s].setMCBestAngleHadp(aMatch.getAngleForParton(0));

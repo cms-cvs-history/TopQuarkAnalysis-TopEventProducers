@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.h,v 1.16 2007/10/03 22:17:59 lowette Exp $
+// $Id: TtSemiEvtSolutionMaker.h,v 1.17 2007/11/24 11:14:21 lowette Exp $
 //
 
 #ifndef TopEventProducers_TtSemiEvtSolutionMaker_h
@@ -23,38 +23,40 @@ class TtSemiLRSignalSelCalc;
 
 
 class TtSemiEvtSolutionMaker : public edm::EDProducer {
-
-  public:
-
-    explicit TtSemiEvtSolutionMaker(const edm::ParameterSet & iConfig);
-    ~TtSemiEvtSolutionMaker();
-
-    virtual void produce(edm::Event & iEvent, const edm::EventSetup & iSetup);
-
-  private:
-
-    // configurables
-    edm::InputTag electronSrc_;
-    edm::InputTag muonSrc_;
-    edm::InputTag metSrc_;
-    edm::InputTag jetSrc_;
-    std::string leptonFlavour_;
-    int jetCorrScheme_;
-    unsigned int nrCombJets_;
-    std::string lrSignalSelFile_, lrJetCombFile_;
-    bool addLRSignalSel_, addLRJetComb_, doKinFit_, matchToGenEvt_;
-    int maxNrIter_;
-    double maxDeltaS_, maxF_;
-    int jetParam_, lepParam_, metParam_;
-    std::vector<int> lrSignalSelObs_, lrJetCombObs_, constraints_;
-    // tools
-    TtSemiKinFitter              * myKinFitter;
-    TtSemiSimpleBestJetComb      * mySimpleBestJetComb;
-    TtSemiLRJetCombObservables   * myLRJetCombObservables;
-    TtSemiLRJetCombCalc          * myLRJetCombCalc;
-    TtSemiLRSignalSelObservables * myLRSignalSelObservables;
-    TtSemiLRSignalSelCalc        * myLRSignalSelCalc;
-
+  
+ public:
+  
+  explicit TtSemiEvtSolutionMaker(const edm::ParameterSet & iConfig);
+  ~TtSemiEvtSolutionMaker();
+  
+  virtual void produce(edm::Event & iEvent, const edm::EventSetup & iSetup);
+  
+ private:
+  
+  // configurables
+  edm::InputTag electronSrc_;
+  edm::InputTag muonSrc_;
+  edm::InputTag metSrc_;
+  edm::InputTag jetSrc_;
+  std::string leptonFlavour_;
+  int jetCorrScheme_;
+  unsigned int nrCombJets_;
+  std::string lrSignalSelFile_, lrJetCombFile_;
+  bool addLRSignalSel_, addLRJetComb_, doKinFit_, matchToGenEvt_;
+  int matchingAlgo_;
+  bool useMaxDist_, useDeltaR_;
+  double maxDist_;
+  int maxNrIter_;
+  double maxDeltaS_, maxF_;
+  int jetParam_, lepParam_, metParam_;
+  std::vector<int> lrSignalSelObs_, lrJetCombObs_, constraints_;
+  // tools
+  TtSemiKinFitter              * myKinFitter;
+  TtSemiSimpleBestJetComb      * mySimpleBestJetComb;
+  TtSemiLRJetCombObservables   * myLRJetCombObservables;
+  TtSemiLRJetCombCalc          * myLRJetCombCalc;
+  TtSemiLRSignalSelObservables * myLRSignalSelObservables;
+  TtSemiLRSignalSelCalc        * myLRSignalSelCalc;  
 };
 
 

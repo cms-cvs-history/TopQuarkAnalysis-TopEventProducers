@@ -1,4 +1,4 @@
-// $Id: TtHadEvtSolutionMaker.cc,v 1.8 2008/01/25 13:49:08 vadler Exp $
+// $Id: TtHadEvtSolutionMaker.cc,v 1.8.2.1 2008/04/08 10:05:12 rwolf Exp $
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtHadEvtSolutionMaker.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
@@ -33,6 +33,10 @@ TtHadEvtSolutionMaker::TtHadEvtSolutionMaker(const edm::ParameterSet & iConfig) 
   jetParam_        = iConfig.getParameter<int>              ("jetParametrisation");
   constraints_     = iConfig.getParameter<std::vector<int> >("constraints");
   matchToGenEvt_   = iConfig.getParameter<bool>             ("matchToGenEvt");
+  matchingAlgo_    = iConfig.getParameter<bool>             ("matchingAlgorithm");
+  useMaxDist_      = iConfig.getParameter<bool>             ("useMaximalDistance");
+  useDeltaR_       = iConfig.getParameter<bool>             ("useDeltaR");
+  maxDist_         = iConfig.getParameter<double>           ("maximalDistance");
 
   // define kinfitter
   if(doKinFit_){
@@ -215,7 +219,7 @@ void TtHadEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup &
 	  jets.push_back( &jetj );
 	  jets.push_back( &jetk );
 	  jets.push_back( &jetbbar );
-	  JetPartonMatching aMatch(quarks, jets, 3, true, true, 0.3);  
+	  JetPartonMatching aMatch(quarks, jets, matchingAlgo_, useMaxDist_, useDeltaR_, maxDist_);  
 	  (*evtsols)[s].setGenEvt(genEvt);   
 	  (*evtsols)[s].setMCBestSumAngles(aMatch.getSumAngles());
 	  (*evtsols)[s].setMCBestAngleHadp(aMatch.getAngleForParton(0));

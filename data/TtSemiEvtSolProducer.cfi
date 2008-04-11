@@ -22,8 +22,15 @@
     uint32 nrCombJets       = 4
 
     // do matching to gen event, and find the "MC true" jet matching
-    bool   matchToGenEvt    = true
-
+    bool   matchToGenEvt      = true
+    int    matchingAlgorithm  = 0    // 0 = totalMinDist
+                                     // 1 = minSumDist
+                                     // 2 = prOrderedMinDist
+                                     // 3 = unambiguousOnly
+    bool   useMaximalDistance = true // used for outlier rejection for 0-2; 3 uses it automatically
+    bool   useDeltaR          = true // use DeltaR(eta/phi) or Angle(theta/phi) otherwise
+    double maximalDistance    = 0.3  // maximal distance for jet-parton matching(in 3) or outlier
+                                     // rejection
     // kinematic fit setup
     bool   doKinFit   	      = true
     int32  maxNrIter          = 200
