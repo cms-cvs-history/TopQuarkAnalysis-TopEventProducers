@@ -23,7 +23,7 @@
 
     // do matching to gen event, and find the "MC true" jet matching
     bool   matchToGenEvt      = true
-    int    matchingAlgorithm  = 0    // 0 = totalMinDist
+    int32  matchingAlgorithm  = 0    // 0 = totalMinDist
                                      // 1 = minSumDist
                                      // 2 = prOrderedMinDist
                                      // 3 = unambiguousOnly
