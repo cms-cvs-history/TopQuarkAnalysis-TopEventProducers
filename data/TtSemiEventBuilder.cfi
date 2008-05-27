@@ -1,0 +1,14 @@
+module ttSemiEvent = TtSemiEventBuilder {
+  int32 decay      = 1
+
+  VInputTag hyps   = {ttSemiGenMatch}
+  VInputTag keys   = {ttSemiGenMatch:Key}
+
+  InputTag genEvent= genEvt
+
+  PSet genMatch = {
+    InputTag match = ttSemiEvtJetPartonMatch
+    InputTag sumPt = ttSemiEvtJetPartonMatch:SumPt
+    InputTag sumDR = ttSemiEvtJetPartonMatch:SumDR
+  }
+}

@@ -1,0 +1,7 @@
+# include partonMatch cfi
+  include "TopQuarkAnalysis/TopEventProducers/data/TtSemiEvtJetPartonMatch.cfi"
+
+# include genMatch hypothesis cfi
+  include "TopQuarkAnalysis/TopEventProducers/data/TtSemiGenMatchHypothesis.cfi"
+
+  sequence makeGenMatchHyp = { ttSemiEvtJetPartonMatch, ttSemiGenMatch }
