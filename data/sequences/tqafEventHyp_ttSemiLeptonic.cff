@@ -1,0 +1,8 @@
+# produce hypothesis
+  include "TopQuarkAnalysis/TopEventProducers/data/sequences/tqafEventHyp_ttSemiLeptonic_genMatch.cff"
+
+  include "TopQuarkAnalysis/TopEventProducers/data/producers/TtSemiEventBuilder.cfi"
+
+#
+  sequence makeTtSemiHyps  = {makeGenMatchHyp}
+  sequence makeTtSemiEvent = {makeTtSemiHyps, ttSemiEvent}

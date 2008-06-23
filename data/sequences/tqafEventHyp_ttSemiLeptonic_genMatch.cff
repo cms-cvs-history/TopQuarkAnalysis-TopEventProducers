@@ -1,0 +1,11 @@
+# 
+# productio sequence of genMatch hypothesis for semi-leptonic ttbar events
+#
+
+# include partonMatch cfi
+  include "TopQuarkAnalysis/TopTools/data/TtSemiEvtJetPartonMatch.cfi"
+
+# include genMatch hypothesis cfi
+  include "TopQuarkAnalysis/TopEventProducers/data/producers/TtSemiGenMatchHypothesis.cfi"
+
+  sequence makeGenMatchHyp = { ttSemiEvtJetPartonMatch, ttSemiGenMatch }

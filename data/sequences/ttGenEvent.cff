@@ -1,0 +1,15 @@
+#
+# production sequence of ttGenEvent
+#
+
+# produce initSubset of top decay
+  include "TopQuarkAnalysis/TopEventProducers/data/producers/TopInitSubset.cfi"
+
+# produce decaySubset of top decay
+  include "TopQuarkAnalysis/TopEventProducers/data/producers/TopDecaySubset.cfi"
+
+# produce ttGenEvt
+  include "TopQuarkAnalysis/TopEventProducers/data/producers/TtGenEvtProducer.cfi"
+
+#
+  sequence makeGenEvt = {initSubset, decaySubset, genEvt}

@@ -1,4 +1,4 @@
-module genEvtSingletop = StGenEventReco{
+module genEvt_SingleTop = StGenEventReco{
   InputTag src  = decaySubset
   InputTag init = initSubset
 }  

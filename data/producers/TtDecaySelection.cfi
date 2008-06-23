@@ -1,4 +1,4 @@
-module ttFullyLeptonicFilter = TtDecaySelection
+module ttDecaySelection = TtDecaySelection
 {
   InputTag src = genEvt
 
@@ -6,18 +6,15 @@ module ttFullyLeptonicFilter = TtDecaySelection
   # select channels of consideration in
   # order: (elec,muon,tau)
   #---------------------------------------
-  vint32 channel_1 = {1,1,0}
-  vint32 channel_2 = {1,1,0}
+  vint32 channel_1 = {0,0,0}
+  vint32 channel_2 = {0,0,0}
 
  #---------------------------------------
  # allowed decay channels for taus.
  # In order: (leptonic, one prong, three prong)
- # Important note: When running from genEvt, 
- # tau daughters are not known. 
- # All taus are therefore kept, whatever the decay.
  #---------------------------------------
-  vint32 tauDecays = {0,1,1}
+  vint32 tauDecays = {0,0,0}
 
-#invert selection?
+ #invert selection?
   bool   invert = false
 }

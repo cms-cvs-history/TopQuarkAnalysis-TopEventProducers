@@ -1,0 +1,21 @@
+#
+# ttGenEvent filters for different ttbar channels
+#
+
+# fully hadronic filter
+  module  ttFullyHadronicFilter = ttDecaySelection from "TopQuarkAnalysis/TopEventProducers/data/producers/TtDecaySelection.cfi"
+  replace ttFullyHadronicFilter.channel_1 = {0,0,0}
+  replace ttFullyHadronicFilter.channel_2 = {0,0,0}
+  replace ttFullyHadronicFilter.tauDecays = {0,0,0}
+
+# semi-leptonic filter
+  module  ttSemiLeptonicFilter  = ttDecaySelection from "TopQuarkAnalysis/TopEventProducers/data/producers/TtDecaySelection.cfi"
+  replace ttSemiLeptonicFilter.channel_1  = {1,1,0}
+  replace ttSemiLeptonicFilter.channel_2  = {0,0,0}
+  replace ttSemiLeptonicFilter.tauDecays  = {0,0,0}
+
+# fully leptonic filter
+  module  ttFullyLeptonicFilter = ttDecaySelection from "TopQuarkAnalysis/TopEventProducers/data/producers/TtDecaySelection.cfi"
+  replace ttFullyLeptonicFilter.channel_1 = {1,1,0}
+  replace ttFullyLeptonicFilter.channel_2 = {1,1,0}
+  replace ttFullyLeptonicFilter.tauDecays = {1,1,0}
