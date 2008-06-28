@@ -1,8 +1,9 @@
 # produce hypotheses
   include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisGenMatch.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisMVADisc.cff"
 
   include "TopQuarkAnalysis/TopEventProducers/data/producers/TtSemiEventBuilder.cfi"
 
 #
-  sequence makeTtSemiHyps  = {makeHypothesis_genMatch}
+  sequence makeTtSemiHyps  = {makeHypothesis_genMatch, makeHypothesis_mvaDisc}
   sequence makeTtSemiEvent = {makeTtSemiHyps, ttSemiEvent}
