@@ -1,17 +1,39 @@
 import FWCore.ParameterSet.Config as cms
 
+<<<<<<< tqafLayer2_fromAOD_full_cfg.py
+process = cms.Process("TQAF")
+# initialize MessageLogger
+=======
 ##
 # test cfg file for semi-leptonic ttbar analyses
 ##
 process = cms.Process("TEST")
 
 ## add message logger
+>>>>>>> 1.2
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = 'INFO'
 
+<<<<<<< tqafLayer2_fromAOD_full_cfg.py
+#
+# tqaf steering
+#
+process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
+
+process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
+
+process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff")
+
+process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_EventContent_cff")
+
+process.options = cms.untracked.PSet(
+    wantSummary = cms.untracked.bool(True)
+)
+=======
 ##
 # process configuration
 ##
+>>>>>>> 1.2
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring('file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTbar-210p5.1-AODSIM.100.root')
 )
