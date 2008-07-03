@@ -1,49 +1,46 @@
 import FWCore.ParameterSet.Config as cms
 
-<<<<<<< ttSemiEventBuilder_cfg.py
-process = cms.Process("TQAF")
-# initialize MessageLogger
-=======
-##
-# test cfg file for semi-leptonic ttbar analyses
-##
+#-------------------------------------------------
+# test cfg file for the production of a 
+# ttSemiEvent
+#-------------------------------------------------
 process = cms.Process("TEST")
 
 ## add message logger
->>>>>>> 1.2
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = 'INFO'
 
-<<<<<<< ttSemiEventBuilder_cfg.py
-# input file
-=======
-##
+#-------------------------------------------------
 # process configuration
-##
->>>>>>> 1.2
-process.load("TopQuarkAnalysis.Examples.test.RecoInput_cfi")
+#-------------------------------------------------
 
-<<<<<<< ttSemiEventBuilder_cfg.py
-# TQAF ###
-# TQAF Layer 1 TopObject production
-=======
-##
+
+## define input
+process.source = cms.Source("PoolSource",
+    fileNames = cms.untracked.vstring('file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTbar-210p5.1-AODSIM.100.root')
+)
+
+## define maximal number of events to loop over
+process.maxEvents = cms.untracked.PSet(
+    input = cms.untracked.int32(100)
+)
+
+## configure process options
+process.options = cms.untracked.PSet(
+    wantSummary = cms.untracked.bool(False)
+)
+
+#-------------------------------------------------
 # tqaf configuration
-##
+#-------------------------------------------------
 
 ## std sequence for tqaf layer1
->>>>>>> 1.2
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
-<<<<<<< ttSemiEventBuilder_cfg.py
-# TQAF Layer 2 for the ttbar semi-leptonic final state
-=======
-## std sequence to produce the ttGenEvent
->>>>>>> 1.2
-process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
-
-## std sequence to produce event hypothesis for semi-leptonic ttbar decays
-process.load("TopQuarkAnalysis.TopEventProducers.sequences.tqafEventHyp_ttSemiLeptonic_cff")
+## std sequence to produce the ttSemiEvent
+process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttSemiEventBuilder_cff")
 
 ## process path
-process.p = cms.Path(process.tqafLayer1*process.makeGenEvt*process.makeTtSemiEvent)
+process.p = cms.Path(process.tqafLayer1  *
+                     process.makeTtSemiEvent
+                     )

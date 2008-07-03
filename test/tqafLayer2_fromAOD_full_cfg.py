@@ -26,7 +26,7 @@ process.maxEvents = cms.untracked.PSet(
 
 ## configure process options
 process.options = cms.untracked.PSet(
-    wantSummary = cms.untracked.bool(True)
+    wantSummary = cms.untracked.bool(False)
 )
 
 #-------------------------------------------------
@@ -41,6 +41,11 @@ process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
 ## std sequence for tqaf layer2 for semi-leptonic decays
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
+
+## process path
+process.p = cms.Path(process.tqafLayer1 *
+                     process.tqafLayer2_ttSemiLeptonic
+                     )
 
 #-------------------------------------------------
 # tqaf event content; first ALL objects are
@@ -89,9 +94,6 @@ process.out = cms.OutputModule("PoolOutputModule",
 # persistent output to file comment the the output
 # path
 #-------------------------------------------------
-
-## process path
-process.p = cms.Path(process.tqafLayer1*process.tqafLayer2_ttSemiLeptonic)
 
 ## output
 process.outpath = cms.EndPath(process.out)
