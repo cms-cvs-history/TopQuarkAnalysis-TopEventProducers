@@ -1,5 +1,0 @@
-# PATLayer1 Jet count filter
-  replace minLayer1Jets.src       = selectedLayer1Jets
-  replace minLayer1Jets.minNumber = 2
-  replace maxLayer1Jets.src       = selectedLayer1Jets
-  replace maxLayer1Jets.maxNumber = 999999

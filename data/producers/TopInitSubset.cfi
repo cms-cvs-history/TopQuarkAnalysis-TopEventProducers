@@ -1,4 +1,0 @@
-module initSubset = TopInitSubset{
-  InputTag src = genParticles
-}  
-
