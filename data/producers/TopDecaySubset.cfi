@@ -1,4 +1,0 @@
-module decaySubset = TopDecaySubset{
-  InputTag src = genParticles
-}  
-

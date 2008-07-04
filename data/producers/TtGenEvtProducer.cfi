@@ -1,5 +1,0 @@
-module genEvt = TtGenEventReco{
-  InputTag src  = decaySubset
-  InputTag init = initSubset
-}  
-
