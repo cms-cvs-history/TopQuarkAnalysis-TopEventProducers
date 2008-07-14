@@ -13,10 +13,15 @@ module ttSemiEvent = TtSemiEventBuilder {
     ttSemiHypothesisMVADisc:Key
   }
 
+  VInputTag matches = {
+    ttSemiHypothesisMaxSumPtWMass:Match,
+    ttSemiHypothesisGenMatch:Match,
+    ttSemiHypothesisMVADisc:Match
+  }
+
   InputTag genEvent = genEvt
 
   PSet genMatch = {
-    InputTag match = ttSemiJetPartonMatch
     InputTag sumPt = ttSemiJetPartonMatch:SumPt
     InputTag sumDR = ttSemiJetPartonMatch:SumDR
   }
