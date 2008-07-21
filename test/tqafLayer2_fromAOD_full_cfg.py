@@ -16,7 +16,7 @@ process.MessageLogger.cerr.threshold = 'INFO'
 
 ## define input
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTbar-210p5.1-AODSIM.100.root')
+    fileNames = cms.untracked.vstring('file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root')
 )
 
 ## define maximal number of events to loop over
@@ -28,6 +28,9 @@ process.maxEvents = cms.untracked.PSet(
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(False)
 )
+
+# Magnetic field now needs to be in the high-level py
+process.load("Configuration.StandardSequences.MagneticField_cff")
 
 #-------------------------------------------------
 # tqaf configuration; if you want just to produce 
