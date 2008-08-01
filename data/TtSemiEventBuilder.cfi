@@ -3,20 +3,27 @@ module ttSemiEvent = TtSemiEventBuilder {
 
   VInputTag hyps = {
     ttSemiHypothesisMaxSumPtWMass,
+    ttSemiHypothesisKinFit,
     ttSemiHypothesisGenMatch,
     ttSemiHypothesisMVADisc
   }
 
   VInputTag keys = {
     ttSemiHypothesisMaxSumPtWMass:Key,
+    ttSemiHypothesisKinFit:Key,
     ttSemiHypothesisGenMatch:Key,
     ttSemiHypothesisMVADisc:Key
   }
 
   VInputTag matches = {
     ttSemiHypothesisMaxSumPtWMass:Match,
+    ttSemiHypothesisKinFit:Match,
     ttSemiHypothesisGenMatch:Match,
     ttSemiHypothesisMVADisc:Match
+  }
+
+  PSet kinFit = {
+    InputTag chi2 = kinFitTtSemiEvent:Chi2
   }
 
   InputTag genEvent = genEvt
