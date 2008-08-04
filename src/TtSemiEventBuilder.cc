@@ -14,6 +14,7 @@ TtSemiEventBuilder::TtSemiEventBuilder(const edm::ParameterSet& cfg):
 {
   // get parameter subsets for kinFit
   fitChi2_=kinFit_.getParameter<edm::InputTag>("chi2");
+  fitProb_=kinFit_.getParameter<edm::InputTag>("prob");
   // get parameter subsets for genMatch
   sumPt_=genMatch_.getParameter<edm::InputTag>("sumPt");
   sumDR_=genMatch_.getParameter<edm::InputTag>("sumDR");
@@ -70,6 +71,10 @@ TtSemiEventBuilder::produce(edm::Event& evt, const edm::EventSetup& setup)
   edm::Handle<double> fitChi2;
   evt.getByLabel(fitChi2_, fitChi2);
   event.setFitChi2(*fitChi2);
+
+  edm::Handle<double> fitProb;
+  evt.getByLabel(fitProb_, fitProb);
+  event.setFitProb(*fitProb);
 
   // set genMatch extras
   edm::Handle<double> sumPt;

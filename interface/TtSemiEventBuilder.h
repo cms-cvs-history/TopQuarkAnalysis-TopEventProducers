@@ -37,6 +37,7 @@ class TtSemiEventBuilder : public edm::EDProducer {
   // kinFit extras
   edm::ParameterSet kinFit_;
   edm::InputTag fitChi2_;
+  edm::InputTag fitProb_;
 
   // gen match extras
   int decay_;
