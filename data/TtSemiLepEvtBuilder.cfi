@@ -1,4 +1,4 @@
-module ttSemiEvent = TtSemiEventBuilder {
+module ttSemiLepEvent = TtSemiLepEvtBuilder {
   int32 decay = 1
 
   VInputTag hyps = {

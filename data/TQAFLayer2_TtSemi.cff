@@ -9,7 +9,7 @@ include "TopQuarkAnalysis/TopEventProducers/data/TtSemiNumJetFilter.cff"
 include "TopQuarkAnalysis/TopEventProducers/data/TtSemiNumLeptonFilter.cff"
 
 # TtSemiEvt solutions
-include "TopQuarkAnalysis/TopEventProducers/data/TtSemiEventBuilder.cff"	
+include "TopQuarkAnalysis/TopEventProducers/data/TtSemiLepEvtBuilder.cff"	
 include "TopQuarkAnalysis/TopEventProducers/data/TtSemiEvtSolProducer.cfi"	
 
 
