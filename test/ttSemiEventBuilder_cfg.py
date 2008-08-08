@@ -49,7 +49,7 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
 ## std sequence to produce the ttSemiEvent
-process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttSemiEventBuilder_cff")
+process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff")
 
 ## process path
 process.p = cms.Path(process.tqafLayer1  *
