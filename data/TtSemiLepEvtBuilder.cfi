@@ -2,24 +2,24 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   int32 decay = 1
 
   VInputTag hyps = {
-    ttSemiHypothesisMaxSumPtWMass,
-    ttSemiHypothesisKinFit,
-    ttSemiHypothesisGenMatch,
-    ttSemiHypothesisMVADisc
+    ttSemiLepMaxSumPtWMass,
+    ttSemiLepKinFit,
+    ttSemiLepGenMatch,
+    ttSemiLepMVADisc
   }
 
   VInputTag keys = {
-    ttSemiHypothesisMaxSumPtWMass:Key,
-    ttSemiHypothesisKinFit:Key,
-    ttSemiHypothesisGenMatch:Key,
-    ttSemiHypothesisMVADisc:Key
+    ttSemiLepMaxSumPtWMass:Key,
+    ttSemiLepKinFit:Key,
+    ttSemiLepGenMatch:Key,
+    ttSemiLepMVADisc:Key
   }
 
   VInputTag matches = {
-    ttSemiHypothesisMaxSumPtWMass:Match,
-    ttSemiHypothesisKinFit:Match,
-    ttSemiHypothesisGenMatch:Match,
-    ttSemiHypothesisMVADisc:Match
+    ttSemiLepMaxSumPtWMass:Match,
+    ttSemiLepKinFit:Match,
+    ttSemiLepGenMatch:Match,
+    ttSemiLepMVADisc:Match
   }
 
   PSet kinFit = {

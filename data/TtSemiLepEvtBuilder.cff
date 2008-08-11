@@ -1,8 +1,8 @@
 # produce hypotheses
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisMaxSumPtWMass.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisGenMatch.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisMVADisc.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiHypothesisKinFit.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMaxSumPtWMass.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepGenMatch.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMVADisc.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepKinFit.cff"
 
   include "TopQuarkAnalysis/TopEventProducers/data/TtSemiLepEvtBuilder.cfi"
 
