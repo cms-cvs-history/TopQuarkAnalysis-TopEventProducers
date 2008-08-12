@@ -1,18 +1,18 @@
 # produce hypotheses
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepGeom.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepWMassMaxSumPt.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMaxSumPtWMass.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepGenMatch.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMVADisc.cff"
-  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepKinFit.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypGeom.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypWMassMaxSumPt.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypMaxSumPtWMass.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypGenMatch.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypMVADisc.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepHypKinFit.cff"
 
   include "TopQuarkAnalysis/TopEventProducers/data/TtSemiLepEvtBuilder.cfi"
 
 #
-  sequence makeTtSemiHyps  = {makeHypothesis_geom,
+  sequence makeTtSemiLepHypotheses = {makeHypothesis_geom,
                               makeHypothesis_wMassMaxSumPt,
                               makeHypothesis_maxSumPtWMass,
                               makeHypothesis_genMatch,
                               makeHypothesis_mvaDisc,
                               makeHypothesis_kinFit}
-  sequence makeTtSemiEvent = {makeTtSemiHyps, ttSemiLepEvent}
+  sequence makeTtSemiEvent = {makeTtSemiLepHypotheses, ttSemiLepEvent}
