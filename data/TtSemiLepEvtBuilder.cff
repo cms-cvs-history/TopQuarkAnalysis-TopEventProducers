@@ -1,4 +1,6 @@
 # produce hypotheses
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepGeom.cff"
+  include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepWMassMaxSumPt.cff"
   include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMaxSumPtWMass.cff"
   include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepGenMatch.cff"
   include "TopQuarkAnalysis/TopJetCombination/data/TtSemiLepMVADisc.cff"
@@ -7,7 +9,9 @@
   include "TopQuarkAnalysis/TopEventProducers/data/TtSemiLepEvtBuilder.cfi"
 
 #
-  sequence makeTtSemiHyps  = {makeHypothesis_maxSumPtWMass,
+  sequence makeTtSemiHyps  = {makeHypothesis_geom,
+                              makeHypothesis_wMassMaxSumPt,
+                              makeHypothesis_maxSumPtWMass,
                               makeHypothesis_genMatch,
                               makeHypothesis_mvaDisc,
                               makeHypothesis_kinFit}

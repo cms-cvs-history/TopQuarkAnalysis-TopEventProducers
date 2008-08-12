@@ -2,6 +2,8 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   int32 decay = 1
 
   VInputTag hyps = {
+    ttSemiLepGeom,
+    ttSemiLepWMassMaxSumPt,
     ttSemiLepMaxSumPtWMass,
     ttSemiLepKinFit,
     ttSemiLepGenMatch,
@@ -9,6 +11,8 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   }
 
   VInputTag keys = {
+    ttSemiLepGeom:Key,
+    ttSemiLepWMassMaxSumPt:Key,
     ttSemiLepMaxSumPtWMass:Key,
     ttSemiLepKinFit:Key,
     ttSemiLepGenMatch:Key,
@@ -16,6 +20,8 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   }
 
   VInputTag matches = {
+    ttSemiLepGeom:Match,
+    ttSemiLepWMassMaxSumPt:Match,
     ttSemiLepMaxSumPtWMass:Match,
     ttSemiLepKinFit:Match,
     ttSemiLepGenMatch:Match,
