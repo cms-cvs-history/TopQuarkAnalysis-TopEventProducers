@@ -15,7 +15,7 @@ include "TopQuarkAnalysis/TopEventProducers/data/TtSemiEvtSolProducer.cfi"
 
 sequence tqafLayer2_TtSemi = {
   makeGenEvt,
-# makeTtSemiEvent,
+# makeTtSemiLepEvent,
   solutions
 }
 
@@ -29,20 +29,20 @@ include "TopQuarkAnalysis/TopEventProducers/data/TtFullyHadronicFilter.cfi"
 sequence tqafLayer2_TtSemi_SemiLepFilter = {
   makeGenEvt,
   ttSemiLeptonicFilter,
-# makeTtSemiEvent,
+# makeTtSemiLepEvent,
   solutions
 }
 
 sequence tqafLayer2_TtSemi_FullLepFilter = {
   makeGenEvt,
   ttFullyLeptonicFilter,
-# makeTtSemiEvent,
+# makeTtSemiLepEvent,
   solutions
 }
 
 sequence tqafLayer2_TtSemi_FullHadFilter = {
   makeGenEvt,
   ttFullyHadronicFilter,
-# makeTtSemiEvent,
+# makeTtSemiLepEvent,
   solutions
 }

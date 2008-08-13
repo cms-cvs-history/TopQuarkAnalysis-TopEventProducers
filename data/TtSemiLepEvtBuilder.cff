@@ -15,4 +15,4 @@
                               makeHypothesis_genMatch,
                               makeHypothesis_mvaDisc,
                               makeHypothesis_kinFit}
-  sequence makeTtSemiEvent = {makeTtSemiLepHypotheses, ttSemiLepEvent}
+  sequence makeTtSemiLepEvent = {makeTtSemiLepHypotheses, ttSemiLepEvent}
