@@ -36,8 +36,8 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   InputTag genEvent = genEvt
 
   PSet genMatch = {
-    InputTag sumPt = ttSemiJetPartonMatch:SumPt
-    InputTag sumDR = ttSemiJetPartonMatch:SumDR
+    InputTag sumPt = ttSemiLepJetPartonMatch:SumPt
+    InputTag sumDR = ttSemiLepJetPartonMatch:SumDR
   }
 
   PSet mvaDisc = {
