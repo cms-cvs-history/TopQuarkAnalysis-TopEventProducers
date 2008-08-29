@@ -29,8 +29,8 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   }
 
   PSet kinFit = {
-    InputTag chi2 = kinFitTtSemiEvent:Chi2
-    InputTag prob = kinFitTtSemiEvent:Prob
+    InputTag chi2 = kinFitTtSemiLepEvent:Chi2
+    InputTag prob = kinFitTtSemiLepEvent:Prob
   }
 
   InputTag genEvent = genEvt

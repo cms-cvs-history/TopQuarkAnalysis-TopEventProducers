@@ -1,11 +1,11 @@
-// $Id: TtHadEvtSolutionMaker.cc,v 1.11 2008/04/11 12:00:24 rwolf Exp $
+// $Id: TtHadEvtSolutionMaker.cc,v 1.12 2008/04/14 22:35:41 rwolf Exp $
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtHadEvtSolutionMaker.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "PhysicsTools/Utilities/interface/DeltaR.h"
 #include "AnalysisDataFormats/TopObjects/interface/TtHadEvtSolution.h"
 #include "TopQuarkAnalysis/TopTools/interface/JetPartonMatching.h"
-#include "TopQuarkAnalysis/TopKinFitter/interface/TtHadKinFitter.h"
+#include "TopQuarkAnalysis/TopKinFitter/interface/TtFullHadKinFitter.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtHadSimpleBestJetComb.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtHadLRJetCombObservables.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtHadLRJetCombCalc.h"
@@ -40,7 +40,7 @@ TtHadEvtSolutionMaker::TtHadEvtSolutionMaker(const edm::ParameterSet & iConfig) 
 
   // define kinfitter
   if(doKinFit_){
-    myKinFitter = new TtHadKinFitter(jetParam_, maxNrIter_, maxDeltaS_, maxF_, constraints_);
+    myKinFitter = new TtFullHadKinFitter(jetParam_, maxNrIter_, maxDeltaS_, maxF_, constraints_);
   }
   
   

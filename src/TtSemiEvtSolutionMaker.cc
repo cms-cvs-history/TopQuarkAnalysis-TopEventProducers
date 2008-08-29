@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.cc,v 1.35 2008/04/14 22:35:41 rwolf Exp $
+// $Id: TtSemiEvtSolutionMaker.cc,v 1.36 2008/04/24 20:08:26 rwolf Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -10,7 +10,7 @@
 
 #include "AnalysisDataFormats/TopObjects/interface/TtSemiEvtSolution.h"
 #include "TopQuarkAnalysis/TopTools/interface/JetPartonMatching.h"
-#include "TopQuarkAnalysis/TopKinFitter/interface/TtSemiKinFitter.h"
+#include "TopQuarkAnalysis/TopKinFitter/interface/TtSemiLepKinFitter.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtSemiSimpleBestJetComb.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtSemiLRJetCombObservables.h"
 #include "TopQuarkAnalysis/TopJetCombination/interface/TtSemiLRJetCombCalc.h"
@@ -51,7 +51,7 @@ TtSemiEvtSolutionMaker::TtSemiEvtSolutionMaker(const edm::ParameterSet & iConfig
   maxDist_         = iConfig.getParameter<double>           ("maximalDistance");
 
   // define kinfitter
-  if(doKinFit_)        myKinFitter       = new TtSemiKinFitter(jetParam_, lepParam_, metParam_, maxNrIter_, maxDeltaS_, maxF_, constraints_);
+  if(doKinFit_)        myKinFitter       = new TtSemiLepKinFitter(jetParam_, lepParam_, metParam_, maxNrIter_, maxDeltaS_, maxF_, constraints_);
 
   // define jet combinations related calculators
   mySimpleBestJetComb                    = new TtSemiSimpleBestJetComb();
