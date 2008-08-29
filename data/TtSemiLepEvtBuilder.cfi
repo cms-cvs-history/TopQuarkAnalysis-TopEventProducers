@@ -41,7 +41,7 @@ module ttSemiLepEvent = TtSemiLepEvtBuilder {
   }
 
   PSet mvaDisc = {
-    InputTag meth = findTtSemiJetCombMVA:Meth
-    InputTag disc = findTtSemiJetCombMVA:Disc
+    InputTag meth = findTtSemiLepJetCombMVA:Meth
+    InputTag disc = findTtSemiLepJetCombMVA:Disc
   }
 }
