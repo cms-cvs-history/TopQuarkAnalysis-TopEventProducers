@@ -61,11 +61,15 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ## std sequence for tqaf layer1
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
+## std sequence for tqaf layer2 common
+process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_common_cff")
+
 ## std sequence for tqaf layer2 for semi-leptonic decays
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
 
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
+                     process.tqafLayer2_common *
                      process.tqafLayer2_ttSemiLeptonic
                      )
 
@@ -90,8 +94,9 @@ tqafLayer1GenParticles(process)                                                 
 from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_jetCollections_cff import * ## jet collections of interest for the Top PAG and top
 tqafLayer1JetCollections(process)                                               ## analyses
 
-## define tqaf layer2 event content
+## define tqaf layer2 event content common & for semi-leptonic decays 
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff")
+process.tqafEventContent.outputCommands.extend(process.tqafLayer2CommonEventContent.outputCommands)
 process.tqafEventContent.outputCommands.extend(process.tqafLayer2TtSemiLeptonicEventContent.outputCommands)
 
 
