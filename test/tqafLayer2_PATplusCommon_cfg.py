@@ -115,7 +115,7 @@ process.out = cms.OutputModule("PoolOutputModule",
     process.EventSelection,
     process.tqafEventContent,
     verbose = cms.untracked.bool(False),
-    fileName = cms.untracked.string('TQAFLayer2_PATPlusCommon.root')
+    fileName = cms.untracked.string('/afs/cern.ch/user/r/rwolf/pccmsuhh05/TQAFLayer2_PATplusCommon.root')
 )
 
 #-------------------------------------------------
