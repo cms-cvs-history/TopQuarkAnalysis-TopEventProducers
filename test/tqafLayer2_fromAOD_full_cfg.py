@@ -61,6 +61,9 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ## std sequence for tqaf layer1
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
+## std sequence for tqaf layer1 caloTaus
+process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_caloTaus_cff")
+
 ## std sequence for tqaf layer2 common
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_common_cff")
 
@@ -69,6 +72,7 @@ process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
 
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
+                     process.tqafLayer1_caloTaus *
                      process.tqafLayer2_common *
                      process.tqafLayer2_ttSemiLeptonic
                      )
@@ -87,6 +91,7 @@ process.tqafEventContent = cms.PSet(
 ## define tqaf layer1 event content
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_EventContent_cff")
 process.tqafEventContent.outputCommands.extend(process.patLayer1EventContent.outputCommands)
+process.tqafEventContent.outputCommands.extend(process.tqafLayer1EventContent.outputCommands)
 
 from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_genParticles_cff import *   ## pruned genParticles which contain only information
 tqafLayer1GenParticles(process)                                                 ## relevant for the TopGenEvnet and stable particles

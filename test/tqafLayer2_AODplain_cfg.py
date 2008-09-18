@@ -52,75 +52,18 @@ process.GlobalTag.globaltag = cms.string('STARTUP_V4::All')
 process.load("Configuration.StandardSequences.MagneticField_cff")
 
 #-------------------------------------------------
-# tqaf configuration; if you want just to produce 
-# tqafLayer2 on top of an already existing
-# tqafLayer1 just comment the standard tqafLayer1
-# production sequence
-#-------------------------------------------------
-
-## std sequence for tqaf layer1
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
-
-## std sequence for tqaf layer1 caloTaus
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_caloTaus_cff")
-
-## std sequence for tqaf layer2 common
-process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_common_cff")
-
-## process path
-process.p = cms.Path(process.tqafLayer1 *
-                     process.tqafLayer1_caloTaus *
-                     process.tqafLayer2_common
-                     )
-
-#-------------------------------------------------
 # tqaf event content; first ALL objects are
 # dropped in this process; then tqafLayer1 and
 # tqafLayer2 concent is added
 #-------------------------------------------------
-
-## define event content
-process.tqafEventContent = cms.PSet(
-    outputCommands = cms.untracked.vstring('drop *')
-)
-
-## define tqaf layer1 event content
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_EventContent_cff")
-process.tqafEventContent.outputCommands.extend(process.patLayer1EventContent.outputCommands)
-process.tqafEventContent.outputCommands.extend(process.tqafLayer1EventContent.outputCommands)
-
-from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_genParticles_cff import *   ## pruned genParticles which contain only information
-tqafLayer1GenParticles(process)                                                 ## relevant for the TopGenEvnet and stable particles
-
-from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_jetCollections_cff import * ## jet collections of interest for the Top PAG and top
-tqafLayer1JetCollections(process)                                               ## analyses
-
-## define tqaf layer2 event content common & for semi-leptonic decays 
-process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff")
-process.tqafEventContent.outputCommands.extend(process.tqafLayer2CommonEventContent.outputCommands)
-
-
-#-------------------------------------------------
-# process output; first the event selection is
-# defined: only those events that have passed the
-# full production path are selected and written
-# to file; the event content has been defined
-# above
-#-------------------------------------------------
-
-## define event selection
-process.EventSelection = cms.PSet(
-    SelectEvents = cms.untracked.PSet(
-        SelectEvents = cms.vstring('p')
-    )
-)
+process.load("Configuration.EventContent.EventContent_cff")
 
 ## configure output module
 process.out = cms.OutputModule("PoolOutputModule",
-    process.EventSelection,
-    process.tqafEventContent,
+    process.RECOSIMEventContent,
+##  process.AODSIMEventContent,
     verbose = cms.untracked.bool(False),
-    fileName = cms.untracked.string('/afs/cern.ch/user/r/rwolf/pccmsuhh05/TQAFLayer2_PATplusCommon.root')
+    fileName = cms.untracked.string('/afs/cern.ch/user/r/rwolf/pccmsuhh05/TQAFLayer2_RECOplain.root')
 )
 
 #-------------------------------------------------

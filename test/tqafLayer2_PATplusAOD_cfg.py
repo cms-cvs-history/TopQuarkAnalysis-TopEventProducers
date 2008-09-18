@@ -61,11 +61,15 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ## std sequence for tqaf layer1
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
+## std sequence for tqaf layer1 caloTaus
+process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_caloTaus_cff")
+
 ## std sequence for tqaf layer2 common
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_common_cff")
 
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
+                     process.tqafLayer1_caloTaus *
                      process.tqafLayer2_common
                      )
 
