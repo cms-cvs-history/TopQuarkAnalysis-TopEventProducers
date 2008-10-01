@@ -61,19 +61,11 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ## std sequence for tqaf layer1
 process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_full_cff")
 
-## std sequence for tqaf layer1 caloTaus
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_caloTaus_cff")
-
-## std sequence for tqaf layer2 common
-process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_common_cff")
-
 ## std sequence for tqaf layer2 for semi-leptonic decays
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
 
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
-                     process.tqafLayer1_caloTaus *
-                     process.tqafLayer2_common *
                      process.tqafLayer2_ttSemiLeptonic
                      )
 
@@ -83,26 +75,28 @@ process.p = cms.Path(process.tqafLayer1 *
 # tqafLayer2 concent is added
 #-------------------------------------------------
 
-## define event content
-process.tqafEventContent = cms.PSet(
-    outputCommands = cms.untracked.vstring('drop *')
-)
-
 ## define tqaf layer1 event content
-process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_EventContent_cff")
-process.tqafEventContent.outputCommands.extend(process.patLayer1EventContent.outputCommands)
-process.tqafEventContent.outputCommands.extend(process.tqafLayer1EventContent.outputCommands)
+from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_EventContent_cff import *
+tqafLayer1EventContent(process)
 
-from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_genParticles_cff import *   ## pruned genParticles which contain only information
-tqafLayer1GenParticles(process)                                                 ## relevant for the TopGenEvnet and stable particles
+#
+# more or changed jet collections
+#
+from PhysicsTools.PatAlgos.tools.jetTools import *
 
-from TopQuarkAnalysis.TopObjectProducers.tqafLayer1_jetCollections_cff import * ## jet collections of interest for the Top PAG and top
-tqafLayer1JetCollections(process)                                               ## analyses
+switchJetCollection(process, 
+                    'sisCone5CaloJets',      # jet collection; must be already in the event when patLayer0 sequence is executed
+                    layers       = [0,1],    # if you're not running patLayer1, set 'layers=[0]' 
+                    runCleaner   = "CaloJet",# =None if not to clean
+                    doJTA        = True,     # run jet-track association & JetCharge
+                    doBTagging   = True,     # run b-tagging
+                    jetCorrLabel = 'Scone5', # example jet correction name; set to None for no JEC
+                    doType1MET   = True      # recompute Type1 MET using these jets
+                    )
 
-## define tqaf layer2 event content common & for semi-leptonic decays 
-process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff")
-process.tqafEventContent.outputCommands.extend(process.tqafLayer2CommonEventContent.outputCommands)
-process.tqafEventContent.outputCommands.extend(process.tqafLayer2TtSemiLeptonicEventContent.outputCommands)
+## define tqaf layer2 event content
+from TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff import *
+tqafLayer2EventContent(process)
 
 
 #-------------------------------------------------
