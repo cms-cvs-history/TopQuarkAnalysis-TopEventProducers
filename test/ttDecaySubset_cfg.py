@@ -8,7 +8,16 @@ process = cms.Process("TEST")
 
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
-process.MessageLogger.cerr.threshold = 'INFO'
+## print original listing of gen particles
+## process.MessageLogger.categories.append('inputChain')
+## print final pruned listing of top decay chain
+process.MessageLogger.categories.append('decayChain')
+process.MessageLogger.cout = cms.untracked.PSet(
+ INFO = cms.untracked.PSet(
+   limit = cms.untracked.int32(0),
+   decayChain = cms.untracked.PSet( limit = cms.untracked.int32(10) )
+  )
+)
 
 #-------------------------------------------------
 # process configuration
