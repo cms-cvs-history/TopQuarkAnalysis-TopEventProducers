@@ -124,6 +124,13 @@ TopDecaySubset::wInDecayChain(const reco::GenParticleCollection& src, const int&
       }
     }
   }
+  if( !isContained ){
+    edm::LogWarning( "decayChain" )
+      << " W boson is not contained in decay chain in the original gen particle listing.   \n"
+      << " A status 2 equivalent W candidate will be re-reconstructed from the W daughters \n"
+      << " but the hadronization of the W might be screwed up. Contact an expert for the   \n"
+      << " generator in use to assure that what you are doing is ok.";     
+  }
   return isContained;
 }
 
