@@ -7,7 +7,8 @@
 using namespace std;
 using namespace reco;
 
-static const unsigned int kMAXEVT=5; //maximal number of events to print for debugging
+//maximal number of events to print for debugging
+static const unsigned int kMAXEVT=5; 
 
 
 
