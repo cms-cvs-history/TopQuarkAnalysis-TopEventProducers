@@ -7,8 +7,9 @@
 using namespace std;
 using namespace reco;
 
-// maximal number of particles in the originnal 
-// gen particle listing to be printed for debugging
+// maximal number of particles in the original gen
+// particle listing to be printed as daughters for 
+// debugging
 static const unsigned int kMAX=5; 
 
 
@@ -19,7 +20,9 @@ TopDecaySubset::TopDecaySubset(const edm::ParameterSet& cfg):
   // produces a genParticle collection following
   // the decay branch of top quarks to the first 
   // level of stable decay products
-  produces<reco::GenParticleCollection>();
+  produces<reco::GenParticleCollection>(); //beforePS,
+                                           //afterPS,
+                                           //woPS
 }
 
 TopDecaySubset::~TopDecaySubset()
@@ -51,6 +54,8 @@ TopDecaySubset::produce(edm::Event& evt, const edm::EventSetup& setup)
 
   // print decay chain for debugging
   printSource( *src, pdg_);
+
+  std::cout << "enter printTarget:" << std::endl;
   printTarget( *sel, pdg_);
 
   // fan out to event
@@ -70,7 +75,7 @@ TopDecaySubset::getP4Top(const reco::GenParticle::const_iterator first,
        vec+=getP4( p->begin(), p->end(), p->pdgId(), inclRadiation );
       }
       else{ 
-        if( abs(pdgId)==TopDecayID::WID ){
+	if( abs(pdgId)==TopDecayID::WID ){
 	  // in case of a W boson skip the status 
 	  // 2 particle to prevent double counting
 	  if( abs(p->pdgId())!=TopDecayID::WID ) vec+=p->p4();
@@ -82,8 +87,8 @@ TopDecaySubset::getP4Top(const reco::GenParticle::const_iterator first,
       if( p->status() == TopDecayID::unfrag && 
 	  (abs(p->pdgId()) == TopDecayID::WID || 
 	   abs(p->pdgId()) == TopDecayID::bID)){
-        // take only the W boson & the quark and no 
-	// additional the radiation
+        // take only the W boson & the quark
+	// and no additional radiation
 	vec+=getP4( p->begin(), p->end(), p->pdgId(), inclRadiation);
       }
     }
@@ -97,11 +102,10 @@ TopDecaySubset::getP4(const reco::GenParticle::const_iterator first,
 		      int pdgId, bool inclRadiation)
 {
   Particle::LorentzVector vec;
-  reco::GenParticle::const_iterator p=first;
   for(reco::GenParticle::const_iterator p=first; p!=last; ++p){
     if(!inclRadiation){
       if( p->status()<=TopDecayID::stable && p->pdgId() == pdgId){
-	// return the four vector of status 1 and 
+	// return the four vector of status 1 or 
 	// status 2 particles, if they have pdgId 
         vec=p->p4();
         break;
@@ -203,14 +207,14 @@ TopDecaySubset::fillFromFullListing(const reco::GenParticleCollection& src, reco
       //search ISR
       if(t->numberOfMothers()>0 && t->pdgId()==TopDecayID::tID) // to do it only once !
         for(GenParticle::const_iterator ts = t->mother()->begin(); ts!=t->mother()->end(); ++ts){
-         if(abs(ts->pdgId())!=TopDecayID::tID){
-           //ISR 
-           GenParticle* cand = new GenParticle( ts->threeCharge(), ts->p4(), ts->vertex(), ts->pdgId(), ts->status(), false );
-           auto_ptr<reco::GenParticle> ptr( cand );
-           sel.push_back( *ptr );
-           ++motherPartIdx_;
-         }
-       }
+	  if(abs(ts->pdgId())!=TopDecayID::tID){
+	    //ISR 
+	    GenParticle* cand = new GenParticle( ts->threeCharge(), ts->p4(), ts->vertex(), ts->pdgId(), ts->status(), false );
+	    auto_ptr<reco::GenParticle> ptr( cand );
+	    sel.push_back( *ptr );
+	    ++motherPartIdx_;
+	  }
+	}
 
       //iterate over top daughters
       GenParticle::const_iterator td=t->begin();
@@ -503,8 +507,7 @@ TopDecaySubset::fillTree(int& idx, const GenParticle::const_iterator part, reco:
 {
   vector<int> daughters;
   int idx0 = idx;
-  GenParticle::const_iterator daughter=part->begin();
-  for( ; daughter!=part->end(); ++daughter){
+  for(GenParticle::const_iterator daughter=part->begin(); daughter!=part->end(); ++daughter){
     GenParticle* cand = new GenParticle( daughter->threeCharge(), daughter->p4(), daughter->vertex(), daughter->pdgId(), daughter->status(), false);
     auto_ptr<GenParticle> ptr( cand );
     sel.push_back( *ptr );
@@ -521,8 +524,7 @@ TopDecaySubset::fillTreeRadiation(int& idx, const GenParticle::const_iterator pa
 {
   vector<int> daughters;
   int idx0 = idx;
-  GenParticle::const_iterator daughter=part->begin();
-  for( ; daughter!=part->end(); ++daughter){
+  for(GenParticle::const_iterator daughter=part->begin(); daughter!=part->end(); ++daughter){
     if(daughter->pdgId()!=part->pdgId()){
       //not duplicated quark s2
       GenParticle* cand = new GenParticle( daughter->threeCharge(), daughter->p4(), daughter->vertex(), daughter->pdgId(), daughter->status(), false);
@@ -563,7 +565,7 @@ TopDecaySubset::printSource(const reco::GenParticleCollection& src, const int& p
     }
     daugstr += "\n";
     char buffer[100];
-    sprintf(buffer, "%8i%15i%10i%25s", idx, q->pdgId(), q->status(), daugstr.c_str());
+    sprintf(buffer, "%8i%15i%10i%12f%25s", idx, q->pdgId(), q->status(), q->px(), daugstr.c_str());
     linestr += buffer; 
   }
   edm::LogVerbatim( "inputChain" ) 
@@ -578,9 +580,13 @@ TopDecaySubset::printSource(const reco::GenParticleCollection& src, const int& p
 void 
 TopDecaySubset::printTarget(reco::GenParticleCollection& sel, const int& pdgId=0)
 {
-  GenParticleCollection::iterator q=sel.begin();
-  for(int idx=0; q!=sel.end(); ++q, ++idx){
-    if( (pdgId==0 && sel[idx].pdgId()==TopDecayID::tID) || abs(sel[idx].pdgId())==pdgId){
+  edm::LogVerbatim log("decayChain");
+  log << "\nParticle-idx      pdgId      status        pdgId of Daughters"
+      << "\n=============================================================";
+
+  int idx=0;
+  for(GenParticleCollection::iterator q=sel.begin(); q!=sel.end(); ++q, ++idx){
+    if( (pdgId==0 && sel[idx].pdgId()==TopDecayID::tID && sel[idx].status()== TopDecayID::unfrag) || abs(sel[idx].pdgId())==pdgId){
       std::string linestr;
       GenParticleCollection::iterator p=sel.begin();
       for(int idx=0; p!=sel.end(); ++p, ++idx){
@@ -603,13 +609,11 @@ TopDecaySubset::printTarget(reco::GenParticleCollection& sel, const int& pdgId=0
 	  daugstr += ("-\n");
 	}
 	char buffer[100];
-	sprintf(buffer, "%8i%15i%10i%25s", idx, sel[idx].pdgId(), sel[idx].status(), daugstr.c_str());
+	sprintf(buffer, "%8i%15i%10i%12f%25s", idx, sel[idx].pdgId(), sel[idx].status(), sel[idx].px(), daugstr.c_str());
 	linestr += buffer;
       }
-      edm::LogVerbatim( "decayChain" ) 
-	<< "\nParticle-idx      pdgId      status        pdgId of Daughters"
-	<< "\n============================================================="
-	<< "\n" << linestr;
+      log << "\n" << linestr;
     }
   }
+
 }
