@@ -9,9 +9,9 @@ process = cms.Process("TEST")
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 ## print original listing of gen particles
-## process.MessageLogger.categories.append('inputChain')
+process.MessageLogger.categories.append('TopDecaySubset::printSource')
 ## print final pruned listing of top decay chain
-process.MessageLogger.categories.append('decayChain')
+process.MessageLogger.categories.append('TopDecaySubset::printTarget')
 process.MessageLogger.cout = cms.untracked.PSet(
  INFO = cms.untracked.PSet(
    limit = cms.untracked.int32(0),
@@ -43,7 +43,7 @@ process.source = cms.Source("PoolSource",
 
 ## define maximal number of events to loop over
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(2)
 )
 
 ## configure process options
