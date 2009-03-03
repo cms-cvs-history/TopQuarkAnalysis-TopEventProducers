@@ -21,6 +21,10 @@ class TopDecaySubset : public edm::EDProducer {
 
  public:
 
+  /// supported modes to fill the new vectors 
+  /// of gen particles
+  enum  FillMode {kStable, kME, kBeforePS, kAfterPS};
+
   /// default constructor
   explicit TopDecaySubset(const edm::ParameterSet&);
   /// default destructor
@@ -31,30 +35,34 @@ class TopDecaySubset : public edm::EDProducer {
 
  private:
 
+  /// fill output collection depending on whether the W
+  /// boson is contained in the generator listing or not
+  void fillOutput(const reco::GenParticleCollection& src, reco::GenParticleCollection& target, const reco::GenParticleRefProd& ref, FillMode mode);
   /// check whether the W boson is contained in the 
   /// original gen particle listing or not
-  bool wInDecayChain(const reco::GenParticleCollection&, const int& partId);
+  bool wInDecayChain(const reco::GenParticleCollection& coll, const int& partId);
   /// fill output vector with full decay chain with 
   /// intermediate W bosons
-  void fillFromFullListing(const reco::GenParticleCollection&, reco::GenParticleCollection&, const int& partId);
+  void fillFromFullListing(const reco::GenParticleCollection& src, reco::GenParticleCollection& target, const int& partId, FillMode mode);
   /// fill output vector with full decay chain w/o  
   /// intermediate W bosons
-  void fillFromTruncatedListing(const reco::GenParticleCollection&, reco::GenParticleCollection&, const int& partId);
+  void fillFromTruncatedListing(const reco::GenParticleCollection& src, reco::GenParticleCollection& target, const int& partId, FillMode mode);
   /// clear references
   void clearReferences();
   /// fill references for output vector
-  void fillReferences(const reco::GenParticleRefProd&, reco::GenParticleCollection&);
+  void fillReferences(const reco::GenParticleRefProd& refProd, reco::GenParticleCollection& target);
   /// calculate lorentz vector from input 
   /// (dedicated to top reconstruction)
-  reco::Particle::LorentzVector getP4Top(const reco::GenParticle::const_iterator, const reco::GenParticle::const_iterator, int pdgId, bool RadIncluded);
+  reco::Particle::LorentzVector getP4Top(const reco::GenParticle::const_iterator daughter1, const reco::GenParticle::const_iterator daughter2, int pdgId, bool plain);
+  reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, bool p4Flag, int statusFlag);
   /// calculate lorentz vector from input
-  reco::Particle::LorentzVector getP4(const reco::GenParticle::const_iterator, const reco::GenParticle::const_iterator, int pdgId, bool RadIncluded);
+  reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, bool p4Flag, int statusFlag);
   /// fill vector recursively for all further decay 
   /// particles of a tau
-  void fillTree(int& index, const reco::GenParticle::const_iterator, reco::GenParticleCollection&);
+  void addTauDaughters(int& index, const reco::GenParticle::const_iterator, reco::GenParticleCollection&);
   /// fill vector including all radiations from quarks 
   /// originating from W/top
-  void fillTreeRadiation(int& index, const reco::GenParticle::const_iterator, reco::GenParticleCollection&);
+  void addRadiation(int& index, const reco::GenParticle::const_iterator, reco::GenParticleCollection&);
   /// print the whole decay chain if particle with pdgId is 
   /// contained in the top decay chain
   void printTarget(reco::GenParticleCollection&, const int& pdgId);
