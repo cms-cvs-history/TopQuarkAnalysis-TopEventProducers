@@ -17,7 +17,7 @@ ttSemiLepEvent = cms.EDProducer("TtSemiLepEvtBuilder",
 
     ## set verbosity level
     verbosity = cms.int32(0),  # 0: no additional printout
-                               # 1: print a summary for each event
+                               # N: print a summary for N events
 
     ## add genEvt (if available)
     genEvent = cms.InputTag("genEvt"),
@@ -29,13 +29,13 @@ ttSemiLepEvent = cms.EDProducer("TtSemiLepEvtBuilder",
                               # can be set to -1 to take all jets
 
     ## labels for event hypotheses
-    hyps = cms.vstring("ttSemiLepHypGeom",
-                       "ttSemiLepHypWMassMaxSumPt",
-                       "ttSemiLepHypMaxSumPtWMass",
-                       "ttSemiLepHypGenMatch",
-                       "ttSemiLepHypKinFit",
-                       "ttSemiLepHypMVADisc"
-                       ),
+    hypotheses = cms.vstring("ttSemiLepHypGeom",
+                             "ttSemiLepHypWMassMaxSumPt",
+                             "ttSemiLepHypMaxSumPtWMass",
+                             "ttSemiLepHypGenMatch",
+                             "ttSemiLepHypKinFit",
+                             "ttSemiLepHypMVADisc"
+                             ),
                                 
     ## add extra information on kinFit
     kinFit = cms.PSet(
