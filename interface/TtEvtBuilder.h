@@ -73,11 +73,11 @@ class TtEvtBuilder : public edm::EDProducer {
 
 template <typename C>
 TtEvtBuilder<C>::TtEvtBuilder(const edm::ParameterSet& cfg) : event_(0),
-  verbosity_   (cfg.getParameter<int>                      ("verbosity"   )),
-  hyps_        (cfg.getParameter<std::vector<std::string> >("hypotheses"  )),
-  genEvt_      (cfg.getParameter<edm::InputTag>            ("genEvent"    )),
-  decayChnTop1_(cfg.getParameter<int>                      ("decayChnTop1")),
-  decayChnTop2_(cfg.getParameter<int>                      ("decayChnTop2"))
+  verbosity_   (cfg.getParameter<int>                      ("verbosity"    )),
+  hyps_        (cfg.getParameter<std::vector<std::string> >("hypotheses"   )),
+  genEvt_      (cfg.getParameter<edm::InputTag>            ("genEvent"     )),
+  decayChnTop1_(cfg.getParameter<int>                      ("decayChannel1")),
+  decayChnTop2_(cfg.getParameter<int>                      ("decayChannel2"))
 {
   // parameter subsets for kKinFit
   if( cfg.exists("kinFit") ) {

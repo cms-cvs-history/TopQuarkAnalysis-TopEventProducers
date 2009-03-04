@@ -5,15 +5,14 @@ import FWCore.ParameterSet.Config as cms
 #
 ttSemiLepEvent = cms.EDProducer("TtSemiLepEvtBuilder",
     ## choose leptonic decay modes
-    lepDecayTop1 = cms.int32(2),  # 0: none
-                                  # 1: electron
-                                  # 2: muon
-                                  # 3: tau
-    lepDecayTop2 = cms.int32(0),  # 0: none
-                                  # 1: electron
-                                  # 2: muon
-                                  # 3: tau
-
+    decayChannel1 = cms.int32(2),  # 0: none
+                                   # 1: electron
+                                   # 2: muon
+                                   # 3: tau
+    decayChannel2 = cms.int32(0),  # 0: none
+                                   # 1: electron
+                                   # 2: muon
+                                   # 3: tau
 
     ## set verbosity level
     verbosity = cms.int32(0),  # 0: no additional printout
