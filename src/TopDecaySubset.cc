@@ -341,7 +341,13 @@ TopDecaySubset::p4(const std::vector<reco::GenParticle>::const_iterator top, boo
       if( p->status() == TopDecayID::unfrag ){
 	// decend by one level for each
 	// status 3 particle on the way
-	vec+=p4( p, p4Flag, 2 );
+	vec+=p4( p, p4Flag, statusFlag );
+	if(abs(p->pdgId())==TopDecayID::tID && fabs(vec.mass()-(p->p4().mass()))/p->p4().mass()<0.1 ){
+	  // break if top mass is in accordance with status 3 particle. 
+	  // then the real top is reconstructed and adding more gluons 
+	  // and qqbar pairs would end up in virtualities. 
+	  break;
+	}
       }
       else{ 
 	if( abs(top->pdgId())==TopDecayID::WID ){
@@ -381,6 +387,7 @@ TopDecaySubset::p4(const reco::GenParticle::const_iterator part,
     // return 4 momentum as it is
     return part->p4();
   }
+
   reco::Particle::LorentzVector vec;
   for(reco::GenParticle::const_iterator p=part->begin(); p!=part->end(); ++p){
     if(!p4Flag){
@@ -488,9 +495,6 @@ TopDecaySubset::printSource(const reco::GenParticleCollection& src)
     if( src[t].pdgId()==TopDecayID::tID ){
       // restrict to the top in order 
       // to have it shown only once 
-
-      std::cout << "ok" << std::endl;
-     
       int idx=0;
       for(reco::GenParticleCollection::const_iterator p=src.begin(); p!=src.end(); ++p, ++idx){
 	// loop the top daughters
