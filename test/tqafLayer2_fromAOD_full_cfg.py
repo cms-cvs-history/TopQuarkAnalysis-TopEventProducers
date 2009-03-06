@@ -18,9 +18,9 @@ process.MessageLogger.cerr.threshold = 'INFO'
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
    #PAT test sample for 2.2.X
-   #'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
+    'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
    #PAT test sample for 2.1.X
-   'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root'    
+   #'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root'    
     )
 )
 
@@ -39,7 +39,7 @@ process.load("Configuration.StandardSequences.Geometry_cff")
 
 ## configure conditions
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = cms.string('STARTUP_V9::All')
+process.GlobalTag.globaltag = cms.string('IDEAL_V9::All')
 
 # Magnetic field now needs to be in the high-level py
 process.load("Configuration.StandardSequences.MagneticField_cff")
@@ -60,8 +60,8 @@ process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
 ## necessary fixes to run 2.2.X on 2.1.X data
 ## comment this when running on samples produced
 ## with 22X
-from PhysicsTools.PatAlgos.tools.cmsswVersionTools import run22XonSummer08AODSIM
-run22XonSummer08AODSIM(process)
+## from PhysicsTools.PatAlgos.tools.cmsswVersionTools import run22XonSummer08AODSIM
+## run22XonSummer08AODSIM(process)
 
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
