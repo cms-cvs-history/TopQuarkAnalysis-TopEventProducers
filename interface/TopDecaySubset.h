@@ -53,9 +53,9 @@ class TopDecaySubset : public edm::EDProducer {
   void fillReferences(const reco::GenParticleRefProd& refProd, reco::GenParticleCollection& target);
   /// calculate lorentz vector from input 
   /// (dedicated to top reconstruction)
-  reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, bool p4Flag, int statusFlag);
+  reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, int statusFlag);
   /// calculate lorentz vector from input
-  reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, bool p4Flag, int statusFlag);
+    reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, int statusFlag);
   /// fill vector recursively for all further decay 
   /// particles of a tau
   void addTauDaughters(int& idx, const reco::GenParticle::const_iterator part, reco::GenParticleCollection& target);
