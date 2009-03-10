@@ -55,10 +55,10 @@ class TopDecaySubset : public edm::EDProducer {
   /// (dedicated to top reconstruction)
   reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, int statusFlag);
   /// calculate lorentz vector from input
-    reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, int statusFlag);
+  reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, int statusFlag);
   /// fill vector recursively for all further decay 
   /// particles of a tau
-  void addTauDaughters(int& idx, const reco::GenParticle::const_iterator part, reco::GenParticleCollection& target);
+  void addDaughters(int& idx, const reco::GenParticle::const_iterator part, reco::GenParticleCollection& target, bool recursive=true);
   /// fill vector including all radiations from quarks 
   /// originating from W/top
   void addRadiation(int& idx, const reco::GenParticle::const_iterator part, reco::GenParticleCollection& target);
