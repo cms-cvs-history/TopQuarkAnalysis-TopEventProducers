@@ -23,38 +23,38 @@ from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepMVASelection_cff impo
 from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff import *
 
 ## produce event solution (legacy)
-from TopQuarkAnalysis.TopEventProducers.producers.TtSemiEvtSolProducer_cfi import *
+## from TopQuarkAnalysis.TopEventProducers.producers.TtSemiEvtSolProducer_cfi import *
 
 
 ## make tqaf layer2
 tqafLayer2_ttSemiLeptonic = cms.Sequence(makeGenEvt *
                                          makeTtSemiLepKinematicFit +
                                          makeTtSemiLepMVASelDiscriminant +
-                                         makeTtSemiLepEvent +
-                                         solutions
+                                         makeTtSemiLepEvent ## +
+                                      ## solutions
                                          )
 
 ## make tqaf layer2 filtered for full leptonic decays
 tqafLayer2_ttSemiLeptonic_fullLepFilter = cms.Sequence(makeGenEvt *
                                                        makeTtSemiLepKinematicFit +
                                                        makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_fullLepFilter +
-                                                       solutions
+                                                       makeTtSemiLepEvent_fullLepFilter ## +
+                                                    ## solutions
                                                        )
 
 ## make tqaf layer2 filtered for semi-leptonic decays
 tqafLayer2_ttSemiLeptonic_semiLepFilter = cms.Sequence(makeGenEvt *
                                                        makeTtSemiLepKinematicFit +
                                                        makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_semiLepFilter +
-                                                       solutions
+                                                       makeTtSemiLepEvent_semiLepFilter ## +
+                                                    ## solutions
                                                        )
 
 ## make tqaf layer2 filtered for full hadronic decays
 tqafLayer2_ttSemiLeptonic_fullHadFilter = cms.Sequence(makeGenEvt *
                                                        makeTtSemiLepKinematicFit +
                                                        makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_fullHadFilter +
-                                                       solutions
+                                                       makeTtSemiLepEvent_fullHadFilter ## +
+                                                    ## solutions
                                                        )
 
