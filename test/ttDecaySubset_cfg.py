@@ -26,7 +26,6 @@ process.MessageLogger.cout = cms.untracked.PSet(
 ## define input
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-    fileNames = cms.untracked.vstring(
   # PAT test sample for 2.2.X
    'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
   # PAT test sample for 2.1.X
