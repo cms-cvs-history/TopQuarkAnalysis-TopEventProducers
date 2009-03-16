@@ -33,28 +33,3 @@ tqafLayer2_ttSemiLeptonic = cms.Sequence(makeGenEvt *
                                          makeTtSemiLepEvent ## +
                                       ## solutions
                                          )
-
-## make tqaf layer2 filtered for full leptonic decays
-tqafLayer2_ttSemiLeptonic_fullLepFilter = cms.Sequence(makeGenEvt *
-                                                       makeTtSemiLepKinematicFit +
-                                                       makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_fullLepFilter ## +
-                                                    ## solutions
-                                                       )
-
-## make tqaf layer2 filtered for semi-leptonic decays
-tqafLayer2_ttSemiLeptonic_semiLepFilter = cms.Sequence(makeGenEvt *
-                                                       makeTtSemiLepKinematicFit +
-                                                       makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_semiLepFilter ## +
-                                                    ## solutions
-                                                       )
-
-## make tqaf layer2 filtered for full hadronic decays
-tqafLayer2_ttSemiLeptonic_fullHadFilter = cms.Sequence(makeGenEvt *
-                                                       makeTtSemiLepKinematicFit +
-                                                       makeTtSemiLepMVASelDiscriminant +
-                                                       makeTtSemiLepEvent_fullHadFilter ## +
-                                                    ## solutions
-                                                       )
-
