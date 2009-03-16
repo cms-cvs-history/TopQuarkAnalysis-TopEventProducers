@@ -12,6 +12,8 @@ process.load("FWCore.MessageLogger.MessageLogger_cfi")
 ## process.MessageLogger.categories.append('TopDecaySubset::printSource')
 ## print final pruned listing of top decay chain
 ## process.MessageLogger.categories.append('TopDecaySubset::printTarget')
+## print final pruned listing of top decay chain
+process.MessageLogger.categories.append('TtDecayChannelSelector::selection')
 process.MessageLogger.cout = cms.untracked.PSet(
  INFO = cms.untracked.PSet(
    limit = cms.untracked.int32(0),
@@ -60,20 +62,18 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 
 ## create ttGenEvent
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
-
-## adaptations
-process.genEvt.src = "decaySubset:afterPS"
-
+process.decaySubset.addRadiatedGluons = True
+process.genEvt.src = "decaySubset:ME"
+process.genEvtProc = cms.Path(process.makeGenEvt)
+               
 ## std sequence to produce the ttSemiEvent
 process.load("TopQuarkAnalysis.TopEventProducers.producers.TtDecaySelection_cfi")
-
-## adaptations
 process.ttDecaySelection.src = "genEvt"
-process.ttDecaySelection.channel_1 = [1, 1, 0]
-process.ttDecaySelection.channel_2 = [1, 1, 0]
-process.ttDecaySelection.tauDecays = [0, 0, 0]
-
-## process path
-process.p = cms.Path(process.makeGenEvt *
-                     process.ttDecaySelection
-                     )
+process.ttDecaySelection.allowedTopDecays.decayBranchA.electron = True
+process.ttDecaySelection.allowedTopDecays.decayBranchA.muon     = True
+process.ttDecaySelection.allowedTopDecays.decayBranchB.electron = False
+process.ttDecaySelection.allowedTopDecays.decayBranchB.muon     = False
+process.ttDecaySelection.allowedTauDecays.leptonic   = True
+process.ttDecaySelection.allowedTauDecays.oneProng   = True
+process.ttDecaySelection.allowedTauDecays.threeProng = True
+process.ttDecaySelectionProc = cms.Path(process.ttDecaySelection)
