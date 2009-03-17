@@ -382,7 +382,7 @@ TopDecaySubset::p4(const reco::GenParticle::const_iterator part, int statusFlag)
   reco::Particle::LorentzVector vec;
   for(reco::GenParticle::const_iterator p=part->begin(); p!=part->end(); ++p){
     if( p->status()<=TopDecayID::stable && 
-	p->pdgId ()==TopDecayID::WID){
+	abs(p->pdgId ())==TopDecayID::WID){
       vec=p->p4();
     }
     else{
