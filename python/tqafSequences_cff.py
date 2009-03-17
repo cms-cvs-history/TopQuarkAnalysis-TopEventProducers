@@ -13,8 +13,8 @@ from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepMVASelection_cff impo
 from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff import *
 
 ## make tqaf layer2
-tqafLayer2_ttSemiLeptonic = cms.Sequence(makeGenEvt *
-                                         makeTtSemiLepKinematicFit +
-                                         makeTtSemiLepMVASelDiscriminant +
-                                         makeTtSemiLepEvent
-                                         )
+tqafTtSemiLeptonic = cms.Sequence(makeGenEvt *
+                                  makeTtSemiLepKinematicFit +
+                                  makeTtSemiLepMVASelDiscriminant +
+                                  makeTtSemiLepEvent
+                                  )

@@ -1,9 +1,5 @@
 import FWCore.ParameterSet.Config as cms
 
-#-------------------------------------------------
-# test cfg file for the production of a 
-# ttSemiEvent
-#-------------------------------------------------
 process = cms.Process("TEST")
 
 ## add message logger
@@ -21,17 +17,10 @@ process.MessageLogger.cout = cms.untracked.PSet(
   )
 )
 
-#-------------------------------------------------
-# process configuration
-#-------------------------------------------------
-
 ## define input
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-  # PAT test sample for 2.2.X
    'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
-  # PAT test sample for 2.1.X
-  #'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root'
     )
 )
 
@@ -55,11 +44,6 @@ process.GlobalTag.globaltag = cms.string('STARTUP_V7::All')
 ## load magnetic field
 process.load("Configuration.StandardSequences.MagneticField_cff")
 
-
-#-------------------------------------------------
-# tqaf configuration
-#-------------------------------------------------
-
 ## create ttGenEvent
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
 process.decaySubset.addRadiatedGluons = True
@@ -73,7 +57,7 @@ process.ttDecaySelection.allowedTopDecays.decayBranchA.electron = True
 process.ttDecaySelection.allowedTopDecays.decayBranchA.muon     = True
 process.ttDecaySelection.allowedTopDecays.decayBranchB.electron = False
 process.ttDecaySelection.allowedTopDecays.decayBranchB.muon     = False
-process.ttDecaySelection.allowedTauDecays.leptonic   = True
-process.ttDecaySelection.allowedTauDecays.oneProng   = True
-process.ttDecaySelection.allowedTauDecays.threeProng = True
+process.ttDecaySelection.allowedTauDecays.leptonic              = True
+process.ttDecaySelection.allowedTauDecays.oneProng              = True
+process.ttDecaySelection.allowedTauDecays.threeProng            = True
 process.ttDecaySelectionProc = cms.Path(process.ttDecaySelection)

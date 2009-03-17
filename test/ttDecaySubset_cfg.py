@@ -1,9 +1,5 @@
 import FWCore.ParameterSet.Config as cms
 
-#-------------------------------------------------
-# test cfg file for the production of a 
-# ttSemiEvent
-#-------------------------------------------------
 process = cms.Process("TEST")
 
 ## add message logger
@@ -19,17 +15,10 @@ process.MessageLogger.cout = cms.untracked.PSet(
   )
 )
 
-#-------------------------------------------------
-# process configuration
-#-------------------------------------------------
-
 ## define input
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-  # PAT test sample for 2.2.X
    'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
-  # PAT test sample for 2.1.X
-  #'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root'
     )
 )
 
@@ -53,12 +42,7 @@ process.GlobalTag.globaltag = cms.string('STARTUP_V7::All')
 ## load magnetic field
 process.load("Configuration.StandardSequences.MagneticField_cff")
 
-
-#-------------------------------------------------
-# tqaf configuration
-#-------------------------------------------------
-
-## std sequence to produce the ttSemiEvent
+## std sequence to produce the decaySubset
 process.load("TopQuarkAnalysis.TopEventProducers.producers.TopDecaySubset_cfi")
 
 ## process path

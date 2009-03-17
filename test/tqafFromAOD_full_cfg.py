@@ -1,19 +1,10 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("TEST")
+process = cms.Process("TQAF")
 
-## add message logger
+## configure message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = 'INFO'
-process.MessageLogger.categories.append('TtSemiLeptonicEvent')
-process.MessageLogger.categories.append('TtSemiLepKinFitter')
-#process.MessageLogger.categories.append('KinFitter')
-process.MessageLogger.cerr.INFO = cms.untracked.PSet(
-    default             = cms.untracked.PSet( limit = cms.untracked.int32( 0) ),
-    TtSemiLeptonicEvent = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
-    TtSemiLepKinFitter  = cms.untracked.PSet( limit = cms.untracked.int32(-1) )
-#   KinFitter           = cms.untracked.PSet( limit = cms.untracked.int32(-1) )
-)
 
 ## define input
 process.source = cms.Source("PoolSource",
@@ -37,28 +28,31 @@ process.load("Configuration.StandardSequences.Geometry_cff")
 
 ## configure conditions
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = cms.string('IDEAL_V9::All')
+process.GlobalTag.globaltag = cms.string('IDEAL_V7::All')
 
-## load magnetic field
+# magnetic field now needs to be in the high-level py
 process.load("Configuration.StandardSequences.MagneticField_cff")
+
+#-------------------------------------------------
+# tqaf configuration; if you want to produce tqaf
+# on top of an already existing pat layer1 comment
+# the patDefaultSequence from the path
+#-------------------------------------------------
 
 ## std sequence for pat
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
-
-## std sequence to produce the ttGenEvt
-process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
-
-## std sequence to produce the ttSemiLepEvent
-process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff")
-process.ttSemiLepEvent.verbosity = 1
-
-## change maximum number of jets taken into account per event (default: 4)
-## process.ttSemiLepEvent.maxNJets = 5
-
-## change maximum number of jet combinations taken into account per event (default: 1)
-## process.findTtSemiLepJetCombMVA.maxNComb        = -1
-## process.kinFitTtSemiLepEventHypothesis.maxNComb = -1
-
+## std sequence for tqaf
+process.load("TopQuarkAnalysis.TopEventProducers.tqafSequences_cff")
+## switch from icone5 to scone5
+from PhysicsTools.PatAlgos.tools.jetTools import *
+switchJetCollection(process, 
+                    cms.InputTag('sisCone5CaloJets'), # Jet collection; must be already in the event when patDefaultSequence is executed
+                    doJTA           =True,            # Run Jet-Track association & JetCharge
+                    doBTagging      =True,            # Run b-tagging
+                    jetCorrLabel    =('SC5','Calo'),  # example jet correction name; set to None for no JEC
+                    doType1MET      =True,            # recompute Type1 MET using these jets
+                    genJetCollection=cms.InputTag("sisCone5GenJets")
+                    ) 
 ## default replacements from B22X -> B22X_v2 in other packages
 process.ttSemiLepHypGeom.mets               = "layer1METs"
 process.ttSemiLepHypKinFit.mets             = "layer1METs"
@@ -67,17 +61,18 @@ process.ttSemiLepHypGenMatch.mets           = "layer1METs"
 process.findTtSemiLepJetCombMVA.mets        = "layer1METs"
 process.ttSemiLepHypMaxSumPtWMass.mets      = "layer1METs"
 process.ttSemiLepHypWMassMaxSumPt.mets      = "layer1METs"
+process.findTtSemiLepSignalSelMVA.METs      = "layer1METs"
+process.kinFitTtSemiLepEventSelection.mets  = "layer1METs"
 process.kinFitTtSemiLepEventHypothesis.mets = "layer1METs"
 
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
-                     process.makeGenEvt         *
-                     process.makeTtSemiLepEvent
+                     process.tqafTtSemiLeptonic
                      )
 
 ## configure output module
 process.out = cms.OutputModule("PoolOutputModule",
-    fileName     = cms.untracked.string('ttSemiLepEvtBuilder.root'),
+    fileName     = cms.untracked.string('tqafOutput.fromAOD_full.root'),
     SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p') ),
     outputCommands = cms.untracked.vstring('drop *'),                      
     dropMetaDataForDroppedData = cms.untracked.bool(True)
