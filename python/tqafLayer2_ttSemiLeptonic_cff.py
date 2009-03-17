@@ -1,9 +1,5 @@
 import FWCore.ParameterSet.Config as cms
 
-#-------------------------------------------------
-# tqaf Layer 2 for semi-leptonic event selections
-#-------------------------------------------------
-
 ## produce ttGenEvent
 from TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff import *
 
@@ -22,14 +18,9 @@ from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepMVASelection_cff impo
 ## produce ttSemiEvent
 from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff import *
 
-## produce event solution (legacy)
-## from TopQuarkAnalysis.TopEventProducers.producers.TtSemiEvtSolProducer_cfi import *
-
-
 ## make tqaf layer2
 tqafLayer2_ttSemiLeptonic = cms.Sequence(makeGenEvt *
                                          makeTtSemiLepKinematicFit +
                                          makeTtSemiLepMVASelDiscriminant +
-                                         makeTtSemiLepEvent ## +
-                                      ## solutions
+                                         makeTtSemiLepEvent
                                          )
