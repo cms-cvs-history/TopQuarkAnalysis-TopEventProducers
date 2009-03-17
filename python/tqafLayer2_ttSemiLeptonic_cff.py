@@ -3,12 +3,6 @@ import FWCore.ParameterSet.Config as cms
 ## produce ttGenEvent
 from TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff import *
 
-## apply objects count selection for *leptons*
-from TopQuarkAnalysis.TopEventProducers.sequences.numLepFilter_ttSemiLeptonic_cff import *
-
-## apply objects count selection for *jets*
-from TopQuarkAnalysis.TopEventProducers.sequences.numJetFilter_ttSemiLeptonic_cff import *
-
 ## produce kin fit for signal selection
 from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepKinematicFit_cff import *
 
