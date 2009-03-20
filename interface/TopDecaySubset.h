@@ -48,7 +48,7 @@ class TopDecaySubset : public edm::EDProducer {
   void fillReferences(const reco::GenParticleRefProd& refProd, reco::GenParticleCollection& target);
   /// calculate lorentz vector from input 
   /// (dedicated to top reconstruction)
-  reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, int statusFlag);
+    reco::Particle::LorentzVector p4(const std::vector<reco::GenParticle>::const_iterator top, int statusFlag);
   /// calculate lorentz vector from input
   reco::Particle::LorentzVector p4(const reco::GenParticle::const_iterator part, int statusFlag);
   /// recursively fill vector for all further 

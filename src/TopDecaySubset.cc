@@ -35,7 +35,7 @@ TopDecaySubset::produce(edm::Event& evt, const edm::EventSetup& setup)
 
   // print full listing of input collection for debuging
   // with 'TopDecaySubset::printSource'
-  printSource(*src);
+  //printSource(*src);
 
   // fill output vectors with references
   fillOutput (evt, *src, kME      );
@@ -61,7 +61,7 @@ TopDecaySubset::fillOutput(edm::Event& evt, const reco::GenParticleCollection& s
   fillReferences(ref, *target);
   // print full isting of input collection for debuging
   // with 'TopDecaySubset::printTarget'
-  printTarget(*target);
+  //printTarget(*target);
 
   // write vectors to the event
   switch(mode){
@@ -345,12 +345,6 @@ TopDecaySubset::p4(const std::vector<reco::GenParticle>::const_iterator top, int
       // decend by one level for each
       // status 3 particle on the way
       vec+=p4( p, statusFlag );
-      if(abs(p->pdgId())==TopDecayID::tID && fabs(vec.mass()-(p->p4().mass()))/p->p4().mass()<0.1 ){
-	// break if top mass is in accordance with status 3 particle. 
-	// then the real top is reconstructed and adding more gluons 
-	// and qqbar pairs would end up in virtualities. 
-	break;
-      }
     }
     else{ 
       if( abs(top->pdgId())==TopDecayID::WID ){
@@ -364,6 +358,12 @@ TopDecaySubset::p4(const std::vector<reco::GenParticle>::const_iterator top, int
 	// particle (status 1 or 2) on the way 
 	// else
 	vec+=p->p4();
+	if( vec.mass()-top->mass()>0 ){
+ 	  // continue adding up gluons and qqbar pairs on the top 
+ 	  // line until the nominal top mass is reached; then break 
+ 	  // in order to prevent picking up virtualities
+	  break;
+	}
       }
     }
   }
