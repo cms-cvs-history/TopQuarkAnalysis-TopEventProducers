@@ -39,7 +39,7 @@ process.load("Configuration.StandardSequences.Geometry_cff")
 
 ## configure conditions
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = cms.string('IDEAL_V9::All')
+process.GlobalTag.globaltag = cms.string('IDEAL_V7::All')
 
 # Magnetic field now needs to be in the high-level py
 process.load("Configuration.StandardSequences.MagneticField_cff")
@@ -56,6 +56,7 @@ process.load("TopQuarkAnalysis.TopObjectProducers.tqafLayer1_cff")
 
 ## std sequence for tqaf layer2 for semi-leptonic decays
 process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
+## process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_oldStyle_cff")
 
 ## necessary fixes to run 2.2.X on 2.1.X data
 ## comment this when running on samples produced
@@ -66,6 +67,7 @@ process.load("TopQuarkAnalysis.TopEventProducers.tqafLayer2_ttSemiLeptonic_cff")
 ## process path
 process.p = cms.Path(process.tqafLayer1 *
                      process.tqafLayer2_ttSemiLeptonic
+                 ##  process.tqafLayer2_ttSemiLeptonic_oldStyle
                      )
 
 #-------------------------------------------------
@@ -104,20 +106,10 @@ switchJetCollection(process,
                     runCleaner       = "CaloJet",       # =None if not to clean
                     doJTA            = True,            # run jet-track association & JetCharge
                     doBTagging       = True,            # run b-tagging
-                    jetCorrLabel     = None,            # example jet correction name; set to None for no JEC
+                    jetCorrLabel     = ('SC5', 'Calo'), # example jet correction name; set to None for no JEC
                     doType1MET       = True,            # recompute Type1 MET using these jets
                     genJetCollection = "sisCone5GenJets"
                     )
-
-# now set JEC by hand
-process.jetCorrFactors.jetSource = cms.InputTag("sisCone5CaloJets")
-process.jetCorrFactors.L1Offset  = cms.string('none')
-process.jetCorrFactors.L2Relative= cms.string('Summer08_L2Relative_SC5Calo')
-process.jetCorrFactors.L3Absolute= cms.string('Summer08_L3Absolute_SC5Calo')
-process.jetCorrFactors.L4EMF     = cms.string('none')
-process.jetCorrFactors.L5Flavor  = cms.string('none')
-process.jetCorrFactors.L6UE      = cms.string('none')
-process.jetCorrFactors.L7Parton  = cms.string('none')
 
 ## define tqaf layer2 event content
 from TopQuarkAnalysis.TopEventProducers.tqafLayer2_EventContent_cff import *
