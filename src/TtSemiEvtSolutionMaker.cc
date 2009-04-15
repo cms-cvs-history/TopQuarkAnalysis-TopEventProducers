@@ -1,5 +1,5 @@
 //
-// $Id: TtSemiEvtSolutionMaker.cc,v 1.40.2.1 2009/01/12 12:24:22 snaumann Exp $
+// $Id: TtSemiEvtSolutionMaker.cc,v 1.40.2.2 2009/04/01 22:34:53 rwolf Exp $
 //
 
 #include "TopQuarkAnalysis/TopEventProducers/interface/TtSemiEvtSolutionMaker.h"
@@ -109,7 +109,7 @@ void TtSemiEvtSolutionMaker::produce(edm::Event & iEvent, const edm::EventSetup 
   bool jetsFound = false;
   edm::Handle<std::vector<pat::Jet> > jets;
   iEvent.getByLabel(jetSrc_, jets);
-  if (jets->size() > 0) jetsFound = true;
+  if (jets->size() >=4) jetsFound = true;
 
   //
   // Build Event solutions according to the ambiguity in the jet combination

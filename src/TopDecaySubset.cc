@@ -35,7 +35,7 @@ TopDecaySubset::produce(edm::Event& evt, const edm::EventSetup& setup)
 
   // print full listing of input collection for debuging
   // with 'TopDecaySubset::printSource'
-  //printSource(*src);
+  printSource(*src);
 
   // fill output vectors with references
   fillOutput (evt, *src, kME      );
@@ -61,7 +61,7 @@ TopDecaySubset::fillOutput(edm::Event& evt, const reco::GenParticleCollection& s
   fillReferences(ref, *target);
   // print full isting of input collection for debuging
   // with 'TopDecaySubset::printTarget'
-  //printTarget(*target);
+  printTarget(*target);
 
   // write vectors to the event
   switch(mode){
