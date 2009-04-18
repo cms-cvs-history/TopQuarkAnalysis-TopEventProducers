@@ -9,13 +9,20 @@ process = cms.Process("TEST")
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = 'INFO'
+#process.MessageLogger.categories.append('TopGenEvent')
+#process.MessageLogger.categories.append('TopDecaySubset_printSource')
+#process.MessageLogger.categories.append('TopDecaySubset_printTarget')
+#process.MessageLogger.categories.append('KinFitter')
 process.MessageLogger.categories.append('TtSemiLeptonicEvent')
 process.MessageLogger.categories.append('TtSemiLepKinFitter')
-#process.MessageLogger.categories.append('KinFitter')
+
 process.MessageLogger.cerr.INFO = cms.untracked.PSet(
-    default             = cms.untracked.PSet( limit = cms.untracked.int32( 0) ),
-    TtSemiLeptonicEvent = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
-    TtSemiLepKinFitter  = cms.untracked.PSet( limit = cms.untracked.int32(-1) )
+    default                    = cms.untracked.PSet( limit = cms.untracked.int32( 1) ),
+#   TopGenEvent                = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
+#   TopDecaySubset_printSource = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
+#   TopDecaySubset_printTarget = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
+    TtSemiLeptonicEvent        = cms.untracked.PSet( limit = cms.untracked.int32(-1) ),
+    TtSemiLepKinFitter         = cms.untracked.PSet( limit = cms.untracked.int32(-1) )
 #   KinFitter           = cms.untracked.PSet( limit = cms.untracked.int32(-1) )
 )
 
@@ -30,7 +37,8 @@ process.source = cms.Source("PoolSource",
     'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
    #PAT test sample for 2.1.X
    #'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_1_X_2008-07-08_STARTUP_V4-AODSIM.100.root'    
-    )
+    ),
+    skipEvents = cms.untracked.uint32(0)
 )
 
 ## define maximal number of events to loop over

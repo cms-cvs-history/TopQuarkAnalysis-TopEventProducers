@@ -34,7 +34,7 @@ TopDecaySubset::produce(edm::Event& evt, const edm::EventSetup& setup)
   evt.getByLabel(src_, src);
 
   // print full listing of input collection for debuging
-  // with 'TopDecaySubset::printSource'
+  // with 'TopDecaySubset_printSource'
   printSource(*src);
 
   // fill output vectors with references
@@ -60,7 +60,7 @@ TopDecaySubset::fillOutput(edm::Event& evt, const reco::GenParticleCollection& s
   // fill references
   fillReferences(ref, *target);
   // print full isting of input collection for debuging
-  // with 'TopDecaySubset::printTarget'
+  // with 'TopDecaySubset_printTarget'
   printTarget(*target);
 
   // write vectors to the event
@@ -465,7 +465,7 @@ TopDecaySubset::fillReferences(const reco::GenParticleRefProd& ref, reco::GenPar
 void 
 TopDecaySubset::printSource(const reco::GenParticleCollection& src)
 {
-  edm::LogVerbatim log("TopDecaySubset::printSource");
+  edm::LogVerbatim log("TopDecaySubset_printSource");
   log << "\n   idx   pdg   stat      px          py         pz             mass          daughter pdg's  "
       << "\n===========================================================================================\n";
 
@@ -518,7 +518,7 @@ TopDecaySubset::printSource(const reco::GenParticleCollection& src)
 void 
 TopDecaySubset::printTarget(reco::GenParticleCollection& sel)
 {
-  edm::LogVerbatim log("TopDecaySubset::printTarget");
+  edm::LogVerbatim log("TopDecaySubset_printTarget");
   log << "\n   idx   pdg   stat      px          py         pz             mass          daughter pdg's  "
       << "\n===========================================================================================\n";
 
