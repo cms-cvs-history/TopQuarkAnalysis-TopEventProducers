@@ -44,15 +44,15 @@ process.load("PhysicsTools.PatAlgos.patSequences_cff")
 ## std sequence for tqaf
 process.load("TopQuarkAnalysis.TopEventProducers.tqafSequences_cff")
 ## switch from icone5 to scone5
-from PhysicsTools.PatAlgos.tools.jetTools import *
-switchJetCollection(process, 
-                    cms.InputTag('sisCone5CaloJets'), # Jet collection; must be already in the event when patDefaultSequence is executed
-                    doJTA           =True,            # Run Jet-Track association & JetCharge
-                    doBTagging      =True,            # Run b-tagging
-                    jetCorrLabel    =('SC5','Calo'),  # example jet correction name; set to None for no JEC
-                    doType1MET      =True,            # recompute Type1 MET using these jets
-                    genJetCollection=cms.InputTag("sisCone5GenJets")
-                    ) 
+##from PhysicsTools.PatAlgos.tools.jetTools import *
+##switchJetCollection(process, 
+##                    cms.InputTag('sisCone5CaloJets'), # Jet collection; must be already in the event when patDefaultSequence is executed
+##                    doJTA           =True,            # Run Jet-Track association & JetCharge
+##                    doBTagging      =True,            # Run b-tagging
+##                    jetCorrLabel    =('SC5','Calo'),  # example jet correction name; set to None for no JEC
+##                    doType1MET      =True,            # recompute Type1 MET using these jets
+##                    genJetCollection=cms.InputTag("sisCone5GenJets")
+##                    ) 
 ## default replacements from B22X -> B22X_v2 in other packages
 process.ttSemiLepHypGeom.mets               = "layer1METs"
 process.ttSemiLepHypKinFit.mets             = "layer1METs"

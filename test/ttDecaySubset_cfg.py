@@ -5,13 +5,14 @@ process = cms.Process("TEST")
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 ## print original listing of gen particles
-process.MessageLogger.categories.append('TopDecaySubset::printSource')
+process.MessageLogger.categories.append('TopDecaySubset_printSource')
 ## print final pruned listing of top decay chain
-process.MessageLogger.categories.append('TopDecaySubset::printTarget')
+process.MessageLogger.categories.append('TopDecaySubset_printTarget')
 process.MessageLogger.cout = cms.untracked.PSet(
  INFO = cms.untracked.PSet(
    limit = cms.untracked.int32(0),
-   decayChain = cms.untracked.PSet( limit = cms.untracked.int32(10) )
+   TopDecaySubset_printSource = cms.untracked.PSet( limit = cms.untracked.int32(10) ),
+   TopDecaySubset_printTarget = cms.untracked.PSet( limit = cms.untracked.int32(10) )
   )
 )
 
@@ -31,16 +32,6 @@ process.maxEvents = cms.untracked.PSet(
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(False)
 )
-
-## configure geometry
-process.load("Configuration.StandardSequences.Geometry_cff")
-
-## configure conditions
-process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = cms.string('STARTUP_V7::All')
-
-## load magnetic field
-process.load("Configuration.StandardSequences.MagneticField_cff")
 
 ## std sequence to produce the decaySubset
 process.load("TopQuarkAnalysis.TopEventProducers.producers.TopDecaySubset_cfi")
