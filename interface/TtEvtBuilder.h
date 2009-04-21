@@ -170,7 +170,7 @@ TtEvtBuilder<C>::produce(edm::Event& evt, const edm::EventSetup& setup)
 
   // print summary via MessageLogger for up
   // to verbosity events if verbosity_>0
-  if(verbosity_ > 0 && event_<verbosity_){ 
+  if(verbosity_==-1 || (verbosity_ > 0 && event_<verbosity_)){ 
     event.print();
   }
 
