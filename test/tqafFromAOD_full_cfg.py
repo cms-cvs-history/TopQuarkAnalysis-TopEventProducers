@@ -12,26 +12,20 @@ process.source = cms.Source("PoolSource",
     'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
     )
 )
-
 ## define maximal number of events to loop over
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(100)
 )
-
 ## configure process options
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(False)
 )
 
-## configure geometry
+## configure geometry & conditions 
 process.load("Configuration.StandardSequences.Geometry_cff")
-
-## configure conditions
+process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = cms.string('IDEAL_V7::All')
-
-# magnetic field now needs to be in the high-level py
-process.load("Configuration.StandardSequences.MagneticField_cff")
 
 #-------------------------------------------------
 # tqaf configuration; if you want to produce tqaf
@@ -53,17 +47,6 @@ process.load("TopQuarkAnalysis.TopEventProducers.tqafSequences_cff")
 ##                    doType1MET      =True,            # recompute Type1 MET using these jets
 ##                    genJetCollection=cms.InputTag("sisCone5GenJets")
 ##                    ) 
-## default replacements from B22X -> B22X_v2 in other packages
-process.ttSemiLepHypGeom.mets               = "layer1METs"
-process.ttSemiLepHypKinFit.mets             = "layer1METs"
-process.ttSemiLepHypMVADisc.mets            = "layer1METs"
-process.ttSemiLepHypGenMatch.mets           = "layer1METs"
-process.findTtSemiLepJetCombMVA.mets        = "layer1METs"
-process.ttSemiLepHypMaxSumPtWMass.mets      = "layer1METs"
-process.ttSemiLepHypWMassMaxSumPt.mets      = "layer1METs"
-process.findTtSemiLepSignalSelMVA.METs      = "layer1METs"
-process.kinFitTtSemiLepEventSelection.mets  = "layer1METs"
-process.kinFitTtSemiLepEventHypothesis.mets = "layer1METs"
 
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
