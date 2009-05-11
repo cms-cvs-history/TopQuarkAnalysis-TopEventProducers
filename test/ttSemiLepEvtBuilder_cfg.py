@@ -59,16 +59,6 @@ process.ttSemiLepEvent.verbosity = 1
 ## process.findTtSemiLepJetCombMVA.maxNComb        = -1
 ## process.kinFitTtSemiLepEventHypothesis.maxNComb = -1
 
-## default replacements from B22X -> B22X_v2 in other packages
-process.ttSemiLepHypGeom.mets               = "layer1METs"
-process.ttSemiLepHypKinFit.mets             = "layer1METs"
-process.ttSemiLepHypMVADisc.mets            = "layer1METs"
-process.ttSemiLepHypGenMatch.mets           = "layer1METs"
-process.findTtSemiLepJetCombMVA.mets        = "layer1METs"
-process.ttSemiLepHypMaxSumPtWMass.mets      = "layer1METs"
-process.ttSemiLepHypWMassMaxSumPt.mets      = "layer1METs"
-process.kinFitTtSemiLepEventHypothesis.mets = "layer1METs"
-
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
                      process.makeGenEvt         *
