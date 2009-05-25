@@ -57,7 +57,7 @@ class TtEvtBuilder : public edm::EDProducer {
   edm::ParameterSet kinFit_;
   edm::InputTag fitChi2_;
   edm::InputTag fitProb_;
-  /// input parameters for the kKinFit
+  /// input parameters for the kKinSolution
   /// hypothesis class extras
   edm::ParameterSet kinSolution_;
   edm::InputTag solWeight_;  
