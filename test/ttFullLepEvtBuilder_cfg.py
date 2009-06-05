@@ -24,7 +24,8 @@ process.MessageLogger.cerr.INFO = cms.untracked.PSet(
 ## define input
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-    '/store/mc/Fall08/TTJets-madgraph/GEN-SIM-RECO/IDEAL_V11_redigi_v10/0010/5455E8C0-EA00-DE11-9984-00151715BC58.root'
+    'file:/afs/cern.ch/cms/PRS/top/cmssw-data/relval200-for-pat-testing/FullSimTTBar-2_2_X_2008-11-03-STARTUP_V7-AODSIM.100.root'
+    #'/store/mc/Fall08/TTJets-madgraph/GEN-SIM-RECO/IDEAL_V11_redigi_v10/0010/5455E8C0-EA00-DE11-9984-00151715BC58.root'
     )
 )
 
