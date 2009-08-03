@@ -50,9 +50,6 @@ process.load("TopQuarkAnalysis.TopEventProducers.tqafSequences_cff")
 ##                    genJetCollection=cms.InputTag("sisCone5GenJets")
 ##                    ) 
 
-# replacements currently needed to make the taus work
-process.allLayer1Taus.addTauID = False
-
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
                      process.tqafTtSemiLeptonic
