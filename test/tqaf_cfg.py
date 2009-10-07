@@ -28,26 +28,30 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = cms.string('MC_31X_V8::All')
 
 #-------------------------------------------------
-# tqaf configuration; if you want to produce tqaf
-# on top of an already existing pat layer1 comment
-# the patDefaultSequence from the path
+# TQAF configuration
+# (comment the patDefaultSequence from the path if
+# you want to produce TQAF on top of already
+# existing PAT objects)
 #-------------------------------------------------
 
-## std sequence for pat
+## std sequence for PAT
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
-## std sequence for tqaf
+
+## std sequence for TQAF
 process.load("TopQuarkAnalysis.TopEventProducers.tqafSequences_cff")
 
-## switch from icone5 to scone5
-##from PhysicsTools.PatAlgos.tools.jetTools import *
-##switchJetCollection(process, 
-##                    cms.InputTag('sisCone5CaloJets'), # Jet collection; must be already in the event when patDefaultSequence is executed
-##                    doJTA           =True,            # Run Jet-Track association & JetCharge
-##                    doBTagging      =True,            # Run b-tagging
-##                    jetCorrLabel    =('SC5','Calo'),  # example jet correction name; set to None for no JEC
-##                    doType1MET      =True,            # recompute Type1 MET using these jets
-##                    genJetCollection=cms.InputTag("sisCone5GenJets")
-##                    ) 
+## switch jet collection
+#from PhysicsTools.PatAlgos.tools.jetTools import *
+#switchJetCollection(process, 
+#                    cms.InputTag('sisCone5CaloJets'),
+#                    doJTA            = True,           
+#                    doBTagging       = True,           
+#                    jetCorrLabel     = ('SC5','Calo'),
+#                    doType1MET       = True,          
+#                    genJetCollection = cms.InputTag("sisCone5GenJets"),
+#                    doJetID          = True,
+#                    jetIdLabel       = "sc5"
+#                    )
 
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
@@ -56,7 +60,7 @@ process.p = cms.Path(process.patDefaultSequence *
 
 ## configure output module
 process.out = cms.OutputModule("PoolOutputModule",
-    fileName       = cms.untracked.string('tqafOutput.fromAOD_full.root'),
+    fileName       = cms.untracked.string('tqafOutput.root'),
     SelectEvents   = cms.untracked.PSet(SelectEvents = cms.vstring('p') ),
     outputCommands = cms.untracked.vstring('drop *'),                      
     dropMetaData   = cms.untracked.string("DROPPED")  ## NONE    for none
@@ -64,11 +68,12 @@ process.out = cms.OutputModule("PoolOutputModule",
 )
 process.outpath = cms.EndPath(process.out)
 
-## pat content
+## PAT content
 from PhysicsTools.PatAlgos.patEventContent_cff import *
 process.out.outputCommands += patTriggerEventContent
 process.out.outputCommands += patExtraAodEventContent
 process.out.outputCommands += patEventContentNoLayer1Cleaning
-## tqaf content
+
+## TQAF content
 from TopQuarkAnalysis.TopEventProducers.tqafEventContent_cff import *
 process.out.outputCommands += tqafEventContent
