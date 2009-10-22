@@ -16,7 +16,7 @@ process.MessageLogger.cerr.TtDecayChannelSelector_selection = cms.untracked.PSet
 ## define input
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-    '/store/relval/CMSSW_3_3_0_pre4/RelValTTbar/GEN-SIM-RECO/MC_31X_V8-v1/0000/FCC5D1DF-C3A6-DE11-81AA-001D09F28EA3.root'
+    '/store/relval/CMSSW_3_3_0/RelValTTbar/GEN-SIM-RECO/MC_31X_V9-v1/0009/F651D737-75B7-DE11-BDD4-001D09F2512C.root'
     )
 )
 ## define maximal number of events to loop over
@@ -32,7 +32,7 @@ process.options = cms.untracked.PSet(
 process.load("Configuration.StandardSequences.Geometry_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = cms.string('MC_31X_V8::All')
+process.GlobalTag.globaltag = cms.string('MC_31X_V9::All')
 
 ## configure genEvent
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
