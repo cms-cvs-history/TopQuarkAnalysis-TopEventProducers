@@ -56,11 +56,11 @@ addTtSemiLepHypotheses(process,
 #removeTtSemiLepHypGenMatch(process)
 
 ## change maximum number of jets taken into account per event (default: 4)
-## process.ttSemiLepEvent.maxNJets = 5
+# setForAllTtSemiLepHypotheses(process, "maxNJets", 5)
 
 ## change maximum number of jet combinations taken into account per event (default: 1)
-## process.findTtSemiLepJetCombMVA.maxNComb        = -1
-## process.kinFitTtSemiLepEventHypothesis.maxNComb = -1
+# process.findTtSemiLepJetCombMVA       .maxNComb = -1
+# process.kinFitTtSemiLepEventHypothesis.maxNComb = -1
 
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
