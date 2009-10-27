@@ -2,7 +2,7 @@
 #include "FWCore/Utilities/interface/EDMException.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
-#include "AnalysisDataFormats/TopObjects/interface/TtGenEvent.h"
+#include "AnalysisDataFormats/TopObjects/interface/TopGenEvent.h"
 #include "TopQuarkAnalysis/TopEventProducers/interface/TopDecaySubset.h"
 
 
@@ -348,7 +348,7 @@ TopDecaySubset::p4(const std::vector<reco::GenParticle>::const_iterator top, int
   reco::Particle::LorentzVector vec;
   for(reco::GenParticle::const_iterator p=top->begin(); p!=top->end(); ++p){
     if( p->status() == TopDecayID::unfrag ){
-      // decend by one level for each
+      // descend by one level for each
       // status 3 particle on the way
       vec+=p4( p, statusFlag );
     }
@@ -400,7 +400,7 @@ TopDecaySubset::p4(const reco::GenParticle::const_iterator part, int statusFlag)
       else 
 	if( p->status()==TopDecayID::unfrag)
 	  // if the particle is unfragmented (i.e.
-	  // status 3) decend by one level
+	  // status 3) descend by one level
 	  vec+=p4(p, statusFlag);   
     }
   }
