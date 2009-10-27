@@ -362,12 +362,11 @@ TopDecaySubset::p4(const std::vector<reco::GenParticle>::const_iterator top, int
       else{
 	// add all four vectors for each stable
 	// particle (status 1 or 2) on the way 
-	// else
 	vec+=p->p4();
 	if( vec.mass()-top->mass()>0 ){
  	  // continue adding up gluons and qqbar pairs on the top 
- 	  // line until the nominal top mass is reached; then break 
- 	  // in order to prevent picking up virtualities
+ 	  // line untill the nominal top mass is reached; then 
+ 	  // break in order to prevent picking up virtualities
 	  break;
 	}
       }
@@ -387,8 +386,7 @@ TopDecaySubset::p4(const reco::GenParticle::const_iterator part, int statusFlag)
   }
   reco::Particle::LorentzVector vec;
   for(reco::GenParticle::const_iterator p=part->begin(); p!=part->end(); ++p){
-    if( p->status()<=TopDecayID::stable && 
-	abs(p->pdgId ())==TopDecayID::WID){
+    if( p->status()<=TopDecayID::stable && abs(p->pdgId ())==TopDecayID::WID){
       vec=p->p4();
     }
     else{
@@ -397,11 +395,13 @@ TopDecaySubset::p4(const reco::GenParticle::const_iterator part, int statusFlag)
 	// (of status 1 or 2)
 	vec+=p->p4();
       }
-      else 
-	if( p->status()==TopDecayID::unfrag)
+      else{
+	if( p->status()==TopDecayID::unfrag){
 	  // if the particle is unfragmented (i.e.
 	  // status 3) descend by one level
 	  vec+=p4(p, statusFlag);   
+	}
+      }
     }
   }
   return vec;
