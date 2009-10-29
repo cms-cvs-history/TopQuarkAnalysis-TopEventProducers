@@ -11,4 +11,6 @@ tqafEventContent = [
   ## hypotheses & event structure
   'keep *_ttSemiLepHyp*_*_*',
   'keep *_ttSemiLepEvent_*_*'
+  'keep *_ttFullHadHyp*_*_*',
+  'keep *_ttFullHadEvent_*_*'
 ]
