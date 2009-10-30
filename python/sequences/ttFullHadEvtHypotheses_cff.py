@@ -1,7 +1,7 @@
-import FWCore.ParameterSet.Config as cms
+\import FWCore.ParameterSet.Config as cms
 
 #
-# produce ttSemiLep event hypotheses
+# produce ttFullHadLep event hypotheses
 #
 
 ## genMatch hypothesis
