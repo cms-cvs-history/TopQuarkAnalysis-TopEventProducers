@@ -5,6 +5,10 @@ process = cms.Process("TEST")
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.threshold = 'INFO'
+process.MessageLogger.categories.append('TtFullHadronicEvent')
+process.MessageLogger.cerr.TtFullHadronicEvent = cms.untracked.PSet(
+    limit = cms.untracked.int32(-1)
+)
 
 ## define input
 process.source = cms.Source("PoolSource",
