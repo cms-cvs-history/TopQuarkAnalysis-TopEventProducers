@@ -1,4 +1,4 @@
-\import FWCore.ParameterSet.Config as cms
+import FWCore.ParameterSet.Config as cms
 
 #
 # produce ttFullHadLep event hypotheses
