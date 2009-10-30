@@ -47,6 +47,10 @@ process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttFullHadEvtBuilder_cff")
 process.ttFullHadEvent.verbosity = 1
 
+## change maximum number of jets taken into account per event (default: 6)
+#from TopQuarkAnalysis.TopEventProducers.sequences.ttFullHadEvtBuilder_cff import *
+#setForAllTtFullHadHypotheses(process, "maxNJets", 8)
+
 ## process path
 process.p = cms.Path(process.patDefaultSequence *
                      process.makeGenEvt         *

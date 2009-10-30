@@ -11,14 +11,24 @@ from TopQuarkAnalysis.TopEventProducers.sequences.ttFullHadEvtHypotheses_cff imp
 ## configure ttFullHadEventBuilder
 from TopQuarkAnalysis.TopEventProducers.producers.TtFullHadEvtBuilder_cfi import *
 
-## synchronize maxNJets in all hypotheses
-ttFullHadJetPartonMatch.maxNJets = ttFullHadEvent.maxNJets
-
-## synchronize jet correction level in all hypotheses
-ttFullHadHypGenMatch.jetCorrectionLevel = "abs"
-
 ## make ttFullHadEvent
 makeTtFullHadEvent = cms.Sequence(makeTtFullHadHypotheses *
                                   ttFullHadEvent
                                   )
 
+
+################################################################################
+## helper functions
+## (examples of usage can be found in the ttFullHadEvtBuilder_cfg.py)
+################################################################################
+
+
+## set a specific attribute for all hypotheses to a given value
+## -> this works for "jets", "maxNJets", "jetCorrectionLevel"
+def setForAllTtFullHadHypotheses(process, attribute, value):
+    modules = ["ttFullHadJetPartonMatch",
+               "ttFullHadHypGenMatch"]
+    for obj in range(len(modules)):
+        object = getattr(process, modules[obj])
+        if hasattr(object, attribute):
+            setattr(object, attribute, value)

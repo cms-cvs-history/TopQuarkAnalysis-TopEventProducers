@@ -22,12 +22,6 @@ ttFullHadEvent = cms.EDProducer("TtFullHadEvtBuilder",
     ## add genEvt (if available)
     genEvent = cms.InputTag("genEvt"),
 
-    ## maximum number of jets taken into account per event for each hypothesis
-    ## (this parameter is used in the ttFullLepEvtBuilder_cff to synchronize
-    ## the individual maxNJets parameters)
-    maxNJets = cms.int32(6),  # has to be >= 6
-                              # can be set to -1 to take all jets
-
     ## labels for event hypotheses
     hypotheses = cms.vstring("ttFullHadHypGenMatch"),  # "ttFullHadHypKinFit"
                                                        # "ttFullHadHypMVADisc"
