@@ -61,6 +61,7 @@ def removeTtFullHadHypGenMatch(process):
 def setForAllTtFullHadHypotheses(process, attribute, value):
     modules = ["ttFullHadJetPartonMatch",
                "ttFullHadHypGenMatch",
+               "kinFitTtFullHadEventHypothesis",
                "ttFullHadHypKinFit"]
     for obj in range(len(modules)):
         object = getattr(process, modules[obj])
