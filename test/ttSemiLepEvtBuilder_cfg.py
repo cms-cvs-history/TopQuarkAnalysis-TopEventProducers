@@ -51,7 +51,7 @@ process.ttSemiLepEvent.verbosity = 1
 ## choose which hypotheses to produce
 from TopQuarkAnalysis.TopEventProducers.sequences.ttSemiLepEvtBuilder_cff import *
 addTtSemiLepHypotheses(process,
-                       ["kGeom", "kWMassMaxSumPt", "kMaxSumPtWMass", "kMVADisc", "kKinFit"]
+                       ["kTrivial", "kGeom", "kWMassMaxSumPt", "kMaxSumPtWMass", "kMVADisc", "kKinFit"]
                        )
 #removeTtSemiLepHypGenMatch(process)
 
