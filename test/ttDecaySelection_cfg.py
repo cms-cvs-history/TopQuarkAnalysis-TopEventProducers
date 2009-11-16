@@ -36,8 +36,8 @@ process.GlobalTag.globaltag = cms.string('MC_3XY_V12::All')
 
 ## configure genEvent
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
+process.decaySubset.fillMode = "kME"
 process.decaySubset.addRadiatedGluons = True
-process.genEvt.src = "decaySubset:ME"
 ## path1
 process.genEvtProc = cms.Path(process.makeGenEvt)
                
