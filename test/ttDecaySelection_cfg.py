@@ -42,8 +42,8 @@ process.ttDecaySelection.allowedTopDecays.decayBranchA.electron = True
 process.ttDecaySelection.allowedTopDecays.decayBranchA.muon     = True
 process.ttDecaySelection.allowedTopDecays.decayBranchB.electron = False
 process.ttDecaySelection.allowedTopDecays.decayBranchB.muon     = False
-process.ttDecaySelection.allowedTauDecays.leptonic              = True
-process.ttDecaySelection.allowedTauDecays.oneProng              = True
-process.ttDecaySelection.allowedTauDecays.threeProng            = True
+#process.ttDecaySelection.allowedTauDecays.leptonic              = True
+#process.ttDecaySelection.allowedTauDecays.oneProng              = True
+#process.ttDecaySelection.allowedTauDecays.threeProng            = True
 ## path2
 process.ttDecaySelectionProc = cms.Path(process.ttDecaySelection)
