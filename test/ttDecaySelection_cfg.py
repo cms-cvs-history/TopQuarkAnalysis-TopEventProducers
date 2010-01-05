@@ -22,7 +22,7 @@ process.source = cms.Source("PoolSource",
 )
 ## define maximal number of events to loop over
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10)
+    input = cms.untracked.int32(3)
 )
 ## configure process options
 process.options = cms.untracked.PSet(
@@ -51,8 +51,8 @@ process.ttDecaySelection.allowedTopDecays.decayBranchA.tau      = True
 process.ttDecaySelection.allowedTopDecays.decayBranchB.electron = False
 process.ttDecaySelection.allowedTopDecays.decayBranchB.muon     = False
 process.ttDecaySelection.allowedTopDecays.decayBranchB.tau      = False
-#process.ttDecaySelection.restrictTauDecays.leptonic            = False
-#process.ttDecaySelection.restrictTauDecays.oneProng            = True
-#process.ttDecaySelection.restrictTauDecays.threeProng          = True
+#process.ttDecaySelection.restrictTauDecays = cms.PSet(leptonic = cms.bool(True))
+#process.ttDecaySelection.restrictTauDecays = cms.PSet(oneProng = cms.bool(True))
+#process.ttDecaySelection.restrictTauDecays = cms.PSet(threeProng = cms.bool(True))
 ## path2
 process.ttDecaySelectionProc = cms.Path(process.ttDecaySelection)
