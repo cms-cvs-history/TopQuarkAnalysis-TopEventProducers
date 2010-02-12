@@ -59,9 +59,15 @@ addJetCollection(process,cms.InputTag('JetPlusTrackZSPCorJetAntiKt5'),
                  )
 
 
-## intermediate fixes
-process.jetCorrFactors.corrLevels.L7Parton = "L7Parton_AK5"
-process.jetCorrFactorsPF.corrLevels.L7Parton = "L7Parton_AK5"
+## set the right sample for JEC factors
+process.jetCorrFactors.corrSample   = 'Summer09_7TeV'
+process.jetCorrFactorsPF.corrSample = 'Summer09_7TeV'
+
+## apply hadron level correction from ttbar
+## instead of dijet qcd events
+process.jetCorrFactors.sampleType   = 'ttbar'
+process.jetCorrFactorsPF.sampleType = 'ttbar'
+
 
 ## run the pat default dequence
 process.p = cms.Path(
@@ -77,7 +83,6 @@ process.out.fileName = "topPAG_ntuple.root"
 
 ## define event content
 from PhysicsTools.PatAlgos.patEventContent_cff import *
-process.out.outputCommands += patTriggerEventContent
 process.out.outputCommands += patExtraAodEventContent
 
 ##
