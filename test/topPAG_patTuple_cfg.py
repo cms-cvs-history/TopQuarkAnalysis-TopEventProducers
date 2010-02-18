@@ -68,6 +68,9 @@ process.jetCorrFactorsPF.corrSample = 'Summer09_7TeV'
 process.jetCorrFactors.sampleType   = 'ttbar'
 process.jetCorrFactorsPF.sampleType = 'ttbar'
 
+## embed calo towers and pflow candidates
+process.allLayer1Jets.embedCaloTowers    = True
+process.allLayer1JetsPF.embedPFCandidates= True
 
 ## run the pat default dequence
 process.p = cms.Path(
@@ -84,6 +87,7 @@ process.out.fileName = "topPAG_ntuple.root"
 ## define event content
 from PhysicsTools.PatAlgos.patEventContent_cff import *
 process.out.outputCommands += patExtraAodEventContent
+process.out.outputCommands += ["drop *_towerMaker_*_*"]
 
 ##
 # configure input
@@ -91,4 +95,4 @@ process.out.outputCommands += patExtraAodEventContent
 
 #process.GlobalTag.globaltag =  'ADD_YOUR_FAVORITE_GLOBAL_TAG'
 #process.source.fileNames    = ['ADD_YOUR_FAVORITE_INPUT_FILE' ]
-#process.maxEvents.input     =  -1
+process.maxEvents.input     =  1000
