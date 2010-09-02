@@ -4,13 +4,9 @@ process = cms.Process("TEST")
 
 ## add message logger
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
-process.MessageLogger.categories.append('TopDecaySubset_printTarget')
-process.MessageLogger.categories.append('TtDecayChannelSelector_selection')
-process.MessageLogger.cerr.TopDecaySubset_printTarget = cms.untracked.PSet(
-    limit = cms.untracked.int32(10)
-)
-process.MessageLogger.cerr.TtDecayChannelSelector_selection = cms.untracked.PSet(
-    limit = cms.untracked.int32(10)
+process.MessageLogger.categories.append('TtDecayChannelSelector')
+process.MessageLogger.cerr.TtDecayChannelSelector = cms.untracked.PSet(
+    limit = cms.untracked.int32(-1)
 )
 
 ## define input
@@ -32,9 +28,7 @@ process.options = cms.untracked.PSet(
 process.load("TopQuarkAnalysis.TopEventProducers.sequences.ttGenEvent_cff")
 process.decaySubset.fillMode = "kME"
 process.decaySubset.addRadiation = True
-## path1
-process.genEvtProc = cms.Path(process.makeGenEvt)
-               
+       
 ## configure decay channel selection 
 process.load("TopQuarkAnalysis.TopEventProducers.producers.TtDecaySelection_cfi")
 process.ttDecaySelection.src = "genEvt"
@@ -45,5 +39,7 @@ process.ttDecaySelection.allowedTopDecays.decayBranchB.muon     = False
 #process.ttDecaySelection.restrictTauDecays = cms.PSet(leptonic = cms.bool(True))
 #process.ttDecaySelection.restrictTauDecays = cms.PSet(oneProng = cms.bool(True))
 #process.ttDecaySelection.restrictTauDecays = cms.PSet(threeProng = cms.bool(True))
-## path2
-process.ttDecaySelectionProc = cms.Path(process.ttDecaySelection)
+
+## path
+process.path = cms.Path(process.makeGenEvt *
+                        process.ttDecaySelection)
