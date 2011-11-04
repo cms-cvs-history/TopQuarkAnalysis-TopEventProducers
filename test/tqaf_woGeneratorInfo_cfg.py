@@ -9,9 +9,10 @@ process.MessageLogger.cerr.threshold = 'INFO'
 ## define input
 from PhysicsTools.PatAlgos.tools.cmsswVersionTools import pickRelValInputFiles
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(pickRelValInputFiles(relVal    = 'Mu',
+    fileNames = cms.untracked.vstring(pickRelValInputFiles(cmsswVersion  = 'CMSSW_4_2_4',
+                                                           relVal    = 'Mu',
                                                            dataTier  = 'RECO',
-                                                           globalTag = 'GR_R_42_V7_RelVal_wzMu2010B'
+                                                           globalTag = 'GR_R_42_V14_RelVal_wzMu2010B'
                                                            ))
 )
 ## define maximal number of events to loop over
