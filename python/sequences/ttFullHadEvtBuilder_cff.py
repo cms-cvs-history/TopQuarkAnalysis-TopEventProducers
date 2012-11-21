@@ -84,7 +84,7 @@ def removeTtFullHadHypGenMatch(process):
         getattr(process, "ttFullHadEvent"+str(i)).hypotheses.remove("ttFullHadHypGenMatch"+str(i))
         ## remove full ttFullHadEvent sequence if
         ## kGenMatch was the only included hypothesis
-        if len(process.ttFullHadEvent2.hypotheses) == 0:
+        if len(getattr(process, "ttFullHadEvent"+str(i)).hypotheses) == 0:
             process.makeTtFullHadEvent.remove(getattr(process,'makeTtFullHadEventBase'+str(i)))
         i = i+1
 
